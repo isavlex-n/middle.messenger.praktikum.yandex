@@ -1,0 +1,42 @@
+$dark-gray: #999999;
+$light-gray: #eaeaea;
+$gray: #efefef;
+.chats__chats-list {
+  overflow: scroll;
+}
+.chats__item {
+  border-top: 1px solid $light-gray;
+  display: flex;
+  padding: 12px 0;
+}
+
+.chats__img-wrap {
+  width: 47px;
+  height: 47px;
+  min-width: 47px;
+  margin-right: 10px;
+  background-color: $gray;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chats__img {
+  width: 100%;
+}
+
+.chats__item-name {
+  font-size: 13px;
+  margin: 0;
+  padding-bottom: 4px;
+}
+
+.chats__item-text {
+  color: $dark-gray;
+  font-size: 12px;
+  margin: 0;
+  max-height: 30px;
+  overflow: hidden;
+}

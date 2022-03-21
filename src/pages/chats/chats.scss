@@ -1,0 +1,104 @@
+$gray: #eaeaea;
+$dark-gray: #999999;
+.chats {
+  display: flex;
+  height: 100vh;
+  p {
+    font-size: 12px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+  &__link-wrap {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  &__search {
+    margin-bottom: 15px;
+  }
+
+  &__link {
+    color: $dark-gray;
+  }
+
+  &__chats-list {
+    padding: 20px 10px 0;
+    max-width: 310px;
+    width: 100%;
+    border-right: 1px solid $gray;
+  }
+
+  &__chat {
+    padding: 10px;
+    width: 100%;
+  }
+
+  &__chat-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $gray;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__person {
+    display: flex;
+    align-items: center;
+  }
+
+  &__person-wrap {
+    width: 34px;
+    height: 34px;
+    background-color: $gray;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+
+  &__person-img {
+    width: 100%;
+  }
+
+  &__person-name {
+    font-size: 13px;
+  }
+
+  &__functions {
+    border: 1px solid $gray;
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  &__function {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    
+  }
+
+  &__function-text {
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    background-position: left center;
+    min-height: 22px;
+    line-height: 22px;
+    margin: 0;
+    text-align: right;
+  }
+
+  &__function-text_add-user {
+    background-image: url(../../../static/icons/add.svg);
+  }
+
+  &__function-text_del-user {
+    background-image: url(../../../static/icons/del-blue.svg);
+  }
+
+  &__function-text_del-chat {
+    background-image: url(../../../static/icons/del-red.svg);
+  }
+}

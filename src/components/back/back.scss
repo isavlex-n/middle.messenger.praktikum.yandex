@@ -1,0 +1,16 @@
+$gray: #FBFBFB;
+$darkGray: #EAEAEA;
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 100vh;
+  background-color: $gray;
+  border-right: 1px solid $darkGray;
+}
+
+.back__button {
+
+}
