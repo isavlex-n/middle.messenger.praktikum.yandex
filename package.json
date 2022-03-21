@@ -12,8 +12,7 @@
   },
   "dependencies": {
     "express": "^4.17.3",
-    "handlebars": "^4.7.7",
-    "path": "^0.12.7"
+    "handlebars": "^4.7.7"
   },
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
