@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "parcel --port 4000",
     "build": "parcel build",
-    "start": "npm run parcel build && node server.js"
+    "start": "npm run build && node server.js"
   },
   "dependencies": {
     "express": "^4.17.3",
