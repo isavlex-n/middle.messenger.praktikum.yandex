@@ -1,0 +1,255 @@
+$gray: #eaeaea;
+$dark-gray: #999999;
+$light-gray: #F5F5F5;
+$lilac: #E4EDFD;
+.chats {
+  display: flex;
+  height: 100vh;
+  p {
+    font-size: 12px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+  &__link-wrap {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  &__search {
+    margin-bottom: 15px;
+  }
+
+  &__link {
+    color: $dark-gray;
+  }
+
+  &__chats-list {
+    padding: 20px 10px 0;
+    max-width: 310px;
+    width: 100%;
+    border-right: 1px solid $gray;
+  }
+
+  &__chat {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  &__chat-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__person {
+    display: flex;
+    align-items: center;
+  }
+
+  &__person-wrap {
+    width: 34px;
+    height: 34px;
+    background-color: $gray;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+
+  &__person-img {
+    width: 100%;
+  }
+
+  &__person-name {
+    font-size: 13px;
+  }
+
+  &__functions-button {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    &:hover {
+      background-color: $light-gray;
+    }
+    &::before {
+      position: relative;
+      display: inline-block;
+      font-size: 25px;
+      content: '...';
+      transform: rotate(90deg) translate(0, -12.5px);
+    }
+
+  }
+
+  &__functions {
+    border: 1px solid $gray;
+    padding: 15px;
+    border-radius: 12px;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    min-width: 194px;
+    background-color: #ffffff;
+    &_hidden {
+      // display: none;
+    }
+  }
+
+  &__function {
+    cursor: pointer;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+    
+  }
+
+  &__function-text {
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    background-position: left center;
+    min-height: 22px;
+    line-height: 22px;
+    margin: 0;
+    text-align: left;
+  }
+
+  &__function-text_add-user {
+    background-image: url(../../../static/icons/add.svg);
+  }
+
+  &__function-text_del-user {
+    background-image: url(../../../static/icons/del-blue.svg);
+  }
+
+  &__function-text_del-chat {
+    background-image: url(../../../static/icons/del-red.svg);
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    flex: 1;
+    overflow: scroll;
+    position: relative;
+  }
+
+  &__date-wrap {
+    font-size: 13px;
+    color: $dark-gray;
+    text-align: center;
+    margin: 30px 0;
+  }
+
+  &__message {
+    display: flex;
+
+  }
+
+  &__companion {
+    justify-self: start;
+  }
+
+  &__yourself {
+    justify-content: end;
+    
+  }
+
+  &__message-text {
+    max-width: 50%;
+    padding: 10px;
+    background-color: $lilac;
+  }
+
+  &__companion .chats__message-text {
+    background-color: $gray;
+    border-radius: 0 20px 20px 20px ;
+  }
+
+  &__yourself .chats__message-text {
+    background-color: $lilac;
+    border-radius: 20px 20px 0 20px ;
+  }
+
+  &__footer {
+    display: flex;
+    border-top: 1px solid $gray;
+    padding-top: 10px;
+  }
+
+  &__writing {
+    width: 100%;
+  }
+
+  &__attach {
+    width: 32px;
+    height: 32px;
+    background-image: url(../../../static/icons/attach.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin-right: 10px;
+    position: relative;
+  }
+
+  &__attach-list {
+    position: absolute;
+    bottom: 50px;
+    border: 1px solid $gray;
+    border-radius: 12px;
+    padding: 15px;
+    min-width: 160px;
+    background-color: #ffffff;
+    &_hidden {
+      // display: none;
+    }
+  }
+
+  &__attach-item {
+
+  }
+
+  &__attach-text {
+    padding-left: 37px;
+    background-repeat: no-repeat;
+    min-height: 22px;
+    line-height: 22px;
+  }
+
+  &__attach-photo {
+    background-image: url(../../../static/icons/photo-blue.svg);
+  }
+
+  &__attach-file {
+    background-image: url(../../../static/icons/file.svg);
+  }
+
+  &__attach-location {
+    background-image: url(../../../static/icons/location.svg);
+  }
+
+  &__input {
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+    border: 0;
+    background-color: $gray;
+    border-radius: 30px;
+    height: 32px;
+    padding: 10px 20px; 
+  }
+  &__send-button {
+    margin-left: 10px;
+  }
+}

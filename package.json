@@ -1,0 +1,24 @@
+{
+  "name": "messanger",
+  "version": "1.0.0",
+  "description": "messanger for yandex practicum",
+  "author": "isavlex",
+  "license": "MIT",
+  "source": "static/index.html",
+  "scripts": {
+    "dev": "parcel --port 4000",
+    "build": "parcel build",
+    "start": "npm run build && node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "handlebars": "^4.7.7"
+  },
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars-precompile": "^1.0.1",
+    "@parcel/config-default": "^2.3.2",
+    "@parcel/transformer-sass": "2.3.2",
+    "eslint": "^8.11.0",
+    "parcel": "^2.3.2"
+  }
+}

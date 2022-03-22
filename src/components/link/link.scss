@@ -1,0 +1,11 @@
+$blue: #3369F3;
+$red: #FF0000;
+
+.link {
+  color: $blue;
+  font-size: 13px;
+  text-decoration: none;
+  &_red {
+    color: $red;
+  }
+}
