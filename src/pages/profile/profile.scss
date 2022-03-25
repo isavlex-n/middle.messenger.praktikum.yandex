@@ -1,5 +1,4 @@
-$gray: #eaeaea;
-$light-gray: #999999;
+@import '../../styles/colors.scss';
 
 .profile {
   margin: auto;
@@ -12,23 +11,6 @@ $light-gray: #999999;
 
   &__fields {
     margin-bottom: 60px;
-  }
-
-  &__field {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid $gray;
-    padding: 10px 0;
-    &:last-child {
-      border-bottom: 0;
-    }
-  }
-
-  &__input {
-    text-align: right;
-    border: 0;
-    outline: none;
-    color: $light-gray;
   }
 
   &__links {

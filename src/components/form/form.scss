@@ -1,6 +1,5 @@
-$blue: #3369F3;
-$gray: #999999;
-$red: #FF2F2F;
+@import '../../styles/colors.scss';
+
 .form {
   padding: 40px 30px;
   display: flex;
@@ -35,7 +34,7 @@ $red: #FF2F2F;
     display: flex;
     justify-content: space-between;
     font-size: 9px;
-    color: $gray;
+    color: $dark-gray;
   }
   
   &__input {

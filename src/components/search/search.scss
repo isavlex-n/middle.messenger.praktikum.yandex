@@ -1,9 +1,11 @@
+@import '../../styles/colors.scss';
+
 .search__input {
   font-size: 12px;
   text-align: center;
   border-radius: 5px;
   width: 100%;
-  background: #EFEFEF;
+  background: $gray;
   outline: none;
   border: 0;
   background-image: url(../../../static/icons/search.svg);

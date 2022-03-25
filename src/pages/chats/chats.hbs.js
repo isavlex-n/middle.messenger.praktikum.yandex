@@ -1,4 +1,4 @@
-<div class="chats">
+export const chats = `<div class="chats">
   <section class="chats__chats-list">
     <div class="chats__link-wrap">
       {{>link textLink="Профиль >" classLink="chats__link" link="/profile"}}
@@ -6,7 +6,6 @@
     <div class="chats__search">
       {{> search}}
     </div>
-    
     {{#each items}}
     {{> chatsItem this}}
     {{/each}}
@@ -19,8 +18,6 @@
         </div>
         <h3 class="chats__person-name">{{personName}}</h3>
       </div>
-      
-
       <div class="chats__functions-button">
         <div class="chats__functions chats__functions_hidden">
           <div class="chats__function">
@@ -74,5 +71,4 @@
       </div>
     </footer>
   </section>
-  
-</div>
+</div>`

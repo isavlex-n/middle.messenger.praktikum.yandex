@@ -1,8 +1,8 @@
 @use './styles/normalize';
 @use './styles/fonts';
+@import './styles/colors';
 
 $robotoregular: 'robotoregular', 'Arial', sans-serif;
-$ligt-gray: #E5E5E5;
 
 *,
 *:before,
@@ -25,7 +25,6 @@ body {
 }
 
 .app {
-  // margin: auto;
   width: 100%;
 }
 

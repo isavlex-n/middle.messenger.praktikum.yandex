@@ -1,7 +1,5 @@
-$gray: #eaeaea;
-$dark-gray: #999999;
-$light-gray: #F5F5F5;
-$lilac: #E4EDFD;
+@import '../../styles/colors.scss';
+
 .chats {
   display: flex;
   height: 100vh;
@@ -81,7 +79,7 @@ $lilac: #E4EDFD;
     cursor: pointer;
     position: relative;
     &:hover {
-      background-color: $light-gray;
+      background-color: $medium-gray;
     }
     &::before {
       position: relative;
@@ -101,7 +99,7 @@ $lilac: #E4EDFD;
     right: 0;
     top: 50px;
     min-width: 194px;
-    background-color: #ffffff;
+    background-color: $white;
     &_hidden {
       // display: none;
     }

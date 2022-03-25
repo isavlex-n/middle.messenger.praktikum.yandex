@@ -1,11 +1,12 @@
-import './components'
-// import './layout'
 import './index.scss'
+import './components'
+
 import getSignupPage from './pages/signup/'
 import getLoginPage from './pages/login/'
 import getProfilePage from './pages/profile/'
 import getErrorPage from './pages/error'
 import getChatsPage from './pages/chats'
+
 
 document.addEventListener('DOMContentLoaded', () => {
   let getPage

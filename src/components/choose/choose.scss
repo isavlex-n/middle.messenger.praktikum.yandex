@@ -1,4 +1,4 @@
-$gray: #EFEFEF;
+@import '../../styles/colors.scss';
 
 .choose {
   margin: auto;
@@ -7,7 +7,7 @@ $gray: #EFEFEF;
     height: 130px;
     display: block;
     border-radius: 50%;
-    background-color: $gray;
+    background-color: $light-gray;
     background-image: url(../../../static/icons/photo.svg);
     background-repeat: no-repeat;
     background-position: center;

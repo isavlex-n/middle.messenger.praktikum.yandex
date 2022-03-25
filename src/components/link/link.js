@@ -1,5 +1,5 @@
-import linkTemplate from './link.hbs'
-import Handlebars from 'handlebars/dist/handlebars.runtime'
+import {link} from './link.hbs'
+import * as  Handlebars from 'handlebars'
 import './link.scss'
 
-Handlebars.registerPartial('link', linkTemplate)
+Handlebars.registerPartial('link', link)

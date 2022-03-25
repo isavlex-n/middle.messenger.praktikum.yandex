@@ -1,5 +1,5 @@
-import Handlebars from 'handlebars/dist/handlebars.runtime'
-import chooseTemplate from './choose.hbs'
+import * as Handlebars from 'handlebars'
+import {choose} from './choose.hbs'
 import './choose.scss'
 
-Handlebars.registerPartial('choose', chooseTemplate)
+Handlebars.registerPartial('choose', choose)

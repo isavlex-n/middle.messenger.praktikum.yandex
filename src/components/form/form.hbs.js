@@ -1,4 +1,4 @@
-<form class='form form_{{mod}}'>
+export const form = `<form class='form form_{{mod}}'>
   <h1 class="form__header">{{header}}</h1>
   <ul class='form__list'>
     {{#each inputs}}
@@ -12,7 +12,6 @@
           type='{{this.type}}'
           id='{{this.id}}'
           class='form__input form__input_{{this.name}}'
-          {{!-- placeholder='{{this.text}}' --}}
         />
         <div class="form__error form__error_hidden">{{this.error}}</div>
       </li>
@@ -27,4 +26,4 @@
       <a href="{{link}}" class="form__link">{{textLink}}</a>
     </li>
   </ul>
-</form>
+</form>`

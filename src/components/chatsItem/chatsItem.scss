@@ -1,11 +1,10 @@
-$dark-gray: #999999;
-$light-gray: #eaeaea;
-$gray: #efefef;
+@import '../../styles/colors.scss';
+
 .chats__chats-list {
   overflow: scroll;
 }
 .chats__item {
-  border-top: 1px solid $light-gray;
+  border-top: 1px solid $gray;
   display: flex;
   padding: 12px 0;
 }
@@ -15,7 +14,7 @@ $gray: #efefef;
   height: 47px;
   min-width: 47px;
   margin-right: 10px;
-  background-color: $gray;
+  background-color: $light-gray;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
