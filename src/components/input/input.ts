@@ -11,6 +11,7 @@ interface InputProps {
 }
 
 export class Input extends Block {
+  static nameOfComponent = 'Input'
   constructor({onChange = () => {}, type = 'text', error, placeholder, value}: InputProps) {
     super({type, placeholder, value, error, events: {input: onChange}});
   }

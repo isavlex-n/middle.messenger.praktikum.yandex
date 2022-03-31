@@ -15,6 +15,7 @@ export default class Block<P = any> {
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
   } as const;
+  static nameOfComponent = ''
 
   public id = nanoid(6);
   private readonly _meta: BlockMeta;

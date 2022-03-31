@@ -2,6 +2,7 @@ import Block from '../../core/Block'
 import './field.scss'
 
 export class Field extends Block {
+  static nameOfComponent = 'Field'
   render () {
     return `
     <div class='field'>

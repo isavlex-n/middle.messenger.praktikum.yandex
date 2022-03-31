@@ -2,6 +2,7 @@ import Block from '../../core/Block'
 import './choose.scss'
 
 export class Choose extends Block {
+  static nameOfComponent = 'Choose'
   render () {
     return `
     <div class="choose">

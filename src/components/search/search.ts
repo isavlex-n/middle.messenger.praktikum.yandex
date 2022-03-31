@@ -2,6 +2,7 @@ import Block from '../../core/Block'
 import './search.scss'
 
 export class Search extends Block {
+  static nameOfComponent = 'Search'
   render() {
     return `
     <div class="search">

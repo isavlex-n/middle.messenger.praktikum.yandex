@@ -3,6 +3,7 @@ import './form.scss'
 import Block from '../../core/Block'
 
 export class Form extends Block {
+  static nameOfComponent = 'Form'
   constructor(data:any) {
     super(data)
   }

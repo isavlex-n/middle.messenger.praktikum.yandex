@@ -2,6 +2,7 @@ import Block from '../../core/Block'
 import './chatsItem.scss'
 
 export class ChatsItem extends Block {
+  static nameOfComponent = 'ChatsItem'
   render () {
     return `
     <div class="chats__item">
