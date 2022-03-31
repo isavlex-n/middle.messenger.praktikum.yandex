@@ -1,0 +1,40 @@
+import './index.scss'
+import {Block, renderPage, registerComponent} from './core'
+
+import Login from './pages/login/'
+import Signup from './pages/signup/'
+import {Error500, Error404} from './pages/errors/errors'
+import Profile from './pages/profile'
+import Chats from './pages/chats'
+
+const components = require('./components/**/index.ts') as {
+  [key: string]: {default: typeof Block}
+}
+
+Object.values(components).forEach((component) => {
+  registerComponent(component.default)
+})
+document.addEventListener('DOMContentLoaded', () => {
+  let getPage
+  switch (window.location.pathname) {
+    case '/':
+      getPage = Login
+      break
+    case '/login':
+      getPage = Login
+      break
+    case '/chats':
+      getPage = Chats
+      break
+    case '/profile':
+      getPage = Profile
+      break
+    case '/signup':
+      getPage = Signup
+      break
+    default:
+      getPage = Error404
+      break
+  }
+  renderPage(getPage)
+})
