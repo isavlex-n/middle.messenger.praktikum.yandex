@@ -64,7 +64,7 @@ export const chatsTemplate = `<div class="chats">
         </div>
       </div>
       <div class="chats__writing">
-        <input type="text" class="chats__input" placeholder="Сообщение"/>
+        <input type="text" name="message" class="chats__input" placeholder="Сообщение"/>
       </div>
       <div class="chats__send-button">
         {{{Button classMod="button_forward"}}}

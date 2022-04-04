@@ -4,19 +4,20 @@ import './button.scss'
 interface ButtonProps {
   text: string
   classMod: string
-  onClick: () => void
+  type: string
+  events: {[key: string]: () => {}} 
 }
 
 export class Button extends Block {
   static nameOfComponent = 'Button'
-  constructor({text, classMod, onClick}: ButtonProps) {
-    super({text, classMod, events: {click: onClick}})
+  constructor(props: ButtonProps) {
+    super(props)
   }
 
   protected render(): string {
     // language=hbs
     return `
-      <button class="button {{classMod}}" type="button">{{text}}</button>
+      <button class="button {{classMod}}" type="{{type}}">{{text}}</button>
     `
   }
 }
