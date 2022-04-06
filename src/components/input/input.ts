@@ -15,6 +15,7 @@ interface InputProps {
   id?: string;
   events: {[key: string]: () => {}};
   required: string;
+  errorName: string;
 }
 
 export class Input extends Block {
@@ -34,8 +35,10 @@ export class Input extends Block {
               {{#if name}}name="{{name}}"{{/if}}
               {{#if type}}type="{{type}}"{{/if}}
               {{#if placeholder}}placeholder="{{placeholder}}"{{/if}}
-              {{#if value}}value="{{value}}"{{/if}} />
-      <div class="input__error">{{#if error}}{{error}}{{/if}}</div>
+              {{#if value}}value="{{value}}"{{/if}}
+              {{#if required}}required{{/if}}
+              />
+              
     </div>
             `
   }

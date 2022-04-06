@@ -3,6 +3,7 @@ import {Block, renderPage, registerComponent} from './core'
 
 import Login from './pages/login/'
 import Signup from './pages/signup/'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Error500, Error404} from './pages/errors/errors'
 import Profile from './pages/profile'
 import Chats from './pages/chats'

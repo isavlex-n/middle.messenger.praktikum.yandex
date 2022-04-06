@@ -6,32 +6,29 @@ export class Login extends Block {
 
   submitHandler(event: Event) {
     event.preventDefault()
+    const login = this.refs.login.querySelector('input')!.value
+    const password = this.refs.password.querySelector('input')!.value
 
     const loginData = {
-      login: this.refs.login.querySelector('input')!.value,
-      password: this.refs.password.querySelector('input')!.value,
-
+      login,
+      password,
     }
-    console.log(loginData)
+
+    Object.entries(loginData).forEach(([key, value]) => {
+      console.log(`${key}: ${value}`)
+      this.setChildProps(`${key}Error`, {error: validateInputHandler(key, value)})
+    } )
+  }
+
+  inputFocusHandler(event: Event) {
+    const target = event.target as HTMLInputElement
+    this.setChildProps(`${target.name}Error`, {error: ''})
   }
 
   inputBlurHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    const inputs = this.state.inputs
-    const indexOfInput = this.state.inputs.findIndex((input: TStringObject) => input.name === target.name)
-    if (!validateInputHandler(<HTMLInputElement>event.target)) {
-      this.setChildProps(target.name, {
-        ...inputs[indexOfInput],
-        error: inputs[indexOfInput].errorMessage,
-        value: target.value,
-      })
-    } else {
-      this.setChildProps(target.name, {
-        ...inputs[indexOfInput],
-        error: '',
-        value: target.value,
-      })
-    }
+    this.setChildProps(`${target.name}Error`, {error: validateInputHandler(target.name, target.value)})
+    
   }
 
 
@@ -49,28 +46,28 @@ export class Login extends Block {
         inputs: [
           {
             ref: "login",
+            refError: "loginError",
             name: 'login',
             text: 'Логин',
             id: 'form__login',
             type: 'text',
-            error: '',
-            errorMessage: 'Неправильный логин',
             value: '',
             events: {
               focusout: this.inputBlurHandler.bind(this),
+              focusin: this.inputFocusHandler.bind(this)
             }
           },
           {
             ref: "password",
+            refError: "passwordError",
             type: 'password',
             text: 'Пароль',
             id: 'form__password',
             name: 'password',
-            error: '',
             value: '',
-            errorMessage: 'Неправильный пароль',
             events: {
               focusout: this.inputBlurHandler.bind(this),
+              focusin: this.inputFocusHandler.bind(this)
             }
           },
         ],
@@ -86,16 +83,17 @@ export class Login extends Block {
                 <h1 class="form__header">Вход</h1>
                 <div class='form__list'>
                   {{#each inputs}}
+                    <div class="form__item">
                     {{{Input name=this.name
                             text=this.text
                             id=this.id
                             type=this.type
-                            error=this.error
-                            errorMessage=this.errorMessage
                             value=this.value
                             events=this.events
                             ref=this.ref
                       }}}
+                      {{{InputError ref=this.refError}}}
+                    </div>
                   {{/each}}
                   <div class='form__list-item form__list-item_button'>
                     {{{Button

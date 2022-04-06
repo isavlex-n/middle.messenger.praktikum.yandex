@@ -1,0 +1,12 @@
+@import '../../styles/colors.scss';
+
+.input-error {
+  color: $red;
+  font-size: 8px;
+  text-align: left;
+  margin-bottom: 16px;
+  margin-top: 7px;
+  &_hidden {
+    display: none;
+  }
+}
