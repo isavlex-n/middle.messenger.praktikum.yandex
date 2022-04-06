@@ -103,19 +103,22 @@ export default class Block<P = any> {
     Object.assign(this.state, nextState)
   }
 
-  validateInputHandler(target: HTMLInputElement) {
-    const patterns: any = {
-      first_name: '',
-      second_name: '',
-      login: /^[a-zA-Z][a-zA-Z0-9-_\\.]{1,20}$/,
-      password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/,
-      email: /^[-\\w.]+@([A-z0-9][-A-z0-9]+\\.)+[A-z]{2,4}$/,
-      phone: /(\\+7|8)[\\s(]*\\d{3}[)\\s]*\\d{3}[\\s-]?\\d{2}[\\s-]?\\d{2}/,
-      message: ''
+
+  setChildProps = (childRefName: string, nextProps: P) => {
+    if (!nextProps || !childRefName) {
+      return;
     }
-    const targetName = target.name
-    const value = target.value
-    return patterns[targetName].test(value)
+    const childComponent = this.retrieveChildByRef(childRefName)
+    childComponent.setProps(nextProps)
+    this.refs[childRefName] = childComponent.getContent()
+  }
+
+  retrieveChildByRef = (ref: string) => {
+    const childBlocks = Object.values(this.children).filter(c => c.element === this.refs[ref])
+    if (childBlocks.length !== 1) {
+      console.warn(`1 Ref with Name ${ref} is expected but was: ${childBlocks}`)
+    }
+    return childBlocks[0]
   }
 
   get element() {

@@ -6,13 +6,13 @@ export const profileTemplate = `<section class="flex">
         <h1 class="profile__name center">{{userName}}</h1>
         <div class="profile__fields">
           {{#each fields}}
-            {{{Field data=this}}}
+            {{{Field name=this.name value=this.value}}}
           {{/each}}
         </div>
         <div class="profile__links">
           {{#each links}}
             <div class="profile__link">
-              {{{Link data=this}}}
+              {{{Link textLink=this.textLink link=this.link classLink=this.classLink}}}
             </div>
           {{/each}}
         </div>

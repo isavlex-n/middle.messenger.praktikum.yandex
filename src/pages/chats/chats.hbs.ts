@@ -7,7 +7,7 @@ export const chatsTemplate = `<div class="chats">
       {{{Search}}}
     </div>
     {{#each items}}
-    {{{ChatsItem data=this}}}
+    {{{ChatsItem name=this.name text=this.text srcImg=this.srcImg}}}
     {{/each}}
   </section>
   <section class="chats__chat">
@@ -49,26 +49,28 @@ export const chatsTemplate = `<div class="chats">
         </p>
       </div>
     </section>
-    <footer class="chats__footer">
-      <div class="chats__attach">
-        <div class="chats__attach-list chats__attach-list_hidden ">
-          <div class="chats__attach-item">
-            <p class="chats__attach-text chats__attach-photo">Фото или Видео</p>
-          </div>
-          <div class="chats__attach-item">
-            <p class="chats__attach-text chats__attach-file">Файл</p>
-          </div>
-          <div class="chats__attach-item">
-            <p class="chats__attach-text chats__attach-location">Локация</p>
+    <form class="chats__form" id="chats__form">
+      <footer class="chats__footer">
+        <div class="chats__attach">
+          <div class="chats__attach-list chats__attach-list_hidden ">
+            <div class="chats__attach-item">
+              <p class="chats__attach-text chats__attach-photo">Фото или Видео</p>
+            </div>
+            <div class="chats__attach-item">
+              <p class="chats__attach-text chats__attach-file">Файл</p>
+            </div>
+            <div class="chats__attach-item">
+              <p class="chats__attach-text chats__attach-location">Локация</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="chats__writing">
-        <input type="text" name="message" class="chats__input" placeholder="Сообщение"/>
-      </div>
-      <div class="chats__send-button">
-        {{{Button classMod="button_forward"}}}
-      </div>
-    </footer>
+        <div class="chats__writing">
+          <input type="text" name="message" class="chats__input " value="" placeholder="Введите сообщение"/>
+        </div>
+        <div class="chats__send-button">
+          {{{Button classMod=button.classMod type=button.type events=button.events}}}
+        </div>
+      </footer>
+    </form>
   </section>
 </div>`

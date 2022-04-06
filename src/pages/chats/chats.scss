@@ -245,7 +245,11 @@
     border-radius: 30px;
     height: 32px;
     padding: 10px 20px; 
+    &_error {
+      border: 1px solid $red;
+    }
   }
+  
   &__send-button {
     margin-left: 10px;
   }

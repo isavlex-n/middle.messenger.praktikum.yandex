@@ -6,13 +6,13 @@ export class Field extends Block {
   render () {
     return `
     <div class='field'>
-      <label for='{{this.id}}' class='field__label'>{{this.name}}</label>
+      <label for='{{id}}' class='field__label'>{{name}}</label>
       <input
-        id='{{this.id}}'
-        type='{{this.type}}'
+        id='{{id}}'
+        type='{{type}}'
         class='field__input'
-        readonly='{{this.readonly}}'
-        value='{{this.value}}'
+        readonly='{{readonly}}'
+        value='{{value}}'
       />
     </div>
   `

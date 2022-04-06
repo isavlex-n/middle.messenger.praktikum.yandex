@@ -1,62 +1,35 @@
 import Block from '../../core/Block'
-
+import {validateInputHandler} from '../../core/utils'
 
 export class Login extends Block {
 
 
   submitHandler(event: Event) {
     event.preventDefault()
-    const totals = this.state.data.totals
-    if (totals.login && totals.password) {
-      console.log(this.state.data.totals)
+
+    const loginData = {
+      login: this.refs.login.querySelector('input')!.value,
+      password: this.refs.password.querySelector('input')!.value,
+
     }
-  }
-
-  inputFocusHandler(event: Event) {
-
-    const target = event.target as HTMLInputElement
-    // const indexOfInput = this.state.data.inputs.findIndex((input: TStringObject) => input.name === target.name)
-    // const inputs = this.state.data.inputs
-    // if (inputs[indexOfInput].error) {
-    //   inputs[indexOfInput].error = ''
-    //   this.setProps({
-    //     data: {
-    //       ...this.state.data,
-    //       inputs,
-    //     }
-    //   })
-    // }
+    console.log(loginData)
   }
 
   inputBlurHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    const indexOfInput = this.state.data.inputs.findIndex((input: TStringObject) => input.name === target.name)
-    const inputs = this.state.data.inputs
-    if (!this.validateInputHandler(<HTMLInputElement>event.target)) {
-      inputs[indexOfInput].error = inputs[indexOfInput].errorMessage
-      inputs[indexOfInput].value = target.value
-      this.setState({
-        data: {
-          ...this.state.data,
-          totals: {
-            ...this.state.data.totals,
-            [target.name]: '',
-          },
-          inputs,
-        }
+    const inputs = this.state.inputs
+    const indexOfInput = this.state.inputs.findIndex((input: TStringObject) => input.name === target.name)
+    if (!validateInputHandler(<HTMLInputElement>event.target)) {
+      this.setChildProps(target.name, {
+        ...inputs[indexOfInput],
+        error: inputs[indexOfInput].errorMessage,
+        value: target.value,
       })
     } else {
-      inputs[indexOfInput].error = ''
-      inputs[indexOfInput].value = target.value
-      this.setState({
-        data: {
-          ...this.state.data,
-          totals: {
-            ...this.state.data.totals,
-            [target.name]: target.value,
-          },
-          inputs,
-        }
+      this.setChildProps(target.name, {
+        ...inputs[indexOfInput],
+        error: '',
+        value: target.value,
       })
     }
   }
@@ -64,20 +37,18 @@ export class Login extends Block {
 
   protected getStateFromProps() {
     this.state = {
-      data: {
         button: {
+          ref: 'button',
           text: 'Авторизоваться',
           type: 'submit',
-          classMod: 'form__button_signin'
+          classMod: 'form__button_signin',
+          events: {
+            click: this.submitHandler.bind(this)
+          }
         },
-        totals: {
-          login: '',
-          password: ''
-        },
-        mod: 'login',
-        header: 'Вход',
         inputs: [
           {
+            ref: "login",
             name: 'login',
             text: 'Логин',
             id: 'form__login',
@@ -86,11 +57,11 @@ export class Login extends Block {
             errorMessage: 'Неправильный логин',
             value: '',
             events: {
-              focus: this.inputFocusHandler.bind(this),
-              blur: this.inputBlurHandler.bind(this),
+              focusout: this.inputBlurHandler.bind(this),
             }
           },
           {
+            ref: "password",
             type: 'password',
             text: 'Пароль',
             id: 'form__password',
@@ -99,24 +70,48 @@ export class Login extends Block {
             value: '',
             errorMessage: 'Неправильный пароль',
             events: {
-              blur: this.inputBlurHandler.bind(this),
+              focusout: this.inputBlurHandler.bind(this),
             }
           },
         ],
-        link: '/signup',
-        textLink: 'Нет аккаунта?',
-        events: {
-          submit: this.submitHandler.bind(this)
-        }
-      }
+        
+      
     }
   }
 
   render() {
     return `<div class="flex fuul-height">
-    <div class="centered">
-      {{{Form data=data}}}
-    </div>
-  </div>`
+              <div class="centered">
+              <form class='form form_login'>
+                <h1 class="form__header">Вход</h1>
+                <div class='form__list'>
+                  {{#each inputs}}
+                    {{{Input name=this.name
+                            text=this.text
+                            id=this.id
+                            type=this.type
+                            error=this.error
+                            errorMessage=this.errorMessage
+                            value=this.value
+                            events=this.events
+                            ref=this.ref
+                      }}}
+                  {{/each}}
+                  <div class='form__list-item form__list-item_button'>
+                    {{{Button
+                      ref=button.ref
+                      text=button.text
+                      type=button.type
+                      classMod=button.classMod
+                      events=button.events
+                    }}}
+                  </div>
+                  <div class='form__list-item'>
+                    <a href="/signup" class="form__link">Нет аккаунта?</a>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>`
   }
 }

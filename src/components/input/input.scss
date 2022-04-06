@@ -1,6 +1,16 @@
 @import '../../styles/colors.scss';
 
 .input {
+  margin-bottom: 16px;
+  text-align: center;
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: $dark-gray;
+  }
+    
   &__input {
     border: 0;
     border-bottom: 1px solid $blue;
