@@ -10,6 +10,13 @@
     "build": "parcel build",
     "start": "npm run build && node server.js"
   },
+  "targets": {
+    "default": {
+      "engines": {
+        "browsers": ">= 50%"
+      }
+    }
+ },
   "dependencies": {
     "dotenv": "16.0.0",
     "express": "4.17.3",
