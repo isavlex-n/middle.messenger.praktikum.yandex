@@ -5,6 +5,17 @@
 * npm run dev - режим разработки, запуск проекта на порту 4000
 * npm run build - сборка проекта
 
+## Функции:
+* Валижация полей форм
+* Валидация форм по событию submit
+
+## Инструменты:
+* typescript
+* eslint
+* parcel
+* handlebars
+
+
 ## Страницы
 * [Войти](https://tender-mayer-f00558.netlify.app/login)
 * [Регистрация](https://tender-mayer-f00558.netlify.app/signup)
