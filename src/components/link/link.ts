@@ -12,14 +12,8 @@ export class Link extends Block {
   static nameOfComponent = 'Link'
 
   constructor(props: LinkProps) {
-    const onClick = (e: MouseEvent) => {
-      // const router = new Router();
-      // router.go(this.props.to);
 
-      e.preventDefault()
-    }
-
-    super({...props, events: {click: onClick}})
+    super(props)
   }
 
   render() {

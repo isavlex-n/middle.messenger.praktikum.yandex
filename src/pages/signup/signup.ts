@@ -24,7 +24,7 @@ export class Signup extends Block {
     Object.entries(loginData).forEach(([key, value]) => {
       console.log(`${key}: ${value}`)
       this.setChildProps(`${key}Error`, {error: validateInputHandler(key, value)})
-    } )
+    })
   }
 
 

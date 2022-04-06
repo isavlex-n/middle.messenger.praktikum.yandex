@@ -15,6 +15,6 @@ export class InputError extends Block {
 
   protected render(): string {
     // language=hbs
-    return `<div class="input-error">{{#if error}}{{error}}{{/if}}</div>`
+    return `<div class="input-error {{classMod}}" >{{#if error}}{{error}}{{/if}}</div>`
   }
 }
