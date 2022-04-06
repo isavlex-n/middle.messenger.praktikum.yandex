@@ -2,8 +2,6 @@ import Block from '../../core/Block'
 import {validateInputHandler} from '../../core/utils'
 
 export class Login extends Block {
-
-
   submitHandler(event: Event) {
     event.preventDefault()
     const login = this.refs.login.querySelector('input')!.value
@@ -30,7 +28,6 @@ export class Login extends Block {
     this.setChildProps(`${target.name}Error`, {error: validateInputHandler(target.name, target.value)})
     
   }
-
 
   protected getStateFromProps() {
     this.state = {
