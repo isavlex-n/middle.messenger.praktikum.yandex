@@ -1,9 +1,10 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors";
 
 .link {
   color: $blue;
   font-size: 13px;
   text-decoration: none;
+
   &_red {
     color: $red;
   }

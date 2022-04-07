@@ -1,8 +1,9 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors";
 
 .profile {
   margin: auto;
   font-size: 13px;
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -22,7 +23,6 @@
   }
 
   &__links {
-    
     &_hidden {
       display: none;
     }
@@ -31,6 +31,7 @@
   &__link {
     border-bottom: 1px solid $gray;
     padding: 10px 0;
+
     &:last-child {
       border-bottom: 0;
     }
@@ -39,6 +40,7 @@
   &__button {
     max-width: 280px;
     margin: 0 auto;
+
     &_hidden {
       display: none;
     }

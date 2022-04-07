@@ -1,15 +1,15 @@
-require('dotenv').config()
-const express = require('express')
-const path = require('path')
+require('dotenv').config();
+const express = require('express');
+const path = require('path');
 
-const app = express()
+const app = express();
 
-app.use(express.static(path.join(__dirname, 'dist')))
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'))
-})
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
-app.listen(process.env.PORT, function () {
-  console.log(`Example app listening on port ${process.env.PORT}!`)
-})
+app.listen(process.env.PORT, () => {
+  console.log(`Example app listening on port ${process.env.PORT}!`);
+});

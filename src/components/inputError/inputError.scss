@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors";
 
 .input-error {
   color: $red;
@@ -6,9 +6,11 @@
   text-align: left;
   margin-bottom: 16px;
   margin-top: 7px;
+
   &_profile {
     margin-bottom: 0;
   }
+
   &_hidden {
     display: none;
   }

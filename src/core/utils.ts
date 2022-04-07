@@ -24,7 +24,7 @@ export function validateInputHandler(name: string, value: string) {
     phone: 'Неправильный телефон',
   }
   if (name === 're_password') {
-    const passValue = (document.querySelector('[name="password"]')! as HTMLInputElement).value
+    const passValue = document.querySelector<HTMLInputElement>('[name="password"]')?.value
     if (passValue !== value || !value) {
       return 'Пароли не совпадают'
     } else {

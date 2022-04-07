@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors";
 
 .input {
   text-align: center;
@@ -9,13 +9,14 @@
     font-size: 9px;
     color: $dark-gray;
   }
-    
+
   &__input {
     border: 0;
     border-bottom: 1px solid $blue;
     padding: 5px;
     width: 100%;
     outline: none;
+
     &_error {
       color: $red;
     }
@@ -26,6 +27,7 @@
     font-size: 8px;
     text-align: left;
     margin-top: 7px;
+
     &_hidden {
       display: none;
     }
