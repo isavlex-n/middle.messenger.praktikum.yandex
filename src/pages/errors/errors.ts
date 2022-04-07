@@ -1,8 +1,7 @@
 import Block from '../../core/Block'
-import {errorsTemplate} from './errors.hbs'
+import { errorsTemplate } from './errors.hbs'
 
 class Error500 extends Block {
-
   protected getStateFromProps() {
     this.state = {
       number: 500,
@@ -14,9 +13,7 @@ class Error500 extends Block {
   }
 }
 
-
 class Error404 extends Block {
-
   protected getStateFromProps() {
     this.state = {
       number: 404,
@@ -28,4 +25,4 @@ class Error404 extends Block {
   }
 }
 
-export {Error404, Error500}
+export { Error404, Error500 }

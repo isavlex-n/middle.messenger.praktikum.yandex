@@ -1,9 +1,8 @@
-import {profileTemplate} from './profile.hbs'
+import { profileTemplate } from './profile.hbs'
 import Block from '../../core/Block'
-import {validateInputHandler} from '../../core/utils'
+import { validateInputHandler } from '../../core/utils'
 import './profile.scss'
 export class Profile extends Block {
-
   toggleDataHandler() {
     const links = document.querySelector('.profile__links')
     const button = document.querySelector('.profile__button')
@@ -17,16 +16,15 @@ export class Profile extends Block {
     const newFields = fields.map((field: TStringObject) => {
       return {
         ...field,
-        readonly: false
+        readonly: false,
       }
     })
     this.setState({
       ...this.state,
-      fields: newFields
+      fields: newFields,
     })
 
     this.toggleDataHandler()
-    
   }
 
   changePassHandler(event: Event) {
@@ -41,8 +39,10 @@ export class Profile extends Block {
   saveDataHandler(event: Event) {
     event.preventDefault()
     const profileData = document.querySelector('.profile__change-data')
-    const condition = profileData?.classList.contains('profile__change-data_hidden')
-    if(!condition) {
+    const condition = profileData?.classList.contains(
+      'profile__change-data_hidden'
+    )
+    if (!condition) {
       const login = this.refs.login.querySelector('input')!.value
       const email = this.refs.email.querySelector('input')!.value
       const first_name = this.refs.first_name.querySelector('input')!.value
@@ -57,7 +57,9 @@ export class Profile extends Block {
       }
       Object.entries(loginData).forEach(([key, value]) => {
         console.log(`${key}: ${value}`)
-        this.setChildProps(`${key}Error`, {error: validateInputHandler(key, value)})
+        this.setChildProps(`${key}Error`, {
+          error: validateInputHandler(key, value),
+        })
       })
     } else {
       const old_password = this.refs.old_password.querySelector('input')!.value
@@ -70,19 +72,23 @@ export class Profile extends Block {
       }
       Object.entries(passData).forEach(([key, value]) => {
         console.log(`${key}: ${value}`)
-        this.setChildProps(`${key}Error`, {error: validateInputHandler(key, value)})
+        this.setChildProps(`${key}Error`, {
+          error: validateInputHandler(key, value),
+        })
       })
     }
   }
 
   fieldFocusHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    this.setChildProps(`${target.name}Error`, {error: ''})
+    this.setChildProps(`${target.name}Error`, { error: '' })
   }
 
   fieldBlurHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    this.setChildProps(`${target.name}Error`, {error: validateInputHandler(target.name, target.value)})
+    this.setChildProps(`${target.name}Error`, {
+      error: validateInputHandler(target.name, target.value),
+    })
   }
 
   protected getStateFromProps() {
@@ -92,7 +98,7 @@ export class Profile extends Block {
       fields: [
         {
           ref: 'email',
-          refError: "emailError",
+          refError: 'emailError',
           id: 'field__email',
           label: 'Почта',
           name: 'email',
@@ -102,11 +108,11 @@ export class Profile extends Block {
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
         {
           ref: 'login',
-          refError: "loginError",
+          refError: 'loginError',
           id: 'field__login',
           label: 'Логин',
           name: 'login',
@@ -116,25 +122,25 @@ export class Profile extends Block {
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
         {
           ref: 'first_name',
-          refError: "first_nameError",
-          id: 'field__first-name', 
-          label: 'Имя', 
-          name: 'first_name', 
-          type: 'text', 
-          value: 'Иван', 
+          refError: 'first_nameError',
+          id: 'field__first-name',
+          label: 'Имя',
+          name: 'first_name',
+          type: 'text',
+          value: 'Иван',
           readonly: true,
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
         {
           ref: 'second_name',
-          refError: "second_nameError",
+          refError: 'second_nameError',
           id: 'field__second-name',
           label: 'Фамилия',
           name: 'second_name',
@@ -144,11 +150,11 @@ export class Profile extends Block {
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
         {
           ref: 'phone',
-          refError: "phoneError",
+          refError: 'phoneError',
           id: 'field__phone',
           label: 'Телефон',
           name: 'phone',
@@ -158,26 +164,26 @@ export class Profile extends Block {
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
       ],
       passwords: [
         {
           ref: 'old_password',
-          refError: "old_passwordError",
-          id: 'field__old-pass', 
-          label: 'Старый пароль', 
-          name: 'old_password', 
-          value: '*****', 
+          refError: 'old_passwordError',
+          id: 'field__old-pass',
+          label: 'Старый пароль',
+          name: 'old_password',
+          value: '*****',
           type: 'password',
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
         {
           ref: 'password',
-          refError: "passwordError",
+          refError: 'passwordError',
           id: 'field__new-pass',
           label: 'Новый пароль',
           name: 'password',
@@ -186,12 +192,12 @@ export class Profile extends Block {
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
         {
           ref: 're_password',
-          refError: "re_passwordError",
-          id: 'field__re-pass', 
+          refError: 're_passwordError',
+          id: 'field__re-pass',
           label: 'Подтвердите новый пароль',
           name: 're_password',
           value: '*****',
@@ -199,32 +205,31 @@ export class Profile extends Block {
           events: {
             focusin: this.fieldFocusHandler.bind(this),
             focusout: this.fieldBlurHandler.bind(this),
-          }
+          },
         },
       ],
       button: {
         text: 'Сохранить',
         events: {
-          click: this.saveDataHandler.bind(this)
-        }
-        
+          click: this.saveDataHandler.bind(this),
+        },
       },
       links: [
         {
           link: '#',
           textLink: 'Изменить данные',
           events: {
-            click: this.changeDataHandler.bind(this)
-          }
+            click: this.changeDataHandler.bind(this),
+          },
         },
         {
           link: '#',
           textLink: 'Изменить пароль',
           events: {
-            click: this.changePassHandler.bind(this)
-          }
+            click: this.changePassHandler.bind(this),
+          },
         },
-        {link: '#', textLink: 'Выйти', classLink: 'link_red'},
+        { link: '#', textLink: 'Выйти', classLink: 'link_red' },
       ],
     }
   }

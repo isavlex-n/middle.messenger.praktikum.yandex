@@ -3,7 +3,7 @@ import './chatsItem.scss'
 
 export class ChatsItem extends Block {
   static nameOfComponent = 'ChatsItem'
-  render () {
+  render() {
     return `
     <div class="chats__item">
       <div class="chats__img-wrap">

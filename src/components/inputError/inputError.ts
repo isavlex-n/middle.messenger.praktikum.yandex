@@ -1,9 +1,10 @@
 import Block from '../../core/Block'
 
-import './inputError.scss';
+import './inputError.scss'
 
 interface ErrorProps {
   error: string
+  classMod: string
 }
 
 export class InputError extends Block {

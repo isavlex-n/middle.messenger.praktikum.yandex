@@ -1,21 +1,21 @@
 import Block from '../../core/Block'
 
-import './input.scss';
+import './input.scss'
 
 interface InputProps {
-  type?: 'text' | 'password' | 'email';
-  placeholder?: string;
-  text?: string; 
-  value?: string;
-  error?: string;
-  errorMessage: string;
-  minLength?: string;
-  name?: string;
-  classMod?: string;
-  id?: string;
-  events: {[key: string]: () => {}};
-  required: string;
-  errorName: string;
+  type?: 'text' | 'password' | 'email'
+  placeholder?: string
+  text?: string
+  value?: string
+  error?: string
+  errorMessage: string
+  minLength?: string
+  name?: string
+  classMod?: string
+  id?: string
+  events: { [key: string]: () => {} }
+  required: string
+  errorName: string
 }
 
 export class Input extends Block {

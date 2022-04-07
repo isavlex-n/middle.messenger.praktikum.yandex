@@ -5,7 +5,7 @@ interface ButtonProps {
   text: string
   classMod: string
   type: string
-  events: {[key: string]: () => {}} 
+  events: { [key: string]: () => {} }
 }
 
 export class Button extends Block {

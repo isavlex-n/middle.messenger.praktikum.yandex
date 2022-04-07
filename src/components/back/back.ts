@@ -2,7 +2,7 @@ import Block from '../../core/Block'
 import './back.scss'
 export class Back extends Block {
   static nameOfComponent = 'Back'
-  render () {
+  render() {
     return `
     <div class="back">
       <div class="back__button">

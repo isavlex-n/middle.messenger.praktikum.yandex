@@ -1,5 +1,5 @@
 import Block from '../../core/Block'
-import {validateInputHandler} from '../../core/utils'
+import { validateInputHandler } from '../../core/utils'
 
 export class Login extends Block {
   submitHandler(event: Event) {
@@ -14,62 +14,63 @@ export class Login extends Block {
 
     Object.entries(loginData).forEach(([key, value]) => {
       console.log(`${key}: ${value}`)
-      this.setChildProps(`${key}Error`, {error: validateInputHandler(key, value)})
-    } )
+      this.setChildProps(`${key}Error`, {
+        error: validateInputHandler(key, value),
+      })
+    })
   }
 
   inputFocusHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    this.setChildProps(`${target.name}Error`, {error: ''})
+    this.setChildProps(`${target.name}Error`, { error: '' })
   }
 
   inputBlurHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    this.setChildProps(`${target.name}Error`, {error: validateInputHandler(target.name, target.value)})
-    
+    this.setChildProps(`${target.name}Error`, {
+      error: validateInputHandler(target.name, target.value),
+    })
   }
 
   protected getStateFromProps() {
     this.state = {
-        button: {
-          ref: 'button',
-          text: 'Авторизоваться',
-          type: 'submit',
-          classMod: 'form__button_signin',
-          events: {
-            click: this.submitHandler.bind(this)
-          }
+      button: {
+        ref: 'button',
+        text: 'Авторизоваться',
+        type: 'submit',
+        classMod: 'form__button_signin',
+        events: {
+          click: this.submitHandler.bind(this),
         },
-        inputs: [
-          {
-            ref: "login",
-            refError: "loginError",
-            name: 'login',
-            text: 'Логин',
-            id: 'form__login',
-            type: 'text',
-            value: '',
-            events: {
-              focusout: this.inputBlurHandler.bind(this),
-              focusin: this.inputFocusHandler.bind(this)
-            }
+      },
+      inputs: [
+        {
+          ref: 'login',
+          refError: 'loginError',
+          name: 'login',
+          text: 'Логин',
+          id: 'form__login',
+          type: 'text',
+          value: '',
+          events: {
+            focusout: this.inputBlurHandler.bind(this),
+            focusin: this.inputFocusHandler.bind(this),
           },
-          {
-            ref: "password",
-            refError: "passwordError",
-            type: 'password',
-            text: 'Пароль',
-            id: 'form__password',
-            name: 'password',
-            value: '',
-            events: {
-              focusout: this.inputBlurHandler.bind(this),
-              focusin: this.inputFocusHandler.bind(this)
-            }
+        },
+        {
+          ref: 'password',
+          refError: 'passwordError',
+          type: 'password',
+          text: 'Пароль',
+          id: 'form__password',
+          name: 'password',
+          value: '',
+          events: {
+            focusout: this.inputBlurHandler.bind(this),
+            focusin: this.inputFocusHandler.bind(this),
           },
-        ],
-        
-      
+        },
+      ],
     }
   }
 

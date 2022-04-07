@@ -1,5 +1,5 @@
 import Block from '../../core/Block'
-import {validateInputHandler} from '../../core/utils'
+import { validateInputHandler } from '../../core/utils'
 
 export class Signup extends Block {
   submitHandler(event: Event) {
@@ -23,20 +23,22 @@ export class Signup extends Block {
 
     Object.entries(loginData).forEach(([key, value]) => {
       console.log(`${key}: ${value}`)
-      this.setChildProps(`${key}Error`, {error: validateInputHandler(key, value)})
+      this.setChildProps(`${key}Error`, {
+        error: validateInputHandler(key, value),
+      })
     })
   }
 
-
   inputFocusHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    this.setChildProps(`${target.name}Error`, {error: ''})
+    this.setChildProps(`${target.name}Error`, { error: '' })
   }
 
   inputBlurHandler(event: Event) {
     const target = event.target as HTMLInputElement
-    this.setChildProps(`${target.name}Error`, {error: validateInputHandler(target.name, target.value)})
-    
+    this.setChildProps(`${target.name}Error`, {
+      error: validateInputHandler(target.name, target.value),
+    })
   }
 
   protected getStateFromProps() {
@@ -47,13 +49,13 @@ export class Signup extends Block {
         type: 'submit',
         classMod: 'form__button_signin',
         events: {
-          click: this.submitHandler.bind(this)
-        }
+          click: this.submitHandler.bind(this),
+        },
       },
       inputs: [
         {
           ref: 'email',
-          refError: "emailError",
+          refError: 'emailError',
           type: 'email',
           name: 'email',
           text: 'Почта',
@@ -61,12 +63,12 @@ export class Signup extends Block {
           required: true,
           events: {
             focusout: this.inputBlurHandler.bind(this),
-            focusin: this.inputFocusHandler.bind(this)
-          }
+            focusin: this.inputFocusHandler.bind(this),
+          },
         },
         {
           ref: 'login',
-          refError: "loginError",
+          refError: 'loginError',
           type: 'text',
           name: 'login',
           text: 'Логин',
@@ -74,13 +76,13 @@ export class Signup extends Block {
           required: true,
           events: {
             focusout: this.inputBlurHandler.bind(this),
-            focusin: this.inputFocusHandler.bind(this)
-          }
+            focusin: this.inputFocusHandler.bind(this),
+          },
         },
 
         {
           ref: 'first_name',
-          refError: "first_nameError",
+          refError: 'first_nameError',
           type: 'text',
           name: 'first_name',
           id: 'form__first-name',
@@ -88,12 +90,12 @@ export class Signup extends Block {
           required: true,
           events: {
             focusout: this.inputBlurHandler.bind(this),
-            focusin: this.inputFocusHandler.bind(this)
-          }
+            focusin: this.inputFocusHandler.bind(this),
+          },
         },
         {
           ref: 'second_name',
-          refError: "second_nameError",
+          refError: 'second_nameError',
           type: 'text',
           name: 'second_name',
           id: 'form__second-name',
@@ -101,12 +103,12 @@ export class Signup extends Block {
           required: true,
           events: {
             focusout: this.inputBlurHandler.bind(this),
-            focusin: this.inputFocusHandler.bind(this)
-          }
+            focusin: this.inputFocusHandler.bind(this),
+          },
         },
         {
           ref: 'phone',
-          refError: "phoneError",
+          refError: 'phoneError',
           type: 'tel',
           name: 'phone',
           id: 'form__phone',
@@ -114,12 +116,12 @@ export class Signup extends Block {
           required: true,
           events: {
             focusout: this.inputBlurHandler.bind(this),
-            focusin: this.inputFocusHandler.bind(this)
-          }
+            focusin: this.inputFocusHandler.bind(this),
+          },
         },
         {
           ref: 'password',
-          refError: "passwordError",
+          refError: 'passwordError',
           type: 'password',
           text: 'Пароль',
           id: 'form__password',
@@ -127,12 +129,12 @@ export class Signup extends Block {
           required: true,
           events: {
             focusout: this.inputBlurHandler.bind(this),
-            focusin: this.inputFocusHandler.bind(this)
-          }
+            focusin: this.inputFocusHandler.bind(this),
+          },
         },
         {
           ref: 're_password',
-          refError: "re_passwordError",
+          refError: 're_passwordError',
           type: 'password',
           text: 'Пароль (ещё раз)',
           id: 'form__password-repeat',
@@ -140,13 +142,13 @@ export class Signup extends Block {
           required: true,
           events: {
             focusout: this.inputBlurHandler.bind(this),
-            focusin: this.inputFocusHandler.bind(this)
-          }
+            focusin: this.inputFocusHandler.bind(this),
+          },
         },
       ],
     }
   }
-  render () {
+  render() {
     return `<div class="flex fuul-height">
               <div class="centered">
               <form class='form form_sigin'>

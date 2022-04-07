@@ -3,7 +3,7 @@ import './choose.scss'
 
 export class Choose extends Block {
   static nameOfComponent = 'Choose'
-  render () {
+  render() {
     return `
     <div class="choose">
       <label for="choose__input" class="choose__label" />

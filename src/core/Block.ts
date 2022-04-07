@@ -1,12 +1,12 @@
 import EventBus from './EventBus'
-import {nanoid} from 'nanoid'
+import { nanoid } from 'nanoid'
 import Handlebars from 'handlebars'
 
 interface BlockMeta<P = any> {
-  props: P;
+  props: P
 }
 
-type Events = Values<typeof Block.EVENTS>;
+type Events = Values<typeof Block.EVENTS>
 
 export default class Block<P = any> {
   static EVENTS = {
@@ -38,7 +38,7 @@ export default class Block<P = any> {
 
     this.getStateFromProps(props)
 
-    this.props = this._makePropsProxy(props || {} as P)
+    this.props = this._makePropsProxy(props || ({} as P))
     this.state = this._makePropsProxy(this.state)
 
     this.eventBus = () => eventBus
@@ -72,8 +72,7 @@ export default class Block<P = any> {
     this.componentDidMount(props)
   }
 
-  componentDidMount(props: P) {
-  }
+  componentDidMount(props: P) {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps)
@@ -103,10 +102,9 @@ export default class Block<P = any> {
     Object.assign(this.state, nextState)
   }
 
-
   setChildProps = (childRefName: string, nextProps: P) => {
     if (!nextProps || !childRefName) {
-      return;
+      return
     }
     const childComponent = this.retrieveChildByRef(childRefName)
     childComponent.setProps(nextProps)
@@ -114,7 +112,9 @@ export default class Block<P = any> {
   }
 
   retrieveChildByRef = (ref: string) => {
-    const childBlocks = Object.values(this.children).filter(c => c.element === this.refs[ref])
+    const childBlocks = Object.values(this.children).filter(
+      (c) => c.element === this.refs[ref]
+    )
     if (childBlocks.length !== 1) {
       console.warn(`1 Ref with Name ${ref} is expected but was: ${childBlocks}`)
     }
@@ -136,13 +136,15 @@ export default class Block<P = any> {
 
   protected render(): string {
     return ''
-  };
+  }
 
   getContent(): HTMLElement {
     // Хак, чтобы вызвать CDM только после добавления в DOM
     if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
       setTimeout(() => {
-        if (this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+        if (
+          this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE
+        ) {
           this.eventBus().emit(Block.EVENTS.FLOW_CDM)
         }
       }, 100)
@@ -166,7 +168,7 @@ export default class Block<P = any> {
 
         // Запускаем обновление компоненты
         // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target)
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target)
         return true
       },
       deleteProperty() {
@@ -185,7 +187,6 @@ export default class Block<P = any> {
     if (!events || !this._element) {
       return
     }
-
 
     Object.entries(events).forEach(([event, listener]) => {
       this._element!.removeEventListener(event, listener)
@@ -210,7 +211,12 @@ export default class Block<P = any> {
      * Рендерим шаблон
      */
     const template = Handlebars.compile(this.render())
-    fragment.innerHTML = template({...this.state, ...this.props, children: this.children, refs: this.refs})
+    fragment.innerHTML = template({
+      ...this.state,
+      ...this.props,
+      children: this.children,
+      refs: this.refs,
+    })
 
     /**
      * Заменяем заглушки на компоненты
@@ -231,13 +237,11 @@ export default class Block<P = any> {
       stub.replaceWith(component.getContent())
     })
 
-
     /**
      * Возвращаем фрагмент
      */
     return fragment.content
   }
-
 
   show() {
     this.getContent().style.display = 'block'
