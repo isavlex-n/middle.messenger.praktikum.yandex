@@ -9,7 +9,8 @@
   background-color: $blue;
   cursor: pointer;
 
-  &_back {
+  &_back,
+  %button_back {
     width: 28px;
     height: 28px;
     border-radius: 50%;
