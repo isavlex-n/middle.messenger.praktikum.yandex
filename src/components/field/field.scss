@@ -1,0 +1,19 @@
+@import "../../styles/colors";
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $gray;
+  padding: 10px 0;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &__input {
+    text-align: right;
+    border: 0;
+    outline: none;
+    color: $dark-gray;
+  }
+}

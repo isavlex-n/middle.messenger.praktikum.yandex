@@ -1,5 +1,4 @@
-$gray: #FBFBFB;
-$darkGray: #EAEAEA;
+@import "../../styles/colors";
 
 .back {
   display: flex;
@@ -7,10 +6,6 @@ $darkGray: #EAEAEA;
   justify-content: center;
   width: 64px;
   height: 100vh;
-  background-color: $gray;
-  border-right: 1px solid $darkGray;
-}
-
-.back__button {
-
+  background-color: $pale-gray;
+  border-right: 1px solid $gray;
 }

@@ -1,12 +1,12 @@
-@use './styles/normalize';
-@use './styles/fonts';
+@use "./styles/normalize";
+@use "./styles/fonts";
+@import "./styles/colors";
 
-$robotoregular: 'robotoregular', 'Arial', sans-serif;
-$ligt-gray: #E5E5E5;
+$robotoregular: "robotoregular", "Arial", sans-serif;
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
   font-family: $robotoregular;
 }
@@ -25,12 +25,10 @@ body {
 }
 
 .app {
-  // margin: auto;
   width: 100%;
 }
 
-
-//helpers
+// helpers
 .center {
   text-align: center;
 }
@@ -47,4 +45,74 @@ body {
   margin: auto;
 }
 
-//-------
+// -------
+// form
+
+.form {
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 340px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+
+  &__header {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 40px 0 0;
+    width: 100%;
+  }
+
+  &__list-item {
+    margin-bottom: 16px;
+    text-align: center;
+
+    &_button {
+      margin-top: 47px;
+      font-size: 13px;
+    }
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: $dark-gray;
+  }
+
+  &__input {
+    border: 0;
+    border-bottom: 1px solid $blue;
+    padding: 5px;
+    width: 100%;
+    outline: none;
+
+    &_error {
+      color: $red;
+    }
+  }
+
+  &__error {
+    color: $red;
+    font-size: 8px;
+    text-align: left;
+    margin-top: 7px;
+
+    &_hidden {
+      display: none;
+    }
+  }
+
+  &__link {
+    color: $blue;
+    font-size: 11px;
+    text-decoration: none;
+  }
+}

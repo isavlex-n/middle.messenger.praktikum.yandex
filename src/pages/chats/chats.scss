@@ -1,10 +1,9 @@
-$gray: #eaeaea;
-$dark-gray: #999999;
-$light-gray: #F5F5F5;
-$lilac: #E4EDFD;
+@import "../../styles/colors";
+
 .chats {
   display: flex;
   height: 100vh;
+
   p {
     font-size: 12px;
   }
@@ -12,6 +11,7 @@ $lilac: #E4EDFD;
   span {
     font-size: 12px;
   }
+
   &__link-wrap {
     text-align: right;
     margin-bottom: 20px;
@@ -80,17 +80,18 @@ $lilac: #E4EDFD;
     border-radius: 50%;
     cursor: pointer;
     position: relative;
+
     &:hover {
-      background-color: $light-gray;
+      background-color: $medium-gray;
     }
+
     &::before {
       position: relative;
       display: inline-block;
       font-size: 25px;
-      content: '...';
+      content: "...";
       transform: rotate(90deg) translate(0, -12.5px);
     }
-
   }
 
   &__functions {
@@ -101,7 +102,8 @@ $lilac: #E4EDFD;
     right: 0;
     top: 50px;
     min-width: 194px;
-    background-color: #ffffff;
+    background-color: $white;
+
     &_hidden {
       // display: none;
     }
@@ -109,10 +111,10 @@ $lilac: #E4EDFD;
 
   &__function {
     cursor: pointer;
+
     &:not(:last-child) {
       margin-bottom: 10px;
     }
-    
   }
 
   &__function-text {
@@ -126,15 +128,15 @@ $lilac: #E4EDFD;
   }
 
   &__function-text_add-user {
-    background-image: url(../../../static/icons/add.svg);
+    background-image: url("../../../static/icons/add.svg");
   }
 
   &__function-text_del-user {
-    background-image: url(../../../static/icons/del-blue.svg);
+    background-image: url("../../../static/icons/del-blue.svg");
   }
 
   &__function-text_del-chat {
-    background-image: url(../../../static/icons/del-red.svg);
+    background-image: url("../../../static/icons/del-red.svg");
   }
 
   &__messages {
@@ -142,7 +144,6 @@ $lilac: #E4EDFD;
     flex-direction: column;
     justify-content: end;
     flex: 1;
-    overflow: scroll;
     position: relative;
   }
 
@@ -155,7 +156,6 @@ $lilac: #E4EDFD;
 
   &__message {
     display: flex;
-
   }
 
   &__companion {
@@ -164,7 +164,6 @@ $lilac: #E4EDFD;
 
   &__yourself {
     justify-content: end;
-    
   }
 
   &__message-text {
@@ -175,12 +174,12 @@ $lilac: #E4EDFD;
 
   &__companion .chats__message-text {
     background-color: $gray;
-    border-radius: 0 20px 20px 20px ;
+    border-radius: 0 20px 20px;
   }
 
   &__yourself .chats__message-text {
     background-color: $lilac;
-    border-radius: 20px 20px 0 20px ;
+    border-radius: 20px 20px 0;
   }
 
   &__footer {
@@ -196,7 +195,7 @@ $lilac: #E4EDFD;
   &__attach {
     width: 32px;
     height: 32px;
-    background-image: url(../../../static/icons/attach.svg);
+    background-image: url("../../../static/icons/attach.svg");
     background-repeat: no-repeat;
     cursor: pointer;
     margin-right: 10px;
@@ -210,14 +209,11 @@ $lilac: #E4EDFD;
     border-radius: 12px;
     padding: 15px;
     min-width: 160px;
-    background-color: #ffffff;
+    background-color: #fff;
+
     &_hidden {
       // display: none;
     }
-  }
-
-  &__attach-item {
-
   }
 
   &__attach-text {
@@ -228,15 +224,15 @@ $lilac: #E4EDFD;
   }
 
   &__attach-photo {
-    background-image: url(../../../static/icons/photo-blue.svg);
+    background-image: url("../../../static/icons/photo-blue.svg");
   }
 
   &__attach-file {
-    background-image: url(../../../static/icons/file.svg);
+    background-image: url("../../../static/icons/file.svg");
   }
 
   &__attach-location {
-    background-image: url(../../../static/icons/location.svg);
+    background-image: url("../../../static/icons/location.svg");
   }
 
   &__input {
@@ -247,8 +243,13 @@ $lilac: #E4EDFD;
     background-color: $gray;
     border-radius: 30px;
     height: 32px;
-    padding: 10px 20px; 
+    padding: 10px 20px;
+
+    &_error {
+      border: 1px solid $red;
+    }
   }
+
   &__send-button {
     margin-left: 10px;
   }

@@ -1,23 +1,27 @@
+@import "../../styles/colors";
+
 .button {
   border-radius: 8px;
   border: 0;
   width: 100%;
   padding: 12px 0;
-  color: #ffffff;
-  background-color: #3369F3;
+  color: $white;
+  background-color: $blue;
   cursor: pointer;
 
-  &_back {
+  &_back,
+  %button_back {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background-image: url(../../../static/icons/back.svg);
+    background-image: url("../../../static/icons/back.svg");
     background-repeat: no-repeat;
     background-position: center;
   }
 
   &_forward {
-    @extend .button_back;
-    background-image: url(../../../static/icons/forward.svg);
+    @extend %button_back;
+
+    background-image: url("../../../static/icons/forward.svg");
   }
 }

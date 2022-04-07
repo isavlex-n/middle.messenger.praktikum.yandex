@@ -1,9 +1,9 @@
-$gray: #eaeaea;
-$light-gray: #999999;
+@import "../../styles/colors";
 
 .profile {
   margin: auto;
   font-size: 13px;
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -14,25 +14,15 @@ $light-gray: #999999;
     margin-bottom: 60px;
   }
 
-  &__field {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid $gray;
-    padding: 10px 0;
-    &:last-child {
-      border-bottom: 0;
-    }
+  &__change-pass_hidden {
+    display: none;
   }
 
-  &__input {
-    text-align: right;
-    border: 0;
-    outline: none;
-    color: $light-gray;
+  &__change-data_hidden {
+    display: none;
   }
 
   &__links {
-    
     &_hidden {
       display: none;
     }
@@ -41,6 +31,7 @@ $light-gray: #999999;
   &__link {
     border-bottom: 1px solid $gray;
     padding: 10px 0;
+
     &:last-child {
       border-bottom: 0;
     }
@@ -49,6 +40,7 @@ $light-gray: #999999;
   &__button {
     max-width: 280px;
     margin: 0 auto;
+
     &_hidden {
       display: none;
     }
