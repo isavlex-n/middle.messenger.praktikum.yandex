@@ -1,6 +1,10 @@
-import EventBus from './EventBus'
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
 import { nanoid } from 'nanoid'
 import Handlebars from 'handlebars'
+import EventBus from './EventBus'
 
 interface BlockMeta<P = any> {
   props: P
@@ -15,18 +19,23 @@ export default class Block<P = any> {
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
   } as const
-  static nameOfComponent = ''
+
+  static nameOfComponent = 'Block'
 
   public id = nanoid(6)
+
   private readonly _meta: BlockMeta
 
   protected _element: Nullable<HTMLElement> = null
+
   protected readonly props: P
+
   protected children: { [id: string]: Block } = {}
 
   eventBus: () => EventBus<Events>
 
   protected state: any = {}
+
   protected refs: { [key: string]: HTMLElement } = {}
 
   public constructor(props?: P) {
@@ -113,7 +122,7 @@ export default class Block<P = any> {
 
   retrieveChildByRef = (ref: string) => {
     const childBlocks = Object.values(this.children).filter(
-      (c) => c.element === this.refs[ref]
+      (c) => c.element === this.refs[ref],
     )
     if (childBlocks.length !== 1) {
       console.warn(`1 Ref with Name ${ref} is expected but was: ${childBlocks}`)
@@ -182,6 +191,7 @@ export default class Block<P = any> {
   }
 
   _removeEvents() {
+    // eslint-disable-next-line prefer-destructuring
     const events: Record<string, () => void> = (this.props as any).events
 
     if (!events || !this._element) {
@@ -194,6 +204,7 @@ export default class Block<P = any> {
   }
 
   _addEvents() {
+    // eslint-disable-next-line prefer-destructuring
     const events: Record<string, () => void> = (this.props as any).events
 
     if (!events) {

@@ -1,1 +1,1 @@
-export {Choose as default} from './choose'
+export { Choose as default } from './choose'

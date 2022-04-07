@@ -1,15 +1,17 @@
+/* eslint-disable no-unused-vars */
 import './index.scss'
-import {Block, renderPage, registerComponent} from './core'
+import { Block, renderPage, registerComponent } from './core'
 
-import Login from './pages/login/'
-import Signup from './pages/signup/'
+import Login from './pages/login'
+import Signup from './pages/signup'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {Error500, Error404} from './pages/errors/errors'
+import { Error500, Error404 } from './pages/errors/errors'
 import Profile from './pages/profile'
 import Chats from './pages/chats'
 
+// eslint-disable-next-line global-require
 const components = require('./components/**/index.ts') as {
-  [key: string]: {default: typeof Block}
+  [key: string]: { default: typeof Block }
 }
 
 Object.values(components).forEach((component) => {

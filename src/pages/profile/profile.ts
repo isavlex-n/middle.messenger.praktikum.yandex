@@ -2,6 +2,7 @@ import { profileTemplate } from './profile.hbs'
 import Block from '../../core/Block'
 import { validateInputHandler } from '../../core/utils'
 import './profile.scss'
+
 export class Profile extends Block {
   toggleDataHandler() {
     const links = document.querySelector('.profile__links')
@@ -12,13 +13,11 @@ export class Profile extends Block {
 
   changeDataHandler(event: Event) {
     event.preventDefault()
-    const fields = this.state.fields
-    const newFields = fields.map((field: TStringObject) => {
-      return {
-        ...field,
-        readonly: false,
-      }
-    })
+    const { fields } = this.state
+    const newFields = fields.map((field: TStringObject) => ({
+      ...field,
+      readonly: false,
+    }))
     this.setState({
       ...this.state,
       fields: newFields,
@@ -40,7 +39,7 @@ export class Profile extends Block {
     event.preventDefault()
     const profileData = document.querySelector('.profile__change-data')
     const condition = profileData?.classList.contains(
-      'profile__change-data_hidden'
+      'profile__change-data_hidden',
     )
     if (!condition) {
       const login = this.refs.login.querySelector('input')!.value

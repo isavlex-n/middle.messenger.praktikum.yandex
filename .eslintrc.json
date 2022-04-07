@@ -1,11 +1,20 @@
 {
-  "extends": [
-    "airbnb-base"
-  ],
+  "extends": ["airbnb-base"],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "camelcase": "warn",
+    "no-undef": "warn",
+    "no-underscore-dangle": 0,
+    "no-useless-constructor": "warn",
+    "no-restricted-exports": "warn",
+    "quotes": "warn",
+    "import/prefer-default-export": "warn",
+    "class-methods-use-this": 0,
+    "import/no-unresolved": 0,
+    "import/extensions": 0,
+    "semi": 0,
     "max-len": [2, 120],
     "@typescript-eslint/no-unused-vars": 2
-    }
+  }
 }

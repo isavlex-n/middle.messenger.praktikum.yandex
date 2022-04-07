@@ -10,6 +10,7 @@ interface ButtonProps {
 
 export class Button extends Block {
   static nameOfComponent = 'Button'
+
   constructor(props: ButtonProps) {
     super(props)
   }

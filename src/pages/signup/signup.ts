@@ -148,6 +148,7 @@ export class Signup extends Block {
       ],
     }
   }
+
   render() {
     return `<div class="flex fuul-height">
               <div class="centered">

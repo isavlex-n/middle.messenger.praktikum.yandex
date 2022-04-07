@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 type TRegexpObject = {
   [key: string]: RegExp
 }
@@ -27,9 +28,8 @@ export function validateInputHandler(name: string, value: string) {
     const passValue = document.querySelector<HTMLInputElement>('[name="password"]')?.value
     if (passValue !== value || !value) {
       return 'Пароли не совпадают'
-    } else {
-      return ''
     }
+    return ''
   }
   return patterns[name].test(value) ? '' : errorMessages[name]
 }

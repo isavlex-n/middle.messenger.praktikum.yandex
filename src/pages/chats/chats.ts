@@ -5,9 +5,7 @@ import './chats.scss'
 export class Chats extends Block {
   messageButtonHandler(event: Event) {
     event.preventDefault()
-    const message = document.querySelector(
-      '.chats__input_message'
-    )! as HTMLInputElement
+    const message = document.querySelector<HTMLInputElement>('.chats__input_message')!
 
     if (!message.value) {
       message.classList.add('chats__input_error')
@@ -16,6 +14,7 @@ export class Chats extends Block {
       }, 1000)
     }
   }
+
   protected getStateFromProps() {
     this.state = {
       button: {
@@ -38,6 +37,7 @@ export class Chats extends Block {
       ],
     }
   }
+
   render() {
     return chatsTemplate
   }

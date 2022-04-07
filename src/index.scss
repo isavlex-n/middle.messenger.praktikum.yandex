@@ -14,14 +14,14 @@ $robotoregular: "robotoregular", "Arial", sans-serif;
 body {
   display: flex;
   flex-direction: column;
+  max-width: 1280px;
   min-height: 100vh;
   margin: 0 auto;
-  max-width: 1280px;
 }
 
 .root {
-  flex: 1;
   display: flex;
+  flex: 1;
 }
 
 .app {
@@ -49,25 +49,25 @@ body {
 // form
 
 .form {
-  padding: 40px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   width: 340px;
+  padding: 40px 30px;
   border-radius: 6px;
   box-shadow: 0 0 6px rgb(0 0 0 / 14%);
 
   &__header {
-    font-size: 20px;
     margin: 0;
+    font-size: 20px;
   }
 
   &__list {
-    list-style-type: none;
-    padding: 0;
-    margin: 40px 0 0;
     width: 100%;
+    margin: 40px 0 0;
+    padding: 0;
+    list-style-type: none;
   }
 
   &__list-item {
@@ -83,15 +83,15 @@ body {
   &__label {
     display: flex;
     justify-content: space-between;
-    font-size: 9px;
     color: $dark-gray;
+    font-size: 9px;
   }
 
   &__input {
+    width: 100%;
+    padding: 5px;
     border: 0;
     border-bottom: 1px solid $blue;
-    padding: 5px;
-    width: 100%;
     outline: none;
 
     &_error {
@@ -100,10 +100,10 @@ body {
   }
 
   &__error {
+    margin-top: 7px;
     color: $red;
     font-size: 8px;
     text-align: left;
-    margin-top: 7px;
 
     &_hidden {
       display: none;

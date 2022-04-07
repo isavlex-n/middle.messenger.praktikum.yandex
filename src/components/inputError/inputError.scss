@@ -1,11 +1,11 @@
 @import "../../styles/colors";
 
 .input-error {
+  margin-top: 7px;
+  margin-bottom: 16px;
   color: $red;
   font-size: 8px;
   text-align: left;
-  margin-bottom: 16px;
-  margin-top: 7px;
 
   &_profile {
     margin-bottom: 0;

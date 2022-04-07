@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import Block from '../../core/Block'
 import { errorsTemplate } from './errors.hbs'
 
@@ -8,6 +9,7 @@ class Error500 extends Block {
       text: 'Мы уже фиксим',
     }
   }
+
   render() {
     return errorsTemplate
   }
@@ -20,6 +22,7 @@ class Error404 extends Block {
       text: 'Не туда попали',
     }
   }
+
   render() {
     return errorsTemplate
   }

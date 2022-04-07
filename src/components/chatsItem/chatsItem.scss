@@ -1,22 +1,22 @@
 @import "../../styles/colors";
 
 .chats__item {
-  border-top: 1px solid $gray;
   display: flex;
   padding: 12px 0;
+  border-top: 1px solid $gray;
 }
 
 .chats__img-wrap {
-  width: 47px;
-  height: 47px;
-  min-width: 47px;
-  margin-right: 10px;
-  background-color: $light-gray;
-  border-radius: 50%;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 47px;
+  min-width: 47px;
+  height: 47px;
+  margin-right: 10px;
+  overflow: hidden;
+  background-color: $light-gray;
+  border-radius: 50%;
 }
 
 .chats__img {
@@ -24,15 +24,15 @@
 }
 
 .chats__item-name {
-  font-size: 13px;
   margin: 0;
   padding-bottom: 4px;
+  font-size: 13px;
 }
 
 .chats__item-text {
+  max-height: 30px;
+  margin: 0;
+  overflow: hidden;
   color: $dark-gray;
   font-size: 12px;
-  margin: 0;
-  max-height: 30px;
-  overflow: hidden;
 }

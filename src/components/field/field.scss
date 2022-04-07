@@ -3,17 +3,17 @@
 .field {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid $gray;
   padding: 10px 0;
+  border-bottom: 1px solid $gray;
 
   &:last-child {
     border-bottom: 0;
   }
 
   &__input {
+    color: $dark-gray;
     text-align: right;
     border: 0;
     outline: none;
-    color: $dark-gray;
   }
 }
