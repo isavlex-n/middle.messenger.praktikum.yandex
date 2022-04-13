@@ -1,3 +1,5 @@
+import Block from "./Block"
+
 /* eslint-disable no-useless-escape */
 type TRegexpObject = {
   [key: string]: RegExp
@@ -32,4 +34,15 @@ export function validateInputHandler(name: string, value: string) {
     return ''
   }
   return patterns[name].test(value) ? '' : errorMessages[name]
+}
+
+export function isEqual(lhs: string, rhs: string) {
+  return lhs === rhs;
+}
+
+export function renderDOM(query: string | undefined, block: Block) {
+  const root = document.querySelector(query as string);
+  root!.innerHTML = ''
+  root!.appendChild(block.getContent())
+  return root;
 }

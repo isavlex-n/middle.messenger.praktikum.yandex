@@ -93,7 +93,6 @@ export class Profile extends Block {
   protected getStateFromProps() {
     this.state = {
       userName: 'Иван',
-
       fields: [
         {
           ref: 'email',
