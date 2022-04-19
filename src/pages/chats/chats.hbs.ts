@@ -1,7 +1,7 @@
 export const chatsTemplate = `<div class="chats">
   <section class="chats__chats-list">
     <div class="chats__link-wrap">
-      {{{Link textLink="Профиль >" classLink="chats__link" events=linkToProfile.events}}}
+      {{{Link textLink="Профиль >" classLink="chats__link" link="/profile" to="/profile"}}}
     </div>
     <div class="chats__search">
       {{{Search}}}
@@ -19,7 +19,7 @@ export const chatsTemplate = `<div class="chats">
         <h3 class="chats__person-name">{{personName}}</h3>
       </div>
       <div class="chats__functions-button">
-        <div class="chats__functions chats__functions_hidden">
+        <div class="chats__functions">
           <div class="chats__function">
             <p class="chats__function-text chats__function-text_add-user">Добавить пользователя</p>
           </div>

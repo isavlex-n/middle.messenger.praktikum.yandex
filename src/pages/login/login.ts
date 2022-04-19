@@ -1,23 +1,27 @@
 import Block from '../../core/Block'
-import { validateInputHandler } from '../../core/utils'
+import validateInputHandler from '../../utils/validateInputHandler'
+import { connect } from '../../utils/connect'
+import UserLoginService from '../../services/userLogin'
+import store from '../../core/Store'
 
-export class Login extends Block {
+class Login extends Block {
   submitHandler(event: Event) {
     event.preventDefault()
     const login = this.refs.login.querySelector('input')!.value
     const password = this.refs.password.querySelector('input')!.value
-
+    const service = new UserLoginService()
     const loginData = {
       login,
       password,
     }
 
     Object.entries(loginData).forEach(([key, value]) => {
-      console.log(`${key}: ${value}`)
       this.setChildProps(`${key}Error`, {
         error: validateInputHandler(key, value),
       })
     })
+
+    service.login(loginData)
   }
 
   inputFocusHandler(event: Event) {
@@ -93,6 +97,7 @@ export class Login extends Block {
                       {{{InputError ref=this.refError}}}
                     </div>
                   {{/each}}
+                  {{{InputError error=error}}}
                   <div class='form__list-item form__list-item_button'>
                     {{{Button
                       ref=button.ref
@@ -103,7 +108,7 @@ export class Login extends Block {
                     }}}
                   </div>
                   <div class='form__list-item'>
-                    <a href="/signup" class="form__link">Нет аккаунта?</a>
+                    {{{Link textLink='Нет аккаунта?' classLink='form__link' link='/signup' to='/signup'}}}
                   </div>
                 </div>
               </form>
@@ -111,3 +116,10 @@ export class Login extends Block {
             </div>`
   }
 }
+
+const withLogin = connect((state) => ({
+  // loginFormError: state.loginFormError,
+  // isLoading: state.isLoading,
+  error: state.error,
+}))
+export default withLogin(Login)

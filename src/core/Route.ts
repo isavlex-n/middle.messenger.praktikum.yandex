@@ -1,5 +1,6 @@
 import Block from './Block'
-import { isEqual, renderDOM } from './utils'
+import isEqual from '../utils/isEqual'
+import renderDOM from '../utils/renderDOM'
 
 export default class Route {
   private _props: TStringObject

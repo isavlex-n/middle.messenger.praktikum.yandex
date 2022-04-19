@@ -1,8 +1,7 @@
 import './index.scss'
 import { Block, Router, registerComponent } from './core'
-
-import Login from './pages/login'
-import Signup from './pages/signup'
+import Login from './pages/login/login'
+import Signup from './pages/signup/signup'
 import Errors from './pages/errors'
 import Profile from './pages/profile'
 import Chats from './pages/chats'
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   router
     .use('/', Chats, {})
     .use('/chats', Chats, {})
-    .use('/login', Login, {})
+    .use('/signin', Login, {})
     .use('/signup', Signup, {})
     .use('/profile', Profile, {})
     .use('/error-400', Errors, {

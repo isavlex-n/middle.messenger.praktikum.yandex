@@ -84,6 +84,9 @@ export default class Block<P = any> {
   componentDidMount(props: P) {}
 
   _componentDidUpdate(oldProps: P, newProps: P) {
+    if (this._element && this._element.style.display === 'none') {
+      return
+    }
     const response = this.componentDidUpdate(oldProps, newProps)
     if (!response) {
       return
@@ -255,7 +258,7 @@ export default class Block<P = any> {
   }
 
   show() {
-    this.getContent().style.display = 'block'
+    this.getContent().style.display = 'flex'
   }
 
   hide() {

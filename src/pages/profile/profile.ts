@@ -1,6 +1,6 @@
 import { profileTemplate } from './profile.hbs'
 import Block from '../../core/Block'
-import { validateInputHandler } from '../../core/utils'
+import validateInputHandler from '../../utils/validateInputHandler'
 import './profile.scss'
 
 export class Profile extends Block {

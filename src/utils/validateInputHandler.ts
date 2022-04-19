@@ -1,11 +1,9 @@
-import Block from "./Block"
-
 /* eslint-disable no-useless-escape */
 type TRegexpObject = {
   [key: string]: RegExp
 }
 
-export function validateInputHandler(name: string, value: string) {
+export default function validateInputHandler(name: string, value: string | undefined) {
   const patterns: TRegexpObject = {
     first_name: /^[А-ЯA-Z][а-яёa-z\\-]+$/,
     second_name: /^[А-ЯA-Z][а-яёa-z\\-]+$/,
@@ -29,20 +27,17 @@ export function validateInputHandler(name: string, value: string) {
   if (name === 're_password') {
     const passValue = document.querySelector<HTMLInputElement>('[name="password"]')?.value
     if (passValue !== value || !value) {
+      console.log(passValue, 'first')
+      console.log(value, 'second')
       return 'Пароли не совпадают'
     }
     return ''
   }
-  return patterns[name].test(value) ? '' : errorMessages[name]
+  return patterns[name].test(value!) ? '' : errorMessages[name]
 }
 
-export function isEqual(lhs: string, rhs: string) {
-  return lhs === rhs;
-}
-
-export function renderDOM(query: string | undefined, block: Block) {
-  const root = document.querySelector(query as string);
-  root!.innerHTML = ''
-  root!.appendChild(block.getContent())
-  return root;
+export function isValid(data: TStringObject) {
+  return Object.entries(data).every(
+    ([key, value]) => !validateInputHandler(key, value),
+  )
 }

@@ -2,8 +2,12 @@
 
 .chats__item {
   display: flex;
-  padding: 12px 0;
+  padding: 12px 5px;
   border-top: 1px solid $gray;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(#000000, 0.1);
+  }
 }
 
 .chats__img-wrap {
