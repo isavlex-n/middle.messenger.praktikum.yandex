@@ -7,7 +7,14 @@ export const chatsTemplate = `<div class="chats">
       {{{Search}}}
     </div>
     {{#each items}}
-    {{{ChatsItem title=this.title text=this.last_message.content srcImg=this.avatar}}}
+    {{{ChatsItem 
+      title=this.title
+      id=this.id
+      text=this.last_message.content
+      src=this.avatar
+      unCount=this.unread_count
+      events=this.events
+    }}}
     {{/each}}
   </section>
   <section class="chats__chat">

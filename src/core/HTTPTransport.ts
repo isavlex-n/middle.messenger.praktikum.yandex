@@ -85,6 +85,8 @@ export default class HTTPTransport {
       const xhr = new XMLHttpRequest()
 
       xhr.open(method, isGet ? `${url}${queryStringify(data)}` : url)
+      xhr.withCredentials = includeCredentials
+
       xhr.responseType = responseType as XMLHttpRequestResponseType
       if (headers) {
         Object.entries(headers).forEach(([key, value]) => {
@@ -98,7 +100,6 @@ export default class HTTPTransport {
           resolve(xhr.response)
         }
       }
-      xhr.withCredentials = includeCredentials
       xhr.onabort = () => {
         reject(xhr.response)
       }

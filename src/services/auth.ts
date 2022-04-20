@@ -25,7 +25,7 @@ export default class AuthService {
 
       const responseUser = await auth.getUser()
 
-      store.set('user', transformUser(responseUser))
+      store.set('user', responseUser.login)
 
       router.go('/messenger')
       // Останавливаем крутилку

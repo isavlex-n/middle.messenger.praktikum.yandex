@@ -7,7 +7,7 @@ const chatsApi = new ChatsAPI()
 
 export default class ChatsService {
   public async getChats() {
-    const chats = chatsApi.request()
-    chats.then((data) => data)
+    const chats = await chatsApi.request()
+    return chats
   }
 }

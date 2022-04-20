@@ -15,13 +15,40 @@ class Chats extends Block {
   // }
 
   componentDidMount() {
-    console.log(this.props)
+    const chats = this.getChats()
+    chats.then((data) => {
+      const items = data.map((item) => ({
+        ...item,
+        events: {
+          click: (e: MouseEvent) => {
+            e.preventDefault()
+            // let action = e.target.dataset.id
+            // if (action) {
+            //   console.log(action)
+            // }
+            console.log(e.target.dataset.id)
+          },
+        },
+      }))
+      this.setState({
+        ...this.state,
+        items,
+      })
+      console.log(this.state.items)
+    })
+  }
+
+  async getChats() {
+    const service = new ChatsService()
+    const chats = await service.getChats()
+    
+    return chats
   }
 
   messageButtonHandler(event: Event) {
     event.preventDefault()
     const message = document.querySelector<HTMLInputElement>(
-      '.chats__input_message'
+      '.chats__input_message',
     )!
 
     if (!message.value) {
@@ -34,14 +61,6 @@ class Chats extends Block {
 
   protected getStateFromProps() {
     this.state = {
-      linkToProfile: {
-        events: {
-          click: (e: Event) => {
-            e.preventDefault()
-            router.go('/profile')
-          },
-        },
-      },
       button: {
         classMod: 'button_forward',
         type: 'submit',
@@ -52,26 +71,27 @@ class Chats extends Block {
       message: {
         type: 'text',
       },
-      items: [
-        {
-          id: 123,
-          title: 'Андрей',
-          avatar: '/123/avatar1.jpg',
-          unread_count: 15,
-          last_message: {
-            user: {
-              first_name: 'Petya',
-              second_name: 'Pupkin',
-              avatar: '/path/to/avatar.jpg',
-              email: 'my@email.com',
-              login: 'userLogin',
-              phone: '8(911)-222-33-22',
-            },
-            time: '2020-01-02T14:22:22.000Z',
-            content: 'this is message content',
-          },
-        },
-      ],
+      // items: [
+      //   {
+      //     id: 123,
+      //     title: 'Андрей',
+      //     avatar: '/123/avatar1.jpg',
+      //     unread_count: 15,
+      //     last_message: {
+      //       user: {
+      //         first_name: 'Petya',
+      //         second_name: 'Pupkin',
+      //         avatar: '/path/to/avatar.jpg',
+      //         email: 'my@email.com',
+      //         login: 'userLogin',
+      //         phone: '8(911)-222-33-22',
+      //       },
+      //       time: '2020-01-02T14:22:22.000Z',
+      //       content: 'this is message content',
+      //     },
+      //   },
+      // ],
+      items: [],
     }
   }
 
