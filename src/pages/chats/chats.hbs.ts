@@ -1,13 +1,13 @@
 export const chatsTemplate = `<div class="chats">
   <section class="chats__chats-list">
     <div class="chats__link-wrap">
-      {{{Link textLink="Профиль >" classLink="chats__link" link="/profile" to="/profile"}}}
+      {{{Link textLink="Профиль >" classLink="chats__link" link="/settings" to="/settings"}}}
     </div>
     <div class="chats__search">
       {{{Search}}}
     </div>
     {{#each items}}
-    {{{ChatsItem name=this.name text=this.text srcImg=this.srcImg}}}
+    {{{ChatsItem title=this.title text=this.last_message.content srcImg=this.avatar}}}
     {{/each}}
   </section>
   <section class="chats__chat">

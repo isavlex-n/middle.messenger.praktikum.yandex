@@ -77,24 +77,3 @@ export default class Router {
     return this.routes.find((route) => route.match(pathname))
   }
 }
-
-// Можно обновиться на /user и получить сразу пользователя
-// router
-//   .use('/', Chats)
-//   .use('/users', Users)
-//   .start();
-
-// Через секунду контент изменится сам, достаточно дёрнуть переход
-// setTimeout(() => {
-//   router.go('/users')
-// }, 1000)
-
-// // А можно и назад
-// setTimeout(() => {
-//   router.back()
-// }, 3000)
-
-// // И снова вперёд
-// setTimeout(() => {
-//   router.forward()
-// }, 5000)

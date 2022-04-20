@@ -1,15 +1,32 @@
 import Block from '../../core/Block'
 import validateInputHandler from '../../utils/validateInputHandler'
 import { connect } from '../../utils/connect'
-import UserLoginService from '../../services/userLogin'
+import AuthSevice from '../../services/auth'
+import AuthAPI from '../../api/AuthAPI'
 import store from '../../core/Store'
+import Router from '../../core/Router'
 
+const router = new Router('.app')
 class Login extends Block {
+  componentDidMount() {
+    const state = store.getState()
+    // здесь видно что в сторе есть user
+    console.log(state, 'state')
+    // но здесь он undefined
+    // как обратиться к store.user?
+    console.log(state.user, 'state.user')
+    // как можно обратиться к this.props.user?
+    console.log(this.props, 'props')
+    if (state.user) {
+      router.go('/messenger')
+    }
+  }
+
   submitHandler(event: Event) {
     event.preventDefault()
     const login = this.refs.login.querySelector('input')!.value
     const password = this.refs.password.querySelector('input')!.value
-    const service = new UserLoginService()
+    const service = new AuthSevice()
     const loginData = {
       login,
       password,
@@ -118,8 +135,7 @@ class Login extends Block {
 }
 
 const withLogin = connect((state) => ({
-  // loginFormError: state.loginFormError,
-  // isLoading: state.isLoading,
   error: state.error,
+  user: state.user,
 }))
 export default withLogin(Login)

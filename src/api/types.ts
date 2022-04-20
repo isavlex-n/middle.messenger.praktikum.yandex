@@ -1,9 +1,14 @@
 export type APIError = {
-  reason: string;
-};
+  reason: string
+}
 
 export type UserDTO = {
-  id: number;
-  login: string;
-  first_name: string;
-};
+  avatar: string | null
+  display_name: string | null
+  email: string
+  id: number
+  login: string
+  first_name: string
+  phone: string
+  second_name: string
+}

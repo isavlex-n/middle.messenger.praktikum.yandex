@@ -7,7 +7,7 @@ export enum StoreEvents {
 }
 
 class Store extends EventBus {
-  private state: Indexed = {}
+  public state: Indexed = {}
 
   constructor() {
     super()

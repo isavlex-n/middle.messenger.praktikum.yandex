@@ -1,7 +1,7 @@
 import Block from '../../core/Block'
 import validateInputHandler from '../../utils/validateInputHandler'
 import { connect } from '../../utils/connect'
-import UserSignupService from '../../services/userSignup'
+import AuthService from '../../services/auth'
 
 class Signup extends Block {
   submitHandler(event: Event) {
@@ -22,7 +22,7 @@ class Signup extends Block {
       second_name,
       phone,
     }
-    const service = new UserSignupService()
+    const service = new AuthService()
 
     Object.entries(loginData).forEach(([key, value]) => {
       console.log(`${key}: ${value}`)

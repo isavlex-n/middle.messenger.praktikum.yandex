@@ -28,7 +28,7 @@ export default class Block<P = any> {
 
   protected _element: Nullable<HTMLElement> = null
 
-  protected readonly props: P
+  protected props: P
 
   protected children: { [id: string]: Block } = {}
 

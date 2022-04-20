@@ -13,6 +13,7 @@ type TOptions = {
   responseType?: 'json' | 'text' | 'blob' | 'document' | 'arraybuffer' | ''
   timeout?: number
   data?: Record<string, any> | {} | null
+  includeCredentials: boolean
 }
 
 type OptionsWithoutMethod = Omit<TOptions, 'method'>
@@ -76,7 +77,9 @@ export default class HTTPTransport {
     timeout: number = 5000,
     responseType = 'json',
   ): Promise<XMLHttpRequest> {
-    const { method, data, headers } = options
+    const {
+      method, data, headers, includeCredentials,
+    } = options
     const isGet = method === METHOD.GET
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest()
@@ -95,6 +98,7 @@ export default class HTTPTransport {
           resolve(xhr.response)
         }
       }
+      xhr.withCredentials = includeCredentials
       xhr.onabort = () => {
         reject(xhr.response)
       }

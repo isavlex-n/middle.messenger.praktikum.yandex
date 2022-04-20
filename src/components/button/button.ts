@@ -22,6 +22,7 @@ export class Button extends Block {
             const router = new Router('.app')
             if (this.props.to === 'back') {
               router.back()
+              return
             }
             router.go(this.props.to)
           },
