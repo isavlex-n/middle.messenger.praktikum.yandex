@@ -8,12 +8,6 @@ import store from '../../core/Store'
 
 const router = new Router('.app')
 class Chats extends Block {
-  // constructor(props) {
-  //   super(props)
-  //   const service = new ChatsService()
-  //   const data = service.getChats()
-  // }
-
   componentDidMount() {
     const chats = this.getChats()
     chats.then((data) => {
@@ -103,5 +97,6 @@ class Chats extends Block {
 const withChats = connect((state) => ({
   error: state.error,
   user: state.user,
+  isLoading: state.isLoading,
 }))
 export default withChats(Chats)

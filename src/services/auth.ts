@@ -11,13 +11,14 @@ const auth = new AuthAPI()
 export default class AuthService {
   public async login(data: LoginData) {
     try {
-      // Запускаем крутилку
+      store.set('isLoading', true)
 
       if (!isValid(data)) {
         throw new Error('Data is not valid')
       }
 
       if (store.getState().user) {
+        store.set('isLoading', false)
         router.go('/messenger')
       }
 
@@ -26,10 +27,10 @@ export default class AuthService {
       const responseUser = await auth.getUser()
 
       store.set('user', responseUser.login)
-
+      store.set('isLoading', false)
       router.go('/messenger')
-      // Останавливаем крутилку
     } catch (error: any) {
+      store.set('isLoading', false)
       if (error.reason === 'User already in system') {
         router.go('/messenger')
         return

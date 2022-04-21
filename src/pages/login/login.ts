@@ -98,6 +98,7 @@ class Login extends Block {
   render() {
     return `<div class="flex fuul-height">
               <div class="centered">
+              {{{Loader show=isLoading}}}
               <form class='form form_login'>
                 <h1 class="form__header">Вход</h1>
                 <div class='form__list'>
@@ -137,5 +138,6 @@ class Login extends Block {
 const withLogin = connect((state) => ({
   error: state.error,
   user: state.user,
+  isLoading: state.isLoading,
 }))
 export default withLogin(Login)
