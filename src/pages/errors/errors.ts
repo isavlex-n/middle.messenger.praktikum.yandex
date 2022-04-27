@@ -7,7 +7,7 @@ export class Errors extends Block {
       <div class="centered center">
         <h1>{{number}}</h1>
         <p>{{text}}</p>
-        {{{Link textLink='Назад к чатам' link='/chat'}}}
+        {{{Link textLink='Назад к чатам' link='/messenger'}}}
       </div>
     </div>
     `

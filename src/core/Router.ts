@@ -15,6 +15,8 @@ export default class Router {
 
   private readonly _rootQuery: string | undefined
 
+  private _pathnames: string[]
+
   constructor(rootQuery: string) {
     if (Router.__instance) {
       return Router.__instance
@@ -24,6 +26,7 @@ export default class Router {
     this.history = window.history
     this._currentRoute = null
     this._rootQuery = rootQuery
+    this._pathnames = []
 
     Router.__instance = this
   }
@@ -35,16 +38,25 @@ export default class Router {
     })
 
     this.routes.push(route)
+    this._pathnames.push(pathname)
 
     return this
   }
 
+  private _hasRoute(pathname: string) {
+    if (!this._pathnames.includes(pathname)) {
+      return '*';
+    }
+    return pathname;
+  }
+
   start() {
     window.onpopstate = (event) => {
-      this._onRoute((event.currentTarget as Window).location.pathname)
+      const pathname = this._hasRoute((event.currentTarget as Window).location.pathname)
+      this._onRoute(pathname)
     }
-
-    this._onRoute(window.location.pathname)
+    const pathname = this._hasRoute(window.location.pathname)
+    this._onRoute(pathname)
   }
 
   _onRoute(pathname: string) {

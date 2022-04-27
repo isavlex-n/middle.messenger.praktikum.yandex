@@ -125,7 +125,7 @@ export default class Block<P = any> {
 
   retrieveChildByRef = (ref: string) => {
     const childBlocks = Object.values(this.children).filter(
-      (c) => c.element === this.refs[ref],
+      (c) => c.element === this.refs[ref]
     )
     if (childBlocks.length !== 1) {
       console.warn(`1 Ref with Name ${ref} is expected but was: ${childBlocks}`)
@@ -264,4 +264,11 @@ export default class Block<P = any> {
   hide() {
     this.getContent().style.display = 'none'
   }
+
+  public destroy() {
+    this._element?.remove()
+    this.onDestroy()
+  }
+
+  public onDestroy() {}
 }

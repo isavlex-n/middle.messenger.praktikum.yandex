@@ -27,7 +27,7 @@ export default class Route {
 
   leave() {
     if (this._block) {
-      this._block.hide()
+      this._block.destroy()
     }
   }
 
@@ -36,12 +36,7 @@ export default class Route {
   }
 
   render() {
-    if (!this._block) {
-      this._block = new this._blockClass(this._props)
-      renderDOM(this._props.rootQuery, this._block!)
-      return
-    }
-
-    this._block.show()
+    this._block = new this._blockClass(this._props)
+    renderDOM(this._props.rootQuery, this._block)
   }
 }
