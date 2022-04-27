@@ -2,11 +2,7 @@ import Block from '../../core/Block'
 import './loader.scss'
 
 interface LoaderProps {
-  text: string
-  classMod: string
-  type: string
-  events: { [key: string]: () => {} }
-  to?: string
+  show: boolean
 }
 
 export class Loader extends Block {

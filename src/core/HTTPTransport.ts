@@ -65,7 +65,7 @@ export default class HTTPTransport {
   }
 
   delete(url: string, options: OptionsWithoutMethod): Promise<XMLHttpRequest> {
-    return this.request(`${this.url}${url}`, {
+    return this.request(`${process.env.API_ENDPOINT}/${this.url}/${url}`, {
       ...options,
       method: METHOD.DELETE,
     })
@@ -114,8 +114,7 @@ export default class HTTPTransport {
       if (isGet) {
         xhr.send()
       } else {
-        const json = JSON.stringify(data)
-        xhr.send(json)
+        xhr.send(data)
       }
     })
   }

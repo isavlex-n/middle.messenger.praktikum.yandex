@@ -2,9 +2,16 @@
 
 .choose {
   margin: auto;
+  &__img {
+    height: 100%;
+  }
 
   &__label {
-    display: block;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
     width: 130px;
     height: 130px;
     background-color: $light-gray;
@@ -16,6 +23,7 @@
 
     &:hover {
       &::before {
+        position: absolute;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -17,11 +17,11 @@ export type SignupData = {
 const auth = new HTTPTransport('auth')
 
 export default class AuthAPI {
-  login(user: LoginData) {
+  login(data: LoginData) {
     return auth.post('signin', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
-      data: user,
+      data: JSON.stringify(data),
     })
   }
 
@@ -42,11 +42,11 @@ export default class AuthAPI {
     })
   }
 
-  signUp(user: SignupData) {
+  signUp(data: SignupData) {
     return auth.post('signup', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
-      data: user,
+      data: JSON.stringify(data),
     })
   }
 }

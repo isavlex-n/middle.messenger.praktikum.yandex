@@ -2,6 +2,25 @@
 
 .input {
   text-align: center;
+  &_hidden {
+    display: none;
+  }
+
+  &_checkbox {
+    display: flex;
+    padding: 0 25%;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    label {
+      font-size: 13px;
+      color: black;
+    }
+
+    input {
+      width: auto;
+      margin: 1px 0 0 5px;
+    }
+  }
 
   &__label {
     display: flex;

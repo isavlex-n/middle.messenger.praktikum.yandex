@@ -1,9 +1,36 @@
 import { profileTemplate } from './profile.hbs'
 import Block from '../../core/Block'
-import validateInputHandler from '../../utils/validateInputHandler'
+import validateInputHandler, { isValid } from '../../utils/validateInputHandler'
+import AuthService from '../../services/auth'
+import UsersService from '../../services/users'
+import { Router } from '../../core'
+import { connect } from '../../utils/connect'
+import store from '../../core/Store'
 import './profile.scss'
 
-export class Profile extends Block {
+const authService = new AuthService()
+const userService = new UsersService()
+const router = new Router('app')
+class Profile extends Block {
+  componentDidMount() {
+    this.getUser()
+  }
+
+  async getUser() {
+    const user: Indexed = await authService.getUser()
+    const { fields } = this.state
+    const newFields = fields.map((field: Indexed) => {
+      const newValue = user[field.name]
+      const newField = { ...field, value: newValue }
+      return newField
+    })
+    this.setState({
+      ...this.state,
+      fields: newFields,
+      user,
+    })
+  }
+
   toggleDataHandler() {
     const links = document.querySelector('.profile__links')
     const button = document.querySelector('.profile__button')
@@ -39,7 +66,7 @@ export class Profile extends Block {
     event.preventDefault()
     const profileData = document.querySelector('.profile__change-data')
     const condition = profileData?.classList.contains(
-      'profile__change-data_hidden',
+      'profile__change-data_hidden'
     )
     if (!condition) {
       const login = this.refs.login.querySelector('input')!.value
@@ -55,11 +82,19 @@ export class Profile extends Block {
         phone,
       }
       Object.entries(loginData).forEach(([key, value]) => {
-        console.log(`${key}: ${value}`)
         this.setChildProps(`${key}Error`, {
           error: validateInputHandler(key, value),
         })
       })
+      if (isValid(loginData)) {
+        userService.changeUserProfile({
+          ...loginData,
+          display_name: loginData.first_name,
+        })
+        setTimeout(() => {
+          this.getUser()
+        }, 2000)
+      }
     } else {
       const old_password = this.refs.old_password.querySelector('input')!.value
       const password = this.refs.password.querySelector('input')!.value
@@ -70,11 +105,19 @@ export class Profile extends Block {
         re_password,
       }
       Object.entries(passData).forEach(([key, value]) => {
-        console.log(`${key}: ${value}`)
         this.setChildProps(`${key}Error`, {
           error: validateInputHandler(key, value),
         })
       })
+      if (isValid(passData)) {
+        userService.changeUserPassword({
+          oldPassword: passData.old_password,
+          newPassword: passData.password,
+        })
+        setTimeout(() => {
+          this.getUser()
+        }, 2000)
+      }
     }
   }
 
@@ -90,8 +133,33 @@ export class Profile extends Block {
     })
   }
 
+  logoutHandler(event: Event) {
+    event.preventDefault()
+    authService.logout()
+    router.go('/signin')
+  }
+
+  changeFileHandler(event: Event) {
+    const { files }: { files: FileList | null } =
+      event.target as HTMLInputElement
+    if (!files?.length) {
+      return
+    }
+    const [file] = files
+    const formData = new FormData()
+    formData.append('avatar', file)
+    userService.changeUserAvatar(formData).then((data) => {
+      store.set({
+        user: data,
+      })
+    })
+  }
+
   protected getStateFromProps() {
     this.state = {
+      choose: {
+        change: this.changeFileHandler.bind(this),
+      },
       userName: 'Иван',
       fields: [
         {
@@ -101,7 +169,7 @@ export class Profile extends Block {
           label: 'Почта',
           name: 'email',
           type: 'email',
-          value: 'login@yandex.ru',
+          value: '',
           readonly: true,
           events: {
             focusin: this.fieldFocusHandler.bind(this),
@@ -227,7 +295,14 @@ export class Profile extends Block {
             click: this.changePassHandler.bind(this),
           },
         },
-        { link: '#', textLink: 'Выйти', classLink: 'link_red' },
+        {
+          link: '#',
+          textLink: 'Выйти',
+          classLink: 'link_red',
+          events: {
+            click: this.logoutHandler.bind(this),
+          },
+        },
       ],
     }
   }
@@ -236,3 +311,10 @@ export class Profile extends Block {
     return profileTemplate
   }
 }
+
+const withProfile = connect((state) => ({
+  error: state.error,
+  user: state.user,
+  isLoading: state.isLoading,
+}))
+export default withProfile(Profile)

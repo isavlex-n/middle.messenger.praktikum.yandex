@@ -9,8 +9,7 @@
   border-radius: 8px;
   cursor: pointer;
 
-  &_back,
-  %button-back {
+  &_back {
     width: 28px;
     height: 28px;
     background-image: url("../../../static/icons/back.svg");
@@ -20,8 +19,7 @@
   }
 
   &_forward {
-    @extend %button-back;
-
+    @extend .button_back;
     background-image: url("../../../static/icons/forward.svg");
   }
 }

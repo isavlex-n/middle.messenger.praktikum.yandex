@@ -195,8 +195,8 @@ class Signup extends Block {
 }
 
 const withSignup = connect((state) => ({
-  // loginFormError: state.loginFormError,
-  // isLoading: state.isLoading,
+  user: state.user,
+  isLoading: state.isLoading,
   error: state.error,
 }))
 export default withSignup(Signup)

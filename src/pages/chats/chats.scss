@@ -13,7 +13,9 @@
   }
 
   &__link-wrap {
-    text-align: right;
+    
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
   }
 
@@ -141,11 +143,9 @@
   }
 
   &__messages {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    flex: 1;
+    overflow-y: scroll;
     position: relative;
+    height: 100vh;
   }
 
   &__date-wrap {
@@ -160,7 +160,8 @@
   }
 
   &__companion {
-    justify-self: start;
+    justify-content: start;
+    flex-direction: column;
   }
 
   &__yourself {
@@ -213,7 +214,7 @@
     background-color: #fff;
 
     &_hidden {
-      // display: none;
+      display: none;
     }
   }
 

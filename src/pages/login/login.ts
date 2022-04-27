@@ -9,17 +9,6 @@ import Router from '../../core/Router'
 const router = new Router('.app')
 class Login extends Block {
   componentDidMount() {
-    const state = store.getState()
-    // здесь видно что в сторе есть user
-    console.log(state, 'state')
-    // но здесь он undefined
-    // как обратиться к store.user?
-    console.log(state.user, 'state.user')
-    // как можно обратиться к this.props.user?
-    console.log(this.props, 'props')
-    if (state.user) {
-      router.go('/messenger')
-    }
   }
 
   submitHandler(event: Event) {

@@ -35,7 +35,13 @@ export class Button extends Block {
   protected render(): string {
     // language=hbs
     return `
-      <button class="button {{classMod}}" type="{{type}}" >{{text}}</button>
+      <button
+        class="button {{classMod}}"
+        type="{{type}}"
+        {{#if dataset}}data-type="{{dataset}}"{{/if}}
+        >
+          {{text}}
+        </button>
     `
   }
 }

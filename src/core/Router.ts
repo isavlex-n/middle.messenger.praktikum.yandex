@@ -1,6 +1,7 @@
 /* eslint-disable no-constructor-return */
 import Block from './Block'
 import Route from './Route'
+import store from './Store'
 
 export default class Router {
   // eslint-disable-next-line no-use-before-define
@@ -55,6 +56,12 @@ export default class Router {
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave()
     }
+
+    // настроить
+    // if (pathname === '/signin' && store.getState().user) {
+    //   console.log('here')
+    //   this.go('/messenger')
+    // }
 
     this._currentRoute = route
     route.render()

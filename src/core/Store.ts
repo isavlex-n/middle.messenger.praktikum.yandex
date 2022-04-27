@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 import EventBus from './EventBus'
-import set from '../utils/set'
+
+type TState = Record<string, any>
 
 export enum StoreEvents {
   Updated = 'updated',
@@ -18,8 +19,14 @@ class Store extends EventBus {
     return this.state
   }
 
-  public set(path: string, value: unknown) {
-    set(this.state, path, value)
+  public set(nextState: TState) {
+    if (!nextState) {
+      return
+    }
+    this.state = {
+      ...this.state,
+      ...nextState,
+    }
     this.emit(StoreEvents.Updated)
   }
 }
