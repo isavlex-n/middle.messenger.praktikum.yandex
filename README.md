@@ -26,4 +26,4 @@
 ## Материалы
 * [Макет figma](https://www.figma.com/file/lauus1sB65VzCpx4D2e7Bi/Messenger?node-id=0%3A1)
 
-[PR sprint_2](https://github.com/isavlex-n/middle.messenger.praktikum.yandex/pull/2)
+[PR sprint_3](https://github.com/isavlex-n/middle.messenger.praktikum.yandex/pull/3)
