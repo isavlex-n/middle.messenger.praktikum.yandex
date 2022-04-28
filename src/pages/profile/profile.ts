@@ -66,7 +66,7 @@ class Profile extends Block {
     event.preventDefault()
     const profileData = document.querySelector('.profile__change-data')
     const condition = profileData?.classList.contains(
-      'profile__change-data_hidden'
+      'profile__change-data_hidden',
     )
     if (!condition) {
       const login = this.refs.login.querySelector('input')!.value
@@ -140,8 +140,7 @@ class Profile extends Block {
   }
 
   changeFileHandler(event: Event) {
-    const { files }: { files: FileList | null } =
-      event.target as HTMLInputElement
+    const { files }: { files: FileList | null } = event.target as HTMLInputElement
     if (!files?.length) {
       return
     }

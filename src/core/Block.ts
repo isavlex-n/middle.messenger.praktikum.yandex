@@ -94,7 +94,7 @@ export default class Block<P = any> {
     this._render()
   }
 
-  componentDidUpdate(oldProps: P, newProps: P) {
+  componentDidUpdate(oldProps?: P, newProps?: P) {
     return true
   }
 
@@ -125,7 +125,7 @@ export default class Block<P = any> {
 
   retrieveChildByRef = (ref: string) => {
     const childBlocks = Object.values(this.children).filter(
-      (c) => c.element === this.refs[ref]
+      (c) => c.element === this.refs[ref],
     )
     if (childBlocks.length !== 1) {
       console.warn(`1 Ref with Name ${ref} is expected but was: ${childBlocks}`)

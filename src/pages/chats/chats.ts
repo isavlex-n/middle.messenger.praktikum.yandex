@@ -2,17 +2,22 @@ import Block from '../../core/Block'
 import { chatsTemplate } from './chats.hbs'
 import './chats.scss'
 import { connect } from '../../utils/connect'
-import Router from '../../core/Router'
 import ChatsService from '../../services/chats'
 import socketService from '../../services/socket'
 import store from '../../core/Store'
 
-const router = new Router('.app')
 const service = new ChatsService()
 
 class Chats extends Block {
   componentDidMount() {
     this.getChats()
+  }
+
+  scrolToBottom() {
+    const scroll = document.querySelector('.hidden-for-scroll')
+    if (scroll) {
+      scroll.scrollIntoView({ block: 'end', behavior: 'auto' })
+    }
   }
 
   clickChatHandler(event: Event) {
@@ -21,11 +26,13 @@ class Chats extends Block {
     const action = +target.dataset.id!
     const { items } = this.state
     const indexPrev = items.findIndex(
-      (item: Indexed) => item.id === this.state.currentChat
+      (item: Indexed) => item.id === this.state.currentChat,
     )
     const indexCur = items.findIndex((item: Indexed) => item.id === +action!)
     if (this.state.currentChat) {
       items[indexPrev].active = false
+      socketService.leave()
+      this.scrolToBottom()
     }
     items[indexCur].active = true
     this.setState({
@@ -68,6 +75,9 @@ class Chats extends Block {
 
   async getUsers(chatId: number) {
     const users = await service.getUsers(chatId)
+    store.set({
+      usersOfChat: users,
+    })
     this.setState({
       ...this.state,
       users,
@@ -109,9 +119,9 @@ class Chats extends Block {
 
     if (action === 'remove-user') {
       const checkboxes = Array.from(
-        this.refs.modal.querySelectorAll('[data-type="checkbox"]')
+        this.refs.modal.querySelectorAll('[data-type="checkbox"]'),
       )
-      const checkedUsers = checkboxes.filter((user) => user.checked)
+      const checkedUsers = checkboxes.filter((user) => (user as HTMLInputElement).checked)
       if (checkedUsers.length) {
         const usersId = checkedUsers.map((user) => +user.id)
         this.removeUsersFromChat(usersId, this.state.currentChat)
@@ -161,6 +171,7 @@ class Chats extends Block {
       return
     }
     this.sendMessage(message)
+    this.scrolToBottom()
   }
 
   toggleModal(event?: Event) {
@@ -212,7 +223,7 @@ class Chats extends Block {
 
     if (action === 'remove-user') {
       const users = this.state.users.filter(
-        (user) => user.login !== this.props.user
+        (user: Indexed) => user.login !== this.props.user,
       )
       this.setChildProps('modal', {
         title: target.textContent?.trim(),
@@ -265,31 +276,6 @@ class Chats extends Block {
       message: {
         type: 'text',
       },
-      chat: {
-        personNames: 'Вася',
-      },
-      // items: [
-      //   {
-      //     id: 123,
-      //     title: 'Андрей',
-      //     avatar: '/123/avatar1.jpg',
-      //     unread_count: 15,
-      //     last_message: {
-      //       user: {
-      //         first_name: 'Petya',
-      //         second_name: 'Pupkin',
-      //         avatar: '/path/to/avatar.jpg',
-      //         email: 'my@email.com',
-      //         login: 'userLogin',
-      //         phone: '8(911)-222-33-22',
-      //       },
-      //       time: '2020-01-02T14:22:22.000Z',
-      //       content: 'this is message content',
-      //     },
-      //   },
-      // ],
-      items: [],
-      users: [],
     }
   }
 

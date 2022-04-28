@@ -2,11 +2,7 @@ import Block from '../../core/Block'
 import validateInputHandler from '../../utils/validateInputHandler'
 import { connect } from '../../utils/connect'
 import AuthSevice from '../../services/auth'
-import AuthAPI from '../../api/AuthAPI'
-import store from '../../core/Store'
-import Router from '../../core/Router'
 
-const router = new Router('.app')
 class Login extends Block {
   componentDidMount() {
   }

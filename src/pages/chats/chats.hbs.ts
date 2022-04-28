@@ -13,8 +13,8 @@ export const chatsTemplate = `
   {{{Loader show=isLoading}}}
   <section class="chats__chats-list">
     <div class="chats__link-wrap">
-      {{{Link textLink="Добавить чат >" classLink="chats__link" events=addChatLinkEvent}}}
-      {{{Link textLink="Профиль >" classLink="chats__link" link="/settings" to="/settings"}}}
+      {{{Link textLink="Добавить чат >" events=addChatLinkEvent}}}
+      {{{Link textLink="Профиль >" link="/settings" to="/settings"}}}
     </div>
     <div class="chats__search">
       {{{Search}}}

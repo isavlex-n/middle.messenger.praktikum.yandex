@@ -1,4 +1,3 @@
-import { Router } from '../../core'
 import Block from '../../core/Block'
 import './back.scss'
 

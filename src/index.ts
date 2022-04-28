@@ -1,12 +1,11 @@
 import './index.scss'
 import { Block, Router, registerComponent } from './core'
-import AuthAPI from './api/AuthAPI'
+import AuthService from './services/auth'
 import Login from './pages/login/login'
 import Signup from './pages/signup/signup'
 import Errors from './pages/errors'
 import Profile from './pages/profile/profile'
 import Chats from './pages/chats/chats'
-import store from './core/Store'
 
 // eslint-disable-next-line global-require
 const components = require('./components/**/index.ts') as {
@@ -17,26 +16,16 @@ Object.values(components).forEach((component) => {
   registerComponent(component.default)
 })
 
+const authService = new AuthService()
 const router = new Router('.app')
-
-async function getUser() {
-  try {
-    const auth = new AuthAPI()
-    const user = await auth.getUser()
-    store.set({
-      user,
-    })
-  } catch (error) {
-    router.go('/signin')
-  }
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   router
-    .use('/', Chats, {})
+    .setUnprotectedPaths(['/', '/sign-up', '/error-500'])
+    .onRoute(authService.getUser)
+    .use('/', Login, {})
     .use('/messenger', Chats, {})
-    .use('/signin', Login, {})
-    .use('/signup', Signup, {})
+    .use('/sign-up', Signup, {})
     .use('/settings', Profile, {})
     .use('/error-500', Errors, {
       number: '500',
@@ -47,5 +36,4 @@ document.addEventListener('DOMContentLoaded', () => {
       text: 'Не туда попали',
     })
     .start()
-  getUser()
 })

@@ -2,6 +2,7 @@ export const profileTemplate = `<section class="flex">
   {{{Back}}}
     <div class="profile">
       <div class="profile__content">
+        {{{Loader show=isLoading}}}
         {{{Choose events=choose img=user.avatar}}}
         <h1 class="profile__name center">{{userName}}</h1>
         <form class="profile__fields">

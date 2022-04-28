@@ -2,6 +2,7 @@
 
 .input {
   text-align: center;
+
   &_hidden {
     display: none;
   }
@@ -11,6 +12,7 @@
     padding: 0 25%;
     justify-content: space-between;
     margin-bottom: 5px;
+
     label {
       font-size: 13px;
       color: black;

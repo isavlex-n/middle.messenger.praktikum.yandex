@@ -24,7 +24,7 @@ export default class AuthService {
       const user = await auth.getUser()
       store.set({ isLoading: false, user })
       router.go('/messenger')
-    } catch (error: any) {
+    } catch (error: Indexed) {
       store.set({ isLoading: false })
       if (error.reason === 'User already in system') {
         router.go('/messenger')
@@ -42,19 +42,44 @@ export default class AuthService {
       throw new Error('Data is not valid')
     }
 
-    await auth.signUp(data)
+    try {
+      store.set({ isLoading: true })
+      await auth.signUp(data)
+
+      router.go('/messenger')
+      store.set({ isLoading: false })
+    } catch (error: Indexed) {
+      store.set({ isLoading: false })
+      if (error.reason === 'User already in system') {
+        router.go('/messenger')
+        return
+      }
+      store.set({ error: error.reason })
+      setTimeout(() => {
+        store.set({ error: '' })
+      }, 2000)
+    }
   }
 
   public async logout() {
     store.set({ isLoading: true })
     await auth.logout()
     store.set({ isLoading: false, user: null })
+    router.go('/')
   }
 
   public async getUser() {
-    store.set({ isLoading: true })
-    const user = await auth.getUser()
-    store.set({ isLoading: false, user })
-    return user
+    try {
+      store.set({ isLoading: true })
+      const user = await auth.getUser()
+      store.set({ isLoading: false, user })
+      return user
+    } catch (error) {
+      store.set({
+        isLoading: false,
+      })
+      console.log(error)
+      router.go('/')
+    }
   }
 }

@@ -114,7 +114,7 @@ export default class HTTPTransport {
       if (isGet) {
         xhr.send()
       } else {
-        xhr.send(data)
+        xhr.send(data as any)
       }
     })
   }

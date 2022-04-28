@@ -1,6 +1,9 @@
 import Block from './Block'
-import isEqual from '../utils/isEqual'
 import renderDOM from '../utils/renderDOM'
+
+function isEqual(lhs: string, rhs: string) {
+  return lhs === rhs;
+}
 
 export default class Route {
   private _props: TStringObject
@@ -16,6 +19,10 @@ export default class Route {
     this._blockClass = view
     this._block = null
     this._props = props
+  }
+
+  get pathname() {
+    return this._pathname;
   }
 
   navigate(pathname: string) {

@@ -1,7 +1,6 @@
 /* eslint-disable no-constructor-return */
 import Block from './Block'
 import Route from './Route'
-import store from './Store'
 
 export default class Router {
   // eslint-disable-next-line no-use-before-define
@@ -9,13 +8,17 @@ export default class Router {
 
   private _currentRoute: Route | null | undefined
 
-  protected history: History = window.history
+  public history: History = window.history
 
   protected routes: Route[] = []
 
   private readonly _rootQuery: string | undefined
 
-  private _pathnames: string[]
+  private _pathnames: string[] | undefined
+
+  private _onRouteCallback: (() => void) | undefined
+
+  private _unprotectedPaths: `/${string}`[] | undefined
 
   constructor(rootQuery: string) {
     if (Router.__instance) {
@@ -27,8 +30,13 @@ export default class Router {
     this._currentRoute = null
     this._rootQuery = rootQuery
     this._pathnames = []
-
+    this._onRouteCallback = () => {}
+    this._unprotectedPaths = []
     Router.__instance = this
+  }
+
+  get currentRoute() {
+    return this._currentRoute;
   }
 
   use(pathname: string, block: typeof Block, props: TStringObject) {
@@ -38,21 +46,22 @@ export default class Router {
     })
 
     this.routes.push(route)
-    this._pathnames.push(pathname)
-
+    this._pathnames!.push(pathname)
     return this
   }
 
   private _hasRoute(pathname: string) {
-    if (!this._pathnames.includes(pathname)) {
-      return '*';
+    if (!this._pathnames!.includes(pathname)) {
+      return '*'
     }
-    return pathname;
+    return pathname
   }
 
   start() {
     window.onpopstate = (event) => {
-      const pathname = this._hasRoute((event.currentTarget as Window).location.pathname)
+      const pathname = this._hasRoute(
+        (event.currentTarget as Window).location.pathname,
+      )
       this._onRoute(pathname)
     }
     const pathname = this._hasRoute(window.location.pathname)
@@ -69,14 +78,22 @@ export default class Router {
       this._currentRoute.leave()
     }
 
-    // настроить
-    // if (pathname === '/signin' && store.getState().user) {
-    //   console.log('here')
-    //   this.go('/messenger')
-    // }
-
     this._currentRoute = route
     route.render()
+
+    if (!this._unprotectedPaths!.includes(pathname as `/${string}`)) {
+      this._onRouteCallback!()
+    }
+  }
+
+  public onRoute(callback: () => void) {
+    this._onRouteCallback = callback
+    return this
+  }
+
+  public setUnprotectedPaths(paths: `/${string}`[]) {
+    this._unprotectedPaths = paths
+    return this
   }
 
   go(pathname: string) {

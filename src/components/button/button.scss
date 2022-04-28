@@ -20,6 +20,7 @@
 
   &_forward {
     @extend .button_back;
+
     background-image: url("../../../static/icons/forward.svg");
   }
 }

@@ -21,11 +21,13 @@ export const template = `
     </div> --}}
     {{#each messages}}
     <div class="{{#if this.self}}chats__yourself{{else}}chats__companion{{/if}} chats__message">
+      <p class="chats__name">{{this.name}}</p>
       <p class="chats__message-text">
         {{this.content}}
       </p>
     </div>
     {{/each}}
+    <div class="hidden-for-scroll"></div>
     </section>
     <form class="chats__form" id="chats__form">
       <footer class="chats__footer">
@@ -43,11 +45,14 @@ export const template = `
           </div>
         </div>
         <div class="chats__writing">
-          <input
-          type="text"
-          name="message"
-          class="chats__input chats__input_message"
-          placeholder="Введите сообщение"/>
+          {{{Input
+            ref="messageInput"
+            type="text"
+            name="message"
+            placeholder="Введите сообщение"
+            classMod="chats__input chats__input_message"
+            mode="chats__input-message"
+            events=inputEvents}}}
         </div>
         <div class="chats__send-button">
           {{{Button classMod=buttonClassMod type=buttonType events=buttonEvents}}}

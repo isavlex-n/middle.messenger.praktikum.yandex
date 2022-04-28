@@ -46,8 +46,6 @@ export class Modal extends Block {
     this.state = {
       users: [],
       inputEvents: {
-        // focusin: this.inputFocusHandler.bind(this),
-        // focusout: this.inputBlurHandler.bind(this),
         input: this.inputHandler.bind(this),
       },
     }

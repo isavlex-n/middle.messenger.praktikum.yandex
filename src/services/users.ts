@@ -45,4 +45,9 @@ export default class UsersService {
       console.log(error)
     }
   }
+
+  public async getUserById(id: string) {
+    const responce = await usersApi.getUserById(id)
+    return responce
+  }
 }

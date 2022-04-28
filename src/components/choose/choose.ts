@@ -10,7 +10,6 @@ export class Choose extends Block {
     }
   }
 
-
   render() {
     return `
     <div class="choose">

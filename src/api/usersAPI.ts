@@ -51,4 +51,14 @@ export default class UsersAPI {
       data: JSON.stringify(data),
     })
   }
+
+  getUserById(id: string) {
+    return usersRequest.get(id, {
+      includeCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+        accept: 'application/json',
+      },
+    })
+  }
 }

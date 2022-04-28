@@ -6,9 +6,11 @@
   border-top: 1px solid $gray;
   position: relative;
   cursor: pointer;
+
   &:hover {
     background-color: rgba($blue, 0.1);
   }
+
   &_active {
     background-color: rgba($blue, 0.1);
   }
@@ -72,4 +74,3 @@
   height: 20px;
   background-color: $blue;
 }
-

@@ -2,6 +2,7 @@ import Block from '../../core/Block'
 import validateInputHandler from '../../utils/validateInputHandler'
 import { connect } from '../../utils/connect'
 import AuthService from '../../services/auth'
+import store from '../../core/Store'
 
 class Signup extends Block {
   submitHandler(event: Event) {
@@ -35,6 +36,7 @@ class Signup extends Block {
   }
 
   inputFocusHandler(event: Event) {
+    console.log(store.state)
     const target = event.target as HTMLInputElement
     this.setChildProps(`${target.name}Error`, { error: '' })
   }
@@ -157,6 +159,7 @@ class Signup extends Block {
   render() {
     return `<div class="flex fuul-height">
               <div class="centered">
+              {{{Loader show=isLoading}}}
               <form class='form form_sigin'>
                 <h1 class="form__header">Регистрация</h1>
                 <div class='form__list'>
@@ -199,4 +202,5 @@ const withSignup = connect((state) => ({
   isLoading: state.isLoading,
   error: state.error,
 }))
+
 export default withSignup(Signup)

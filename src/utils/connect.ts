@@ -1,4 +1,3 @@
-import isEqual from './isEqual'
 import { Block } from '../core'
 import store, { StoreEvents } from '../core/Store'
 
@@ -8,7 +7,6 @@ export function connect(mapStateToProps: (state: Indexed) => Indexed) {
       constructor(props: any) {
         // сохраняем начальное состояние
         let state = mapStateToProps(store.getState())
-
         super({ ...props, ...state })
 
         // подписываемся на событие
@@ -16,10 +14,7 @@ export function connect(mapStateToProps: (state: Indexed) => Indexed) {
           // при обновлении получаем новое состояние
           const newState = mapStateToProps(store.getState())
           // если что-то из используемых данных поменялось, обновляем компонент
-          if (!isEqual(state, newState)) {
-            this.setProps({ ...newState })
-          }
-
+          this.setProps({ ...newState })
           // не забываем сохранить новое состояние
           state = newState
         })

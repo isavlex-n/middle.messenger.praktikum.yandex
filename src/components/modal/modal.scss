@@ -1,4 +1,5 @@
 @import "../../styles/colors";
+
 .modal {
   display: none;
   position: absolute;
@@ -6,11 +7,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(#000000, 0.3);
+  background-color: rgba(#000, 0.3);
   z-index: 10000;
+
   &_show {
     display: flex;
   }
+
   &__window {
     margin: auto;
     max-width: 340px;
@@ -19,6 +22,7 @@
     border-radius: 7px;
     padding: 40px 30px;
   }
+
   &__title {
     text-align: center;
   }

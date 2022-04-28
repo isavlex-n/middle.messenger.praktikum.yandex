@@ -16,7 +16,7 @@
     position: relative;
     display: inline-block;
     font-size: 25px;
-    content: '...';
+    content: "...";
     transform: rotate(90deg) translate(0, -12.5px);
   }
 
@@ -56,14 +56,14 @@
   }
 
   &__function-text_add-user {
-    background-image: url('../../../static/icons/add.svg');
+    background-image: url("../../../static/icons/add.svg");
   }
 
   &__function-text_del-user {
-    background-image: url('../../../static/icons/del-blue.svg');
+    background-image: url("../../../static/icons/del-blue.svg");
   }
 
   &__function-text_del-chat {
-    background-image: url('../../../static/icons/del-red.svg');
+    background-image: url("../../../static/icons/del-red.svg");
   }
 }

@@ -13,7 +13,6 @@
   }
 
   &__link-wrap {
-    
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -159,13 +158,20 @@
     display: flex;
   }
 
+  &__name {
+    color: $blue;
+    margin: 0;
+    padding: 0;
+  }
+
   &__companion {
-    justify-content: start;
+    align-items: start;
     flex-direction: column;
   }
 
   &__yourself {
-    justify-content: end;
+    align-items: end;
+    flex-direction: column;
   }
 
   &__message-text {
@@ -246,9 +252,16 @@
     border-radius: 30px;
     height: 32px;
     padding: 10px 20px;
+    border-bottom: 0 !important;
 
     &_error {
       border: 1px solid $red;
+    }
+  }
+
+  &__input-message {
+    label {
+      display: none;
     }
   }
 

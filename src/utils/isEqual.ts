@@ -1,32 +1,42 @@
 /* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
-import isObject from './isObject'
 
-function isArrayOrObject(value: Indexed) {
-  return isObject(value) || Array.isArray(value)
+type PlainObject<T = unknown> = {
+  [k in string]: T
 }
 
-export default function isEqual(
-  a: Indexed,
-  b: Indexed,
-): Boolean {
-  if (typeof a === 'string' && typeof b === 'string') {
-    return a === b
-  }
-  if (Object.keys(a).length !== Object.keys(b).length) {
-    return false
-  }
-  for (const [keyA, valueA] of Object.entries(a)) {
-    const valueB = b[keyA]
-    if (isArrayOrObject(valueA) && isArrayOrObject(valueB)) {
-      if (isEqual(valueA, valueB)) {
+function isArray(value: unknown): value is [] {
+  return Array.isArray(value)
+}
+
+function isPlainObject(value: unknown): value is PlainObject {
+  return (
+    typeof value === 'object'
+    && value !== null
+    && value.constructor === Object
+    && Object.prototype.toString.call(value) === '[object Object]'
+  )
+}
+function isArrayOrObject(value: unknown): value is [] | PlainObject {
+  return isPlainObject(value) || isArray(value)
+}
+
+export default function isEqual(lhs: PlainObject, rhs: PlainObject) {
+  for (const [key, value] of Object.entries(lhs)) {
+    const rightValue = rhs[key]
+    if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
+      // Здесь value и rightValue может быть только массивом или объектом
+      // и TypeScript это понимает с помощью Type Guard
+      if (isEqual(value, rightValue)) {
         continue
       }
       return false
     }
-    if (valueA !== valueB) {
+
+    if (value !== rightValue) {
       return false
     }
   }
+
   return true
 }

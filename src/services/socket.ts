@@ -56,26 +56,31 @@ class SocketService {
   private _message(event: MessageEvent) {
     const data = JSON.parse(event.data)
     if (Array.isArray(data)) {
-      const messages = data.map((msg) => {
-        const message = msg.user_id === store.state.user.id
-          ? { ...msg, self: true }
-          : { ...msg, self: false }
-        return message
-      }).reverse()
+      const messages = data
+        .map((msg) => {
+          const [currentUser] = store.state.usersOfChat.filter((user: Indexed) => user.id === msg.user_id)
+          const message = msg.user_id === store.state.user.id
+            ? { ...msg, self: true, name: 'Вы' }
+            : { ...msg, self: false, name: `${currentUser.first_name} ${currentUser.second_name}` }
+
+          return message
+        })
+        .reverse()
       store.set({
         messages,
       })
     }
 
     if (data.type === 'message') {
-      console.log('Сообщение', data)
+      const [currentUser] = store.state.usersOfChat.filter((user: Indexed) => user.id === data.user_id)
       const { messages } = store.state
       const message = data.user_id === store.state.user.id
-        ? { ...data, self: true }
-        : { ...data, self: false }
-      messages.pop(message)
+        ? { ...data, self: true, name: 'Вы' }
+        : { ...data, self: false, name: `${currentUser.first_name} ${currentUser.second_name}` }
+      messages.push(message)
       store.set({
         messages,
+        test: 'test',
       })
     }
   }
