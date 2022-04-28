@@ -35,6 +35,7 @@
     "@parcel/config-default": "2.3.2",
     "@parcel/resolver-glob": "2.4.0",
     "@parcel/transformer-js": "^2.5.0",
+    "@parcel/transformer-react-refresh-wrap": "^2.5.0",
     "@parcel/transformer-sass": "2.3.2",
     "@types/chai": "4.3.0",
     "@types/handlebars": "4.1.0",
