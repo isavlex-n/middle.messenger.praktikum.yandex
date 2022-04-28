@@ -28,11 +28,11 @@
 
 
 ## Страницы
-* [Войти](https://tender-mayer-f00558.netlify.app/login)
-* [Регистрация](https://tender-mayer-f00558.netlify.app/signup)
-* [Чаты](https://tender-mayer-f00558.netlify.app/chats)
-* [Ошибка](https://tender-mayer-f00558.netlify.app/error)
-* [Профиль](https://tender-mayer-f00558.netlify.app/profile)
+* [Войти](https://tender-mayer-f00558.netlify.app/)
+* [Регистрация](https://tender-mayer-f00558.netlify.app/sign-up)
+* [Чаты](https://tender-mayer-f00558.netlify.app/messenger)
+* [Ошибка](https://tender-mayer-f00558.netlify.app/error-500)
+* [Профиль](https://tender-mayer-f00558.netlify.app/settings)
 
 ## Материалы
 * [Макет figma](https://www.figma.com/file/lauus1sB65VzCpx4D2e7Bi/Messenger?node-id=0%3A1)
