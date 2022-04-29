@@ -7,23 +7,23 @@ import Router from './Router'
 import Block from './Block'
 
 describe('Router', () => {
-  const router = new Router('.app')
-
   class PageOne extends Block {}
   class PageTwo extends Block {}
   class PageThree extends Block {}
-
+  let router: Router
   let counter: number = 0
-
-  router
-    .setUnprotectedPaths(['/two'])
-    .onRoute(() => {
-      counter += 1
-    })
-    .use('/', PageOne, {})
-    .use('/one', PageTwo, {})
-    .use('/two', PageThree, {})
-    .start()
+  beforeEach(() => {
+    router = new Router('.app')
+    router
+      .setUnprotectedPaths(['/two'])
+      .onRoute(() => {
+        counter += 1
+      })
+      .use('/', PageOne, {})
+      .use('/one', PageTwo, {})
+      .use('/two', PageThree, {})
+      .start()
+  })
 
   it('Router history length should change', () => {
     router.go('/')

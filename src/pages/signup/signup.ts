@@ -4,7 +4,7 @@ import { connect } from '../../utils/connect'
 import authService from '../../services/auth'
 
 class Signup extends Block {
-  submitHandler(event: Event) {
+  async submitHandler(event: Event) {
     event.preventDefault()
     const login = this.refs.login.querySelector('input')!.value
     const password = this.refs.password.querySelector('input')!.value
@@ -30,7 +30,7 @@ class Signup extends Block {
       })
     })
 
-    authService.signup(loginData)
+    await authService.signup(loginData)
   }
 
   inputFocusHandler(event: Event) {

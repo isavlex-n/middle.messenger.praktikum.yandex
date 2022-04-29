@@ -8,14 +8,14 @@ import store from '../../core/Store'
 import { ACTIONS } from './actions'
 
 class Chats extends Block {
-  componentDidMount() {
+  async componentDidMount() {
     store.set({
       messages: [],
     })
-    this.getChats()
+    await this.getChats()
   }
 
-  clickChatHandler(event: Event) {
+  async clickChatHandler(event: Event) {
     event.preventDefault()
     store.set({
       messages: [],
@@ -29,7 +29,7 @@ class Chats extends Block {
     const indexCur = items.findIndex((item: Indexed) => item.id === +action!)
     if (this.state.currentChat) {
       items[indexPrev].active = false
-      socketService.leave()
+      await socketService.leave()
     }
     items[indexCur].active = true
     this.setState({
@@ -37,12 +37,12 @@ class Chats extends Block {
       items,
       currentChat: action,
     })
-    this.getUsers(action)
-    this.getChat(action)
+    await this.getUsers(action)
+    await this.getChat(action)
   }
 
-  requestMessages(token: string = this.state.token) {
-    socketService.connection({
+  async requestMessages(token: string = this.state.token) {
+    await socketService.connection({
       userId: store.state.user.id,
       chatId: this.state.currentChat,
       token,
@@ -51,7 +51,7 @@ class Chats extends Block {
 
   async getChat(chatId: string | number) {
     const { token }: Indexed = await chatsService.getToken(chatId)
-    this.requestMessages(token)
+    await this.requestMessages(token)
   }
 
   async getChats() {
@@ -81,16 +81,6 @@ class Chats extends Block {
     })
   }
 
-  async addNewChat(title: string) {
-    const chatId = await chatsService.addNewChat(title)
-    return chatId
-  }
-
-  async removeChat(chatId: number) {
-    const result = await chatsService.removeChat(chatId)
-    return result
-  }
-
   async addUsersToChat(users: number[], chatId: number) {
     await chatsService.addUsersToChat(users, chatId)
     this.getUsers(chatId)
@@ -101,53 +91,55 @@ class Chats extends Block {
     this.getUsers(chatId)
   }
 
-  buttonModalHandler(event: Event) {
+  async buttonModalHandler(event: Event) {
     event.preventDefault()
     const target = <HTMLButtonElement>event.target
-    const input = this.refs.modal.querySelector('input')!
-    const inputValue = input.value
-    const userId = input.dataset.userId!
-    const action = target.dataset.type
-    if (action === ACTIONS.ADD_USER) {
-      if (userId) {
-        this.addUsersToChat([+userId], this.state.currentChat)
+    const input = this.refs.modal.querySelector('input')
+    if (input) {
+      const inputValue = input.value
+      const userId = input.dataset.userId!
+      const action = target.dataset.type
+      if (action === ACTIONS.ADD_USER) {
+        if (userId) {
+          await this.addUsersToChat([+userId], this.state.currentChat)
+        }
       }
-    }
 
-    if (action === ACTIONS.REMOVE_USER) {
-      const checkboxes = Array.from(
-        this.refs.modal.querySelectorAll('[data-type="checkbox"]')
-      )
-      const checkedUsers = checkboxes.filter(
-        (user) => (user as HTMLInputElement).checked
-      )
-      if (checkedUsers.length) {
-        const usersId = checkedUsers.map((user) => +user.id)
-        this.removeUsersFromChat(usersId, this.state.currentChat)
+      if (action === ACTIONS.REMOVE_USER) {
+        const checkboxes = Array.from(
+          this.refs.modal.querySelectorAll('[data-type="checkbox"]')
+        )
+        const checkedUsers = checkboxes.filter(
+          (user) => (user as HTMLInputElement).checked
+        )
+        if (checkedUsers.length) {
+          const usersId = checkedUsers.map((user) => +user.id)
+          await this.removeUsersFromChat(usersId, this.state.currentChat)
+        }
       }
-    }
 
-    if (action === ACTIONS.ADD_CHAT) {
-      this.addNewChat(inputValue)
-      this.setState({
-        ...this.state,
-        currentChat: 0,
-      })
-      this.getChats()
-    }
+      if (action === ACTIONS.ADD_CHAT) {
+        await chatsService.addNewChat(inputValue)
+        this.setState({
+          ...this.state,
+          currentChat: 0,
+        })
+        await this.getChats()
+      }
 
-    if (action === ACTIONS.REMOVE_CHAT) {
-      this.removeChat(this.state.currentChat)
-      this.setState({
-        ...this.state,
-        currentChat: 0,
-      })
-      this.getChats()
+      if (action === ACTIONS.REMOVE_CHAT) {
+        await chatsService.removeChat(this.state.currentChat)
+        this.setState({
+          ...this.state,
+          currentChat: 0,
+        })
+        await this.getChats()
+      }
     }
   }
 
-  sendMessage(message: string) {
-    socketService.sendMessages(message)
+  async sendMessage(message: string) {
+    await socketService.sendMessages(message)
 
     this.setState({
       messages: store.state.messages,
@@ -155,7 +147,7 @@ class Chats extends Block {
     })
   }
 
-  messageButtonHandler(event: Event) {
+  async messageButtonHandler(event: Event) {
     event.preventDefault()
     const input = document.querySelector<HTMLInputElement>(
       '.chats__input_message'
@@ -165,20 +157,24 @@ class Chats extends Block {
       if (!message) {
         input.classList.add('chats__input_error')
         setTimeout(() => {
-          input!.classList.remove('chats__input_error')
+          input.classList.remove('chats__input_error')
         }, 1000)
         return
       }
-      this.sendMessage(message)
+      await this.sendMessage(message)
     }
   }
 
   toggleModal(event?: Event) {
     const modal = document.querySelector('.modal')
-    if (!event) {
-      modal?.classList.toggle('modal_show')
-    } else if ((<HTMLDivElement>event.target).dataset.modal === 'wrap') {
-      modal?.classList.toggle('modal_show')
+    if (!event && modal) {
+      modal.classList.toggle('modal_show')
+    } else if (
+      event &&
+      modal &&
+      (<HTMLDivElement>event.target).dataset.modal === 'wrap'
+    ) {
+      modal.classList.toggle('modal_show')
     }
   }
 
@@ -203,7 +199,9 @@ class Chats extends Block {
 
     if (action === ACTIONS.TOOGLE) {
       const functions = target.querySelector('.user-menu__functions')
-      functions?.classList.toggle('user-menu__functions_hidden')
+      if (functions) {
+        functions.classList.toggle('user-menu__functions_hidden')
+      }
     }
 
     if (action === ACTIONS.ADD_USER) {
@@ -245,9 +243,9 @@ class Chats extends Block {
     }
   }
 
-  onTop(length: number) {
+  async onTop(length: number) {
     if (length % 20 === 0) {
-      socketService.getMessages(length)
+      await socketService.getMessages(length)
     }
   }
 
@@ -279,9 +277,6 @@ class Chats extends Block {
         },
       },
       onTop: this.onTop.bind(this),
-      message: {
-        type: 'text',
-      },
     }
   }
 

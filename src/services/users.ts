@@ -5,8 +5,12 @@ import store from '../core/Store'
 
 class UsersService {
   public async searchUserByLogin(login: string) {
-    const searchResult = await usersApi.searchUserByLogin({ login })
-    return searchResult
+    try {
+      const searchResult = await usersApi.searchUserByLogin({ login })
+      return searchResult
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   public async changeUserProfile(data: UserProfile) {
@@ -46,8 +50,12 @@ class UsersService {
   }
 
   public async getUserById(id: string) {
-    const responce = await usersApi.getUserById(id)
-    return responce
+    try {
+      const responce = await usersApi.getUserById(id)
+      return responce
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

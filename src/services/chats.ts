@@ -4,17 +4,27 @@ import store from '../core/Store'
 
 class ChatsService {
   public async getChats() {
-    store.set({ isLoading: true })
-    const chats = await chatsApi.getChatsList()
-    store.set({ isLoading: false })
-    return chats
+    try {
+      store.set({ isLoading: true })
+      const chats = await chatsApi.getChatsList()
+      store.set({ isLoading: false })
+      return chats
+    } catch (error) {
+      store.set({ isLoading: false })
+      console.log(error)
+    }
   }
 
   public async addNewChat(title: string) {
-    store.set({ isLoading: true })
-    const chatId = await chatsApi.addChat({ title })
-    store.set({ isLoading: false })
-    return chatId
+    try {
+      store.set({ isLoading: true })
+      const chatId = await chatsApi.addChat({ title })
+      store.set({ isLoading: false })
+      return chatId
+    } catch (error) {
+      store.set({ isLoading: false })
+      console.log(error)
+    }
   }
 
   public async addUsersToChat(users: number[], chatId: number) {
@@ -40,10 +50,15 @@ class ChatsService {
   }
 
   public async removeChat(chatId: number) {
-    store.set({ isLoading: true })
-    const result = await chatsApi.removeChat({ chatId })
-    store.set({ isLoading: false })
-    return result
+    try {
+      store.set({ isLoading: true })
+      const result = await chatsApi.removeChat({ chatId })
+      store.set({ isLoading: false })
+      return result
+    } catch (error) {
+      store.set({ isLoading: false })
+      console.log(error)
+    }
   }
 
   public async getUsers(chatId: number | string) {

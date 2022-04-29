@@ -4,7 +4,7 @@ import { connect } from '../../utils/connect'
 import authSevice from '../../services/auth'
 
 class Login extends Block {
-  submitHandler(event: Event) {
+  async submitHandler(event: Event) {
     event.preventDefault()
     const login = this.refs.login.querySelector('input')!.value
     const password = this.refs.password.querySelector('input')!.value
@@ -19,7 +19,7 @@ class Login extends Block {
       })
     })
 
-    authSevice.login(loginData)
+    await authSevice.login(loginData)
   }
 
   inputFocusHandler(event: Event) {

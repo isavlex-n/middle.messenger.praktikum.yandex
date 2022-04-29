@@ -9,8 +9,8 @@ import store from '../../core/Store'
 import './profile.scss'
 
 class Profile extends Block {
-  componentDidMount() {
-    this.getUser()
+  async componentDidMount() {
+    await this.getUser()
   }
 
   async getUser() {
@@ -63,7 +63,7 @@ class Profile extends Block {
     event.preventDefault()
     const profileData = document.querySelector('.profile__change-data')
     const condition = profileData?.classList.contains(
-      'profile__change-data_hidden'
+      'profile__change-data_hidden',
     )
     if (!condition) {
       const login = this.refs.login.querySelector('input')!.value
@@ -84,7 +84,7 @@ class Profile extends Block {
         })
       })
       if (isValid(loginData)) {
-        userService.changeUserProfile({
+        await userService.changeUserProfile({
           ...loginData,
           display_name: loginData.first_name,
         })
@@ -105,7 +105,7 @@ class Profile extends Block {
         })
       })
       if (isValid(passData)) {
-        userService.changeUserPassword({
+        await userService.changeUserPassword({
           oldPassword: passData.old_password,
           newPassword: passData.password,
         })
@@ -127,15 +127,14 @@ class Profile extends Block {
     })
   }
 
-  logoutHandler(event: Event) {
+  async logoutHandler(event: Event) {
     event.preventDefault()
-    authService.logout()
+    await authService.logout()
     router.go('/signin')
   }
 
   async changeFileHandler(event: Event) {
-    const { files }: { files: FileList | null } =
-      event.target as HTMLInputElement
+    const { files }: { files: FileList | null } = event.target as HTMLInputElement
     if (!files?.length) {
       return
     }

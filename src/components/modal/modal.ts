@@ -31,13 +31,13 @@ export class Modal extends Block {
     })
   }
 
-  inputHandler(event: Event) {
+  async inputHandler(event: Event) {
     event.preventDefault()
     const target = event.target as HTMLInputElement
     const type = target.dataset.type!
     if (type === ACTIONS.ADD_USER) {
       if (isValid({ [target.name]: target.value })) {
-        this.getUsersByLogin(target.value, type)
+        await this.getUsersByLogin(target.value, type)
       }
     }
   }
