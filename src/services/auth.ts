@@ -1,12 +1,10 @@
-import { Router } from '../core'
-import AuthAPI, { LoginData, SignupData } from '../api/AuthAPI'
+import auth from '../api/authAPI'
+import { LoginData, SignupData } from '../api/types'
 import store from '../core/Store'
 import { isValid } from '../utils/validateInputHandler'
+import { router } from '../router'
 
-const router = new Router('.app')
-const auth = new AuthAPI()
-
-export default class AuthService {
+class AuthService {
   public async login(data: LoginData) {
     try {
       store.set({ isLoading: true })
@@ -83,3 +81,5 @@ export default class AuthService {
     }
   }
 }
+
+export default new AuthService()

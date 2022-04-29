@@ -147,6 +147,7 @@
     overflow-y: scroll;
     position: relative;
     height: 100vh;
+    overflow-anchor: none;
   }
 
   &__date-wrap {

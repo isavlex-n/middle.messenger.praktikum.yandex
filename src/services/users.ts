@@ -1,10 +1,9 @@
 /* eslint-disable consistent-return */
-import UsersAPI, { UserProfile, UserPassword } from '../api/usersAPI'
+import usersApi from '../api/usersAPI'
+import { UserProfile, UserPassword } from '../api/types'
 import store from '../core/Store'
 
-const usersApi = new UsersAPI()
-
-export default class UsersService {
+class UsersService {
   public async searchUserByLogin(login: string) {
     const searchResult = await usersApi.searchUserByLogin({ login })
     return searchResult
@@ -51,3 +50,5 @@ export default class UsersService {
     return responce
   }
 }
+
+export default new UsersService()

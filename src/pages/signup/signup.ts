@@ -1,8 +1,7 @@
 import Block from '../../core/Block'
 import validateInputHandler from '../../utils/validateInputHandler'
 import { connect } from '../../utils/connect'
-import AuthService from '../../services/auth'
-import store from '../../core/Store'
+import authService from '../../services/auth'
 
 class Signup extends Block {
   submitHandler(event: Event) {
@@ -23,7 +22,6 @@ class Signup extends Block {
       second_name,
       phone,
     }
-    const service = new AuthService()
 
     Object.entries(loginData).forEach(([key, value]) => {
       console.log(`${key}: ${value}`)
@@ -32,11 +30,10 @@ class Signup extends Block {
       })
     })
 
-    service.signup(loginData)
+    authService.signup(loginData)
   }
 
   inputFocusHandler(event: Event) {
-    console.log(store.state)
     const target = event.target as HTMLInputElement
     this.setChildProps(`${target.name}Error`, { error: '' })
   }

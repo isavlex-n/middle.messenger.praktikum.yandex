@@ -1,11 +1,12 @@
 import './index.scss'
-import { Block, Router, registerComponent } from './core'
-import AuthService from './services/auth'
+import { Block, registerComponent } from './core'
+import authService from './services/auth'
 import Login from './pages/login/login'
 import Signup from './pages/signup/signup'
 import Errors from './pages/errors'
 import Profile from './pages/profile/profile'
 import Chats from './pages/chats/chats'
+import { router } from './router'
 
 // eslint-disable-next-line global-require
 const components = require('./components/**/index.ts') as {
@@ -15,9 +16,6 @@ const components = require('./components/**/index.ts') as {
 Object.values(components).forEach((component) => {
   registerComponent(component.default)
 })
-
-const authService = new AuthService()
-const router = new Router('.app')
 
 document.addEventListener('DOMContentLoaded', () => {
   router

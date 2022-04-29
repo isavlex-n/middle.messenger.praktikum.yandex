@@ -2,11 +2,9 @@ import Block from '../../core/Block'
 import { chatsTemplate } from './chats.hbs'
 import './chats.scss'
 import { connect } from '../../utils/connect'
-import ChatsService from '../../services/chats'
+import chatsService from '../../services/chats'
 import socketService from '../../services/socket'
 import store from '../../core/Store'
-
-const service = new ChatsService()
 
 class Chats extends Block {
   componentDidMount() {
@@ -51,12 +49,12 @@ class Chats extends Block {
   }
 
   async getChat(chatId: string | number) {
-    const { token }: Indexed = await service.getToken(chatId)
+    const { token }: Indexed = await chatsService.getToken(chatId)
     this.requestMessages(token)
   }
 
   async getChats() {
-    const response: Indexed = await service.getChats()
+    const response: Indexed = await chatsService.getChats()
     const items = response.map((item: Indexed) => ({
       ...item,
       ref: `${item.id}-item`,
@@ -72,7 +70,7 @@ class Chats extends Block {
   }
 
   async getUsers(chatId: number) {
-    const users = await service.getUsers(chatId)
+    const users = await chatsService.getUsers(chatId)
     store.set({
       usersOfChat: users,
     })
@@ -83,22 +81,22 @@ class Chats extends Block {
   }
 
   async addNewChat(title: string) {
-    const chatId = await service.addNewChat(title)
+    const chatId = await chatsService.addNewChat(title)
     return chatId
   }
 
   async removeChat(chatId: number) {
-    const result = await service.removeChat(chatId)
+    const result = await chatsService.removeChat(chatId)
     return result
   }
 
   async addUsersToChat(users: number[], chatId: number) {
-    await service.addUsersToChat(users, chatId)
+    await chatsService.addUsersToChat(users, chatId)
     this.getUsers(chatId)
   }
 
   async removeUsersFromChat(users: number[], chatId: number) {
-    await service.removeUsersFromChat(users, chatId)
+    await chatsService.removeUsersFromChat(users, chatId)
     this.getUsers(chatId)
   }
 

@@ -1,17 +1,13 @@
 import Block from '../../core/Block'
 import validateInputHandler from '../../utils/validateInputHandler'
 import { connect } from '../../utils/connect'
-import AuthSevice from '../../services/auth'
+import authSevice from '../../services/auth'
 
 class Login extends Block {
-  componentDidMount() {
-  }
-
   submitHandler(event: Event) {
     event.preventDefault()
     const login = this.refs.login.querySelector('input')!.value
     const password = this.refs.password.querySelector('input')!.value
-    const service = new AuthSevice()
     const loginData = {
       login,
       password,
@@ -23,7 +19,7 @@ class Login extends Block {
       })
     })
 
-    service.login(loginData)
+    authSevice.login(loginData)
   }
 
   inputFocusHandler(event: Event) {

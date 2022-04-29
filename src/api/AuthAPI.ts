@@ -1,24 +1,15 @@
 import HTTPTransport from '../core/HTTPTransport'
+import { LoginData, SignupData } from './types'
 
-export type LoginData = {
-  login: string
-  password: string
-}
+class AuthAPI {
+  private _auth: HTTPTransport
 
-export type SignupData = {
-  first_name: string,
-  second_name: string,
-  login: string,
-  email: string,
-  password: string,
-  phone: string
-}
+  constructor() {
+    this._auth = new HTTPTransport('auth')
+  }
 
-const auth = new HTTPTransport('auth')
-
-export default class AuthAPI {
   login(data: LoginData) {
-    return auth.post('signin', {
+    return this._auth.post('signin', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
@@ -26,14 +17,14 @@ export default class AuthAPI {
   }
 
   logout() {
-    return auth.post('logout', {
+    return this._auth.post('logout', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
     })
   }
 
   getUser() {
-    return auth.get('user', {
+    return this._auth.get('user', {
       includeCredentials: true,
       headers: {
         'Content-Type': 'application/json',
@@ -43,10 +34,12 @@ export default class AuthAPI {
   }
 
   signUp(data: SignupData) {
-    return auth.post('signup', {
+    return this._auth.post('signup', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
     })
   }
 }
+
+export default new AuthAPI()

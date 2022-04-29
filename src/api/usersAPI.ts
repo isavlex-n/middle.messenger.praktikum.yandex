@@ -1,28 +1,15 @@
 import HTTPTransport from '../core/HTTPTransport'
+import { SearchUserData, UserProfile, UserPassword } from './types'
 
-const usersRequest = new HTTPTransport('user')
+class UsersAPI {
+  private _users: HTTPTransport
 
-type SearchUserData = {
-  login: string
-}
+  constructor() {
+    this._users = new HTTPTransport('user')
+  }
 
-export type UserPassword = {
-  oldPassword: string
-  newPassword: string
-}
-
-export type UserProfile = {
-  first_name: string
-  second_name: string
-  display_name: string
-  login: string
-  email: string
-  phone: string
-}
-
-export default class UsersAPI {
   searchUserByLogin(data: SearchUserData) {
-    return usersRequest.post('search', {
+    return this._users.post('search', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
@@ -30,7 +17,7 @@ export default class UsersAPI {
   }
 
   changeUserProfile(data: UserProfile) {
-    return usersRequest.put('profile', {
+    return this._users.put('profile', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
@@ -38,14 +25,14 @@ export default class UsersAPI {
   }
 
   changeUserAvatar(data: FormData) {
-    return usersRequest.put('profile/avatar', {
+    return this._users.put('profile/avatar', {
       includeCredentials: true,
       data,
     })
   }
 
   changeUserPassword(data: UserPassword) {
-    return usersRequest.put('password', {
+    return this._users.put('password', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
@@ -53,7 +40,7 @@ export default class UsersAPI {
   }
 
   getUserById(id: string) {
-    return usersRequest.get(id, {
+    return this._users.get(id, {
       includeCredentials: true,
       headers: {
         'Content-Type': 'application/json',
@@ -62,3 +49,5 @@ export default class UsersAPI {
     })
   }
 }
+
+export default new UsersAPI()

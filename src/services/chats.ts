@@ -1,11 +1,8 @@
 /* eslint-disable consistent-return */
-import ChatsAPI from '../api/chatsAPI'
+import chatsApi from '../api/chatsAPI'
 import store from '../core/Store'
 
-// const router = new Router('.app')
-const chatsApi = new ChatsAPI()
-
-export default class ChatsService {
+class ChatsService {
   public async getChats() {
     store.set({ isLoading: true })
     const chats = await chatsApi.getChatsList()
@@ -73,3 +70,5 @@ export default class ChatsService {
     }
   }
 }
+
+export default new ChatsService()

@@ -1,16 +1,13 @@
 import { profileTemplate } from './profile.hbs'
 import Block from '../../core/Block'
 import validateInputHandler, { isValid } from '../../utils/validateInputHandler'
-import AuthService from '../../services/auth'
-import UsersService from '../../services/users'
-import { Router } from '../../core'
+import authService from '../../services/auth'
+import userService from '../../services/users'
+import { router } from '../../router'
 import { connect } from '../../utils/connect'
 import store from '../../core/Store'
 import './profile.scss'
 
-const authService = new AuthService()
-const userService = new UsersService()
-const router = new Router('app')
 class Profile extends Block {
   componentDidMount() {
     this.getUser()

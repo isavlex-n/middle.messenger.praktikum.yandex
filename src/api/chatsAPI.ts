@@ -1,30 +1,22 @@
 import HTTPTransport from '../core/HTTPTransport'
+import { AddChatData, RemoveChatData, UsersData } from './types'
 
-const chatsRequest = new HTTPTransport('chats')
+class ChatsAPI {
+  private _chats: HTTPTransport
 
-type AddChatData = {
-  title: string
-}
+  constructor() {
+    this._chats = new HTTPTransport('chats')
+  }
 
-type UsersData = {
-  users: number[]
-  chatId: number
-}
-
-type RemoveChatData = {
-  chatId: number | string
-}
-
-export default class ChatsAPI {
   getToken(chatID: string | number) {
-    return chatsRequest.post(`token/${chatID}`, {
+    return this._chats.post(`token/${chatID}`, {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
     })
   }
 
   addChat(data: AddChatData) {
-    return chatsRequest.post('', {
+    return this._chats.post('', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
@@ -32,7 +24,7 @@ export default class ChatsAPI {
   }
 
   removeChat(data: RemoveChatData) {
-    return chatsRequest.delete('', {
+    return this._chats.delete('', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
@@ -40,21 +32,21 @@ export default class ChatsAPI {
   }
 
   getChatsList() {
-    return chatsRequest.get('', {
+    return this._chats.get('', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
     })
   }
 
   getUsers(id: string | number) {
-    return chatsRequest.get(`${id}/users`, {
+    return this._chats.get(`${id}/users`, {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
     })
   }
 
   addUsers(data: UsersData) {
-    return chatsRequest.put('users', {
+    return this._chats.put('users', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
@@ -62,10 +54,12 @@ export default class ChatsAPI {
   }
 
   removeUsers(data: UsersData) {
-    return chatsRequest.delete('users', {
+    return this._chats.delete('users', {
       includeCredentials: true,
       headers: { 'Content-Type': 'application/json' },
       data: JSON.stringify(data),
     })
   }
 }
+
+export default new ChatsAPI()
