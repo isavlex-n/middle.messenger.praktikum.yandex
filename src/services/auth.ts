@@ -29,9 +29,7 @@ class AuthService {
         return
       }
       store.set({ error: error.reason })
-      setTimeout(() => {
-        store.set({ error: '' })
-      }, 2000)
+      store.set({ error: '' })
     }
   }
 
@@ -53,17 +51,19 @@ class AuthService {
         return
       }
       store.set({ error: error.reason })
-      setTimeout(() => {
-        store.set({ error: '' })
-      }, 2000)
+      store.set({ error: '' })
     }
   }
 
   public async logout() {
-    store.set({ isLoading: true })
-    await auth.logout()
-    store.set({ isLoading: false, user: null })
-    router.go('/')
+    try {
+      store.set({ isLoading: true })
+      await auth.logout()
+      store.set({ isLoading: false, user: null })
+      router.go('/')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   public async getUser() {
@@ -76,7 +76,6 @@ class AuthService {
       store.set({
         isLoading: false,
       })
-      console.log(error)
       router.go('/')
     }
   }

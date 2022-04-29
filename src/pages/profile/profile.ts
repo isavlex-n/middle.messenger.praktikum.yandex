@@ -59,11 +59,11 @@ class Profile extends Block {
     profilePass?.classList.toggle('profile__change-pass_hidden')
   }
 
-  saveDataHandler(event: Event) {
+  async saveDataHandler(event: Event) {
     event.preventDefault()
     const profileData = document.querySelector('.profile__change-data')
     const condition = profileData?.classList.contains(
-      'profile__change-data_hidden',
+      'profile__change-data_hidden'
     )
     if (!condition) {
       const login = this.refs.login.querySelector('input')!.value
@@ -88,9 +88,7 @@ class Profile extends Block {
           ...loginData,
           display_name: loginData.first_name,
         })
-        setTimeout(() => {
-          this.getUser()
-        }, 2000)
+        await this.getUser()
       }
     } else {
       const old_password = this.refs.old_password.querySelector('input')!.value
@@ -111,9 +109,8 @@ class Profile extends Block {
           oldPassword: passData.old_password,
           newPassword: passData.password,
         })
-        setTimeout(() => {
-          this.getUser()
-        }, 2000)
+
+        await this.getUser()
       }
     }
   }
@@ -136,18 +133,21 @@ class Profile extends Block {
     router.go('/signin')
   }
 
-  changeFileHandler(event: Event) {
-    const { files }: { files: FileList | null } = event.target as HTMLInputElement
+  async changeFileHandler(event: Event) {
+    const { files }: { files: FileList | null } =
+      event.target as HTMLInputElement
     if (!files?.length) {
       return
     }
     const [file] = files
     const formData = new FormData()
     formData.append('avatar', file)
-    userService.changeUserAvatar(formData).then((data) => {
+    await userService.changeUserAvatar(formData).then((data) => {
       store.set({
         user: data,
       })
+    }).catch((error) => {
+      console.log(error)
     })
   }
 

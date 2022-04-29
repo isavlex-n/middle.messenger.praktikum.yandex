@@ -5,6 +5,7 @@ import { connect } from '../../utils/connect'
 import chatsService from '../../services/chats'
 import socketService from '../../services/socket'
 import store from '../../core/Store'
+import { ACTIONS } from './actions'
 
 class Chats extends Block {
   componentDidMount() {
@@ -107,13 +108,13 @@ class Chats extends Block {
     const inputValue = input.value
     const userId = input.dataset.userId!
     const action = target.dataset.type
-    if (action === 'add-user') {
+    if (action === ACTIONS.ADD_USER) {
       if (userId) {
         this.addUsersToChat([+userId], this.state.currentChat)
       }
     }
 
-    if (action === 'remove-user') {
+    if (action === ACTIONS.REMOVE_USER) {
       const checkboxes = Array.from(
         this.refs.modal.querySelectorAll('[data-type="checkbox"]')
       )
@@ -126,7 +127,7 @@ class Chats extends Block {
       }
     }
 
-    if (action === 'add-chat') {
+    if (action === ACTIONS.ADD_CHAT) {
       this.addNewChat(inputValue)
       this.setState({
         ...this.state,
@@ -135,7 +136,7 @@ class Chats extends Block {
       this.getChats()
     }
 
-    if (action === 'remove-chat') {
+    if (action === ACTIONS.REMOVE_CHAT) {
       this.removeChat(this.state.currentChat)
       this.setState({
         ...this.state,
@@ -157,7 +158,7 @@ class Chats extends Block {
   messageButtonHandler(event: Event) {
     event.preventDefault()
     const input = document.querySelector<HTMLInputElement>(
-      '.chats__input_message',
+      '.chats__input_message'
     )
     if (input) {
       const message = input.value
@@ -200,12 +201,12 @@ class Chats extends Block {
     const target = <HTMLDivElement>event.target
     const action = target.dataset.button
 
-    if (action === 'toogle') {
+    if (action === ACTIONS.TOOGLE) {
       const functions = target.querySelector('.user-menu__functions')
       functions?.classList.toggle('user-menu__functions_hidden')
     }
 
-    if (action === 'add-user') {
+    if (action === ACTIONS.ADD_USER) {
       this.setChildProps('modal', {
         title: target.textContent?.trim(),
         buttonText: 'Добавить',
@@ -219,7 +220,7 @@ class Chats extends Block {
       this.toggleModal()
     }
 
-    if (action === 'remove-user') {
+    if (action === ACTIONS.REMOVE_USER) {
       const users = this.state.users.filter(
         (user: Indexed) => user.login !== this.props.user
       )
@@ -232,7 +233,7 @@ class Chats extends Block {
       })
       this.toggleModal()
     }
-    if (action === 'remove-chat') {
+    if (action === ACTIONS.REMOVE_CHAT) {
       this.setChildProps('modal', {
         title: target.textContent?.trim(),
         buttonText: 'Удалить',

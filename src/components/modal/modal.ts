@@ -1,7 +1,8 @@
 import Block from '../../core/Block'
 import { isValid } from '../../utils/validateInputHandler'
-import UsersService from '../../services/users'
+import userService from '../../services/users'
 import './modal.scss'
+import { ACTIONS } from '../../pages/chats/actions'
 
 export class Modal extends Block {
   static nameOfComponent = 'Modal'
@@ -18,8 +19,7 @@ export class Modal extends Block {
 
   async getUsersByLogin(login: string, type: string) {
     let users
-    if (type === 'add-user') {
-      const userService = new UsersService()
+    if (type === ACTIONS.ADD_USER) {
       users = await userService.searchUserByLogin(login)
     }
 
@@ -35,7 +35,7 @@ export class Modal extends Block {
     event.preventDefault()
     const target = event.target as HTMLInputElement
     const type = target.dataset.type!
-    if (type === 'add-user') {
+    if (type === ACTIONS.ADD_USER) {
       if (isValid({ [target.name]: target.value })) {
         this.getUsersByLogin(target.value, type)
       }
