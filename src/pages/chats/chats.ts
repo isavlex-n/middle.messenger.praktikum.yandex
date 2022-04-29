@@ -10,29 +10,27 @@ const service = new ChatsService()
 
 class Chats extends Block {
   componentDidMount() {
+    store.set({
+      messages: [],
+    })
     this.getChats()
-  }
-
-  scrolToBottom() {
-    const scroll = document.querySelector('.hidden-for-scroll')
-    if (scroll) {
-      scroll.scrollIntoView({ block: 'end', behavior: 'auto' })
-    }
   }
 
   clickChatHandler(event: Event) {
     event.preventDefault()
+    store.set({
+      messages: [],
+    })
     const target = <HTMLDivElement>event.target
     const action = +target.dataset.id!
     const { items } = this.state
     const indexPrev = items.findIndex(
-      (item: Indexed) => item.id === this.state.currentChat,
+      (item: Indexed) => item.id === this.state.currentChat
     )
     const indexCur = items.findIndex((item: Indexed) => item.id === +action!)
     if (this.state.currentChat) {
       items[indexPrev].active = false
       socketService.leave()
-      this.scrolToBottom()
     }
     items[indexCur].active = true
     this.setState({
@@ -119,9 +117,11 @@ class Chats extends Block {
 
     if (action === 'remove-user') {
       const checkboxes = Array.from(
-        this.refs.modal.querySelectorAll('[data-type="checkbox"]'),
+        this.refs.modal.querySelectorAll('[data-type="checkbox"]')
       )
-      const checkedUsers = checkboxes.filter((user) => (user as HTMLInputElement).checked)
+      const checkedUsers = checkboxes.filter(
+        (user) => (user as HTMLInputElement).checked
+      )
       if (checkedUsers.length) {
         const usersId = checkedUsers.map((user) => +user.id)
         this.removeUsersFromChat(usersId, this.state.currentChat)
@@ -161,17 +161,17 @@ class Chats extends Block {
     const input = document.querySelector<HTMLInputElement>(
       '.chats__input_message',
     )
-    const message = input!.value
-
-    if (!message) {
-      input!.classList.add('chats__input_error')
-      setTimeout(() => {
-        input!.classList.remove('chats__input_error')
-      }, 1000)
-      return
+    if (input) {
+      const message = input.value
+      if (!message) {
+        input.classList.add('chats__input_error')
+        setTimeout(() => {
+          input!.classList.remove('chats__input_error')
+        }, 1000)
+        return
+      }
+      this.sendMessage(message)
     }
-    this.sendMessage(message)
-    this.scrolToBottom()
   }
 
   toggleModal(event?: Event) {
@@ -223,7 +223,7 @@ class Chats extends Block {
 
     if (action === 'remove-user') {
       const users = this.state.users.filter(
-        (user: Indexed) => user.login !== this.props.user,
+        (user: Indexed) => user.login !== this.props.user
       )
       this.setChildProps('modal', {
         title: target.textContent?.trim(),
@@ -243,6 +243,12 @@ class Chats extends Block {
         users: null,
       })
       this.toggleModal()
+    }
+  }
+
+  onTop(length: number) {
+    if (length % 20 === 0) {
+      socketService.getMessages(length)
     }
   }
 
@@ -273,6 +279,7 @@ class Chats extends Block {
           click: this.messageButtonHandler.bind(this),
         },
       },
+      onTop: this.onTop.bind(this),
       message: {
         type: 'text',
       },

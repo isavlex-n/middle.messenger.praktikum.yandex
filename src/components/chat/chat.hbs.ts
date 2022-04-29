@@ -15,20 +15,8 @@ export const template = `
     </div>
     {{{UserMenu events=userMenuEvents}}}
   </header>
-  <section class="chats__messages">
-    {{!-- <div class="chats__date-wrap">
-      <span class="chats__date">19 июня</span>
-    </div> --}}
-    {{#each messages}}
-    <div class="{{#if this.self}}chats__yourself{{else}}chats__companion{{/if}} chats__message">
-      <p class="chats__name">{{this.name}}</p>
-      <p class="chats__message-text">
-        {{this.content}}
-      </p>
-    </div>
-    {{/each}}
-    <div class="hidden-for-scroll"></div>
-    </section>
+
+    {{{Messages messages=messages onTop=onTop}}}
     <form class="chats__form" id="chats__form">
       <footer class="chats__footer">
         <div class="chats__attach">
@@ -52,7 +40,7 @@ export const template = `
             placeholder="Введите сообщение"
             classMod="chats__input chats__input_message"
             mode="chats__input-message"
-            events=inputEvents}}}
+            }}}
         </div>
         <div class="chats__send-button">
           {{{Button classMod=buttonClassMod type=buttonType events=buttonEvents}}}

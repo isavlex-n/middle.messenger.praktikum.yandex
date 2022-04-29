@@ -142,6 +142,8 @@
   }
 
   &__messages {
+    display: flex;
+    flex-direction: column-reverse;
     overflow-y: scroll;
     position: relative;
     height: 100vh;

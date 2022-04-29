@@ -40,5 +40,6 @@ export const chatsTemplate = `
     buttonType=button.type
     buttonEvents=button.events
     messages=messages
+    onTop=onTop
   }}}
 </div>`

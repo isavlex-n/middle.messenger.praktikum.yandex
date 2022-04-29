@@ -56,31 +56,40 @@ class SocketService {
   private _message(event: MessageEvent) {
     const data = JSON.parse(event.data)
     if (Array.isArray(data)) {
-      const messages = data
-        .map((msg) => {
-          const [currentUser] = store.state.usersOfChat.filter((user: Indexed) => user.id === msg.user_id)
-          const message = msg.user_id === store.state.user.id
-            ? { ...msg, self: true, name: 'Вы' }
-            : { ...msg, self: false, name: `${currentUser.first_name} ${currentUser.second_name}` }
+      const newMessages = data.map((msg) => {
+        const [currentUser] = store.state.usersOfChat.filter(
+          (user: Indexed) => user.id === msg.user_id,
+        )
+        const message = msg.user_id === store.state.user.id
+          ? { ...msg, self: true, name: 'Вы' }
+          : {
+            ...msg,
+            self: false,
+            name: `${currentUser.first_name} ${currentUser.second_name}`,
+          }
 
-          return message
-        })
-        .reverse()
+        return message
+      })
+      const messages = [...store.state.messages, ...newMessages]
       store.set({
         messages,
       })
     }
 
     if (data.type === 'message') {
-      const [currentUser] = store.state.usersOfChat.filter((user: Indexed) => user.id === data.user_id)
-      const { messages } = store.state
+      const [currentUser] = store.state.usersOfChat.filter(
+        (user: Indexed) => user.id === data.user_id,
+      )
       const message = data.user_id === store.state.user.id
         ? { ...data, self: true, name: 'Вы' }
-        : { ...data, self: false, name: `${currentUser.first_name} ${currentUser.second_name}` }
-      messages.push(message)
+        : {
+          ...data,
+          self: false,
+          name: `${currentUser.first_name} ${currentUser.second_name}`,
+        }
+      const messages = [message, ...store.state.messages]
       store.set({
         messages,
-        test: 'test',
       })
     }
   }
@@ -117,7 +126,7 @@ class SocketService {
   public getMessages(offset: number) {
     this._socket.send(
       JSON.stringify({
-        content: offset,
+        content: offset.toString(),
         type: 'get old',
       }),
     )
