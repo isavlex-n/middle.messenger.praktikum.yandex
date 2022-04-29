@@ -1,4 +1,4 @@
-import auth from '../api/authAPI'
+import auth from '../api/AuthAPI'
 import { LoginData, SignupData } from '../api/types'
 import store from '../core/Store'
 import { isValid } from '../utils/validateInputHandler'
