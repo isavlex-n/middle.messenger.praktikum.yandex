@@ -28,15 +28,17 @@ export class Input extends Block {
   protected render(): string {
     // language=hbs
     return `
-    <div class='input'>
+    <div class='input {{#if hide}}input_hidden{{/if}}{{#if mode}}{{mode}}{{/if}}'>
       <label class='input__label' for='{{id}}'>{{text}}: </label>
       <input class="input__input {{classMod}}"
               {{#if id}}id="{{id}}"{{/if}}
+              {{#if dataset}}data-type="{{dataset}}"{{/if}}
               {{#if name}}name="{{name}}"{{/if}}
               {{#if type}}type="{{type}}"{{/if}}
               {{#if placeholder}}placeholder="{{placeholder}}"{{/if}}
               {{#if value}}value="{{value}}"{{/if}}
               {{#if required}}required{{/if}}
+              {{#if autocomplete}}autocomplete="{{autocomplete}}"{{/if}}
               />
               
     </div>

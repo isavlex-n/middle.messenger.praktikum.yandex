@@ -1,0 +1,33 @@
+@import "../../styles/colors";
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(#000, 0.3);
+  z-index: 10000;
+
+  &_show {
+    display: flex;
+  }
+
+  &__window {
+    margin: auto;
+    max-width: 340px;
+    width: 100%;
+    background-color: $white;
+    border-radius: 7px;
+    padding: 40px 30px;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__input {
+    margin: 50px 0 20px;
+  }
+}

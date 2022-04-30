@@ -1,1 +1,1 @@
-export {Back as default} from './back'
+export { Back as default } from './back'

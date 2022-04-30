@@ -1,26 +1,25 @@
 @import "../../styles/colors";
 
 .button {
-  border-radius: 8px;
-  border: 0;
   width: 100%;
   padding: 12px 0;
   color: $white;
   background-color: $blue;
+  border: 0;
+  border-radius: 8px;
   cursor: pointer;
 
-  &_back,
-  %button_back {
+  &_back {
     width: 28px;
     height: 28px;
-    border-radius: 50%;
     background-image: url("../../../static/icons/back.svg");
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 50%;
   }
 
   &_forward {
-    @extend %button_back;
+    @extend .button_back;
 
     background-image: url("../../../static/icons/forward.svg");
   }

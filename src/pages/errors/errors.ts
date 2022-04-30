@@ -1,28 +1,15 @@
 import Block from '../../core/Block'
-import { errorsTemplate } from './errors.hbs'
 
-class Error500 extends Block {
-  protected getStateFromProps() {
-    this.state = {
-      number: 500,
-      text: 'Мы уже фиксим',
-    }
-  }
+export class Errors extends Block {
   render() {
-    return errorsTemplate
+    return `
+    <div class="flex fuul-height">
+      <div class="centered center">
+        <h1>{{number}}</h1>
+        <p>{{text}}</p>
+        {{{Link textLink='Назад к чатам' link='/messenger'}}}
+      </div>
+    </div>
+    `
   }
 }
-
-class Error404 extends Block {
-  protected getStateFromProps() {
-    this.state = {
-      number: 404,
-      text: 'Не туда попали',
-    }
-  }
-  render() {
-    return errorsTemplate
-  }
-}
-
-export { Error404, Error500 }

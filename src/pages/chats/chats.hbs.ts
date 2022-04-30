@@ -1,86 +1,45 @@
-export const chatsTemplate = `<div class="chats">
+export const chatsTemplate = `
+<div class="chats">
+  {{{Modal
+    ref=modal.ref
+    events=modal.events
+    show=modal.show
+    title=modal.title
+    buttonText=modal.button.text
+    buttonEvents=modal.button.events
+    inputText=modal.input.text
+    currentChat=currentChat
+  }}}
+  {{{Loader show=isLoading}}}
   <section class="chats__chats-list">
     <div class="chats__link-wrap">
-      {{{Link textLink="Профиль >" classLink="chats__link" link="/profile"}}}
+      {{{Link textLink="Добавить чат >" events=addChatLinkEvent}}}
+      {{{Link textLink="Профиль >" link="/settings" to="/settings"}}}
     </div>
     <div class="chats__search">
       {{{Search}}}
     </div>
     {{#each items}}
-    {{{ChatsItem name=this.name text=this.text srcImg=this.srcImg}}}
+    {{{ChatsItem
+      active=this.active
+      ref=this.ref 
+      title=this.title
+      id=this.id
+      text=this.last_message.content
+      src=this.avatar
+      unCount=this.unread_count
+      events=this.events
+    }}}
     {{/each}}
   </section>
-  <section class="chats__chat">
-    <header class="chats__chat-header">
-      <div class="chats__person">
-        <div class="chats__person-wrap">
-          <img src="{{personImg}}" class="chats__person-img" />
-        </div>
-        <h3 class="chats__person-name">{{personName}}</h3>
-      </div>
-      <div class="chats__functions-button">
-        <div class="chats__functions chats__functions_hidden">
-          <div class="chats__function">
-            <p class="chats__function-text chats__function-text_add-user">Добавить пользователя</p>
-          </div>
-          <div class="chats__function">
-            <p class="chats__function-text chats__function-text_del-user">Удалить пользователя</p>
-          </div>
-          <div class="chats__function">
-            <p class="chats__function-text chats__function-text_del-chat">Удалить чат</p>
-          </div>
-        </div>
-      </div>
-    </header>
-    <section class="chats__messages">
-      <div class="chats__date-wrap">
-        <span class="chats__date">19 июня</span>
-      </div>
-      <div class="chats__companion chats__message">
-        <p class="chats__message-text">
-          Привет! Смотри, тут всплыл интересный кусок лунной космической
-          истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну.
-           Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря,
-           все тушки этих камер все еще находятся на поверхности Луны, 
-           так как астронавты с собой забрали только кассеты с пленкой.
-
-Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не 
-так и на ракету они так никогда и не попали. Всего их было произведено
- 25 штук, одну из них недавно продали на аукционе за 45000 евро.
-        </p>
-      </div>
-      <div class="chats__yourself chats__message">
-        <p class="chats__message-text">
-          Круто!
-        </p>
-      </div>
-    </section>
-    <form class="chats__form" id="chats__form">
-      <footer class="chats__footer">
-        <div class="chats__attach">
-          <div class="chats__attach-list chats__attach-list_hidden ">
-            <div class="chats__attach-item">
-              <p class="chats__attach-text chats__attach-photo">Фото или Видео</p>
-            </div>
-            <div class="chats__attach-item">
-              <p class="chats__attach-text chats__attach-file">Файл</p>
-            </div>
-            <div class="chats__attach-item">
-              <p class="chats__attach-text chats__attach-location">Локация</p>
-            </div>
-          </div>
-        </div>
-        <div class="chats__writing">
-          <input
-          type="text"
-          name="message"
-          class="chats__input chats__input_message"
-          placeholder="Введите сообщение"/>
-        </div>
-        <div class="chats__send-button">
-          {{{Button classMod=button.classMod type=button.type events=button.events}}}
-        </div>
-      </footer>
-    </form>
-  </section>
+  {{{Chat
+    currentChat=currentChat
+    userMenuEvents=userMenuEvents
+    personNames=users
+    buttonClassMod=button.classMod
+    buttonType=button.type
+    buttonEvents=button.events
+    messages=messages
+    onTop=onTop
+  }}}
 </div>`

@@ -1,8 +1,33 @@
 import { profileTemplate } from './profile.hbs'
 import Block from '../../core/Block'
-import { validateInputHandler } from '../../core/utils'
+import validateInputHandler, { isValid } from '../../utils/validateInputHandler'
+import authService from '../../services/auth'
+import userService from '../../services/users'
+import { router } from '../../router'
+import { connect } from '../../utils/connect'
+import store from '../../core/Store'
 import './profile.scss'
-export class Profile extends Block {
+
+class Profile extends Block {
+  async componentDidMount() {
+    await this.getUser()
+  }
+
+  async getUser() {
+    const user: Indexed = await authService.getUser()
+    const { fields } = this.state
+    const newFields = fields.map((field: Indexed) => {
+      const newValue = user[field.name]
+      const newField = { ...field, value: newValue }
+      return newField
+    })
+    this.setState({
+      ...this.state,
+      fields: newFields,
+      user,
+    })
+  }
+
   toggleDataHandler() {
     const links = document.querySelector('.profile__links')
     const button = document.querySelector('.profile__button')
@@ -12,13 +37,11 @@ export class Profile extends Block {
 
   changeDataHandler(event: Event) {
     event.preventDefault()
-    const fields = this.state.fields
-    const newFields = fields.map((field: TStringObject) => {
-      return {
-        ...field,
-        readonly: false,
-      }
-    })
+    const { fields } = this.state
+    const newFields = fields.map((field: TStringObject) => ({
+      ...field,
+      readonly: false,
+    }))
     this.setState({
       ...this.state,
       fields: newFields,
@@ -36,11 +59,11 @@ export class Profile extends Block {
     profilePass?.classList.toggle('profile__change-pass_hidden')
   }
 
-  saveDataHandler(event: Event) {
+  async saveDataHandler(event: Event) {
     event.preventDefault()
     const profileData = document.querySelector('.profile__change-data')
     const condition = profileData?.classList.contains(
-      'profile__change-data_hidden'
+      'profile__change-data_hidden',
     )
     if (!condition) {
       const login = this.refs.login.querySelector('input')!.value
@@ -56,11 +79,17 @@ export class Profile extends Block {
         phone,
       }
       Object.entries(loginData).forEach(([key, value]) => {
-        console.log(`${key}: ${value}`)
         this.setChildProps(`${key}Error`, {
           error: validateInputHandler(key, value),
         })
       })
+      if (isValid(loginData)) {
+        await userService.changeUserProfile({
+          ...loginData,
+          display_name: loginData.first_name,
+        })
+        await this.getUser()
+      }
     } else {
       const old_password = this.refs.old_password.querySelector('input')!.value
       const password = this.refs.password.querySelector('input')!.value
@@ -71,11 +100,18 @@ export class Profile extends Block {
         re_password,
       }
       Object.entries(passData).forEach(([key, value]) => {
-        console.log(`${key}: ${value}`)
         this.setChildProps(`${key}Error`, {
           error: validateInputHandler(key, value),
         })
       })
+      if (isValid(passData)) {
+        await userService.changeUserPassword({
+          oldPassword: passData.old_password,
+          newPassword: passData.password,
+        })
+
+        await this.getUser()
+      }
     }
   }
 
@@ -91,10 +127,35 @@ export class Profile extends Block {
     })
   }
 
+  async logoutHandler(event: Event) {
+    event.preventDefault()
+    await authService.logout()
+    router.go('/signin')
+  }
+
+  async changeFileHandler(event: Event) {
+    const { files }: { files: FileList | null } = event.target as HTMLInputElement
+    if (!files?.length) {
+      return
+    }
+    const [file] = files
+    const formData = new FormData()
+    formData.append('avatar', file)
+    await userService.changeUserAvatar(formData).then((data) => {
+      store.set({
+        user: data,
+      })
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
   protected getStateFromProps() {
     this.state = {
+      choose: {
+        change: this.changeFileHandler.bind(this),
+      },
       userName: 'Иван',
-
       fields: [
         {
           ref: 'email',
@@ -103,7 +164,7 @@ export class Profile extends Block {
           label: 'Почта',
           name: 'email',
           type: 'email',
-          value: 'login@yandex.ru',
+          value: '',
           readonly: true,
           events: {
             focusin: this.fieldFocusHandler.bind(this),
@@ -229,7 +290,14 @@ export class Profile extends Block {
             click: this.changePassHandler.bind(this),
           },
         },
-        { link: '#', textLink: 'Выйти', classLink: 'link_red' },
+        {
+          link: '#',
+          textLink: 'Выйти',
+          classLink: 'link_red',
+          events: {
+            click: this.logoutHandler.bind(this),
+          },
+        },
       ],
     }
   }
@@ -238,3 +306,10 @@ export class Profile extends Block {
     return profileTemplate
   }
 }
+
+const withProfile = connect((state) => ({
+  error: state.error,
+  user: state.user,
+  isLoading: state.isLoading,
+}))
+export default withProfile(Profile)

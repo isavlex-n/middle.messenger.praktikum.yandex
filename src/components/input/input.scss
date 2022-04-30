@@ -3,18 +3,39 @@
 .input {
   text-align: center;
 
+  &_hidden {
+    display: none;
+  }
+
+  &_checkbox {
+    display: flex;
+    padding: 0 25%;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    label {
+      font-size: 13px;
+      color: black;
+    }
+
+    input {
+      width: auto;
+      margin: 1px 0 0 5px;
+    }
+  }
+
   &__label {
     display: flex;
     justify-content: space-between;
-    font-size: 9px;
     color: $dark-gray;
+    font-size: 9px;
   }
 
   &__input {
+    width: 100%;
+    padding: 5px;
     border: 0;
     border-bottom: 1px solid $blue;
-    padding: 5px;
-    width: 100%;
     outline: none;
 
     &_error {
@@ -23,10 +44,10 @@
   }
 
   &__error {
+    margin-top: 7px;
     color: $red;
     font-size: 8px;
     text-align: left;
-    margin-top: 7px;
 
     &_hidden {
       display: none;

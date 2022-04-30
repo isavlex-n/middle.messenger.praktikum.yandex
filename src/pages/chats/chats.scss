@@ -13,7 +13,8 @@
   }
 
   &__link-wrap {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
   }
 
@@ -95,6 +96,7 @@
   }
 
   &__functions {
+    z-index: 100;
     border: 1px solid $gray;
     padding: 15px;
     border-radius: 12px;
@@ -105,7 +107,7 @@
     background-color: $white;
 
     &_hidden {
-      // display: none;
+      display: none;
     }
   }
 
@@ -141,10 +143,11 @@
 
   &__messages {
     display: flex;
-    flex-direction: column;
-    justify-content: end;
-    flex: 1;
+    flex-direction: column-reverse;
+    overflow-y: scroll;
     position: relative;
+    height: 100vh;
+    overflow-anchor: none;
   }
 
   &__date-wrap {
@@ -158,12 +161,20 @@
     display: flex;
   }
 
+  &__name {
+    color: $blue;
+    margin: 0;
+    padding: 0;
+  }
+
   &__companion {
-    justify-self: start;
+    align-items: start;
+    flex-direction: column;
   }
 
   &__yourself {
-    justify-content: end;
+    align-items: end;
+    flex-direction: column;
   }
 
   &__message-text {
@@ -212,7 +223,7 @@
     background-color: #fff;
 
     &_hidden {
-      // display: none;
+      display: none;
     }
   }
 
@@ -244,9 +255,16 @@
     border-radius: 30px;
     height: 32px;
     padding: 10px 20px;
+    border-bottom: 0 !important;
 
     &_error {
       border: 1px solid $red;
+    }
+  }
+
+  &__input-message {
+    label {
+      display: none;
     }
   }
 

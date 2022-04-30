@@ -3,39 +3,48 @@
 .choose {
   margin: auto;
 
+  &__img {
+    height: 100%;
+  }
+
   &__label {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
     width: 130px;
     height: 130px;
-    display: block;
-    border-radius: 50%;
     background-color: $light-gray;
     background-image: url("../../../static/icons/photo.svg");
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 50%;
     cursor: pointer;
 
     &:hover {
       &::before {
-        content: "Поменять фото";
+        position: absolute;
         display: flex;
-        justify-content: center;
         align-items: center;
-        color: #fff;
-        font-size: 13px;
-        border-radius: 50%;
+        justify-content: center;
         width: 130px;
         height: 130px;
+        color: #fff;
+        font-size: 13px;
         background-color: rgba($color: #000, $alpha: 50%);
+        border-radius: 50%;
+        content: "Поменять фото";
       }
     }
   }
 
   &__input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
     position: absolute;
     z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+    opacity: 0;
   }
 }

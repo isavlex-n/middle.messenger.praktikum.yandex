@@ -1,23 +1,25 @@
 import Block from '../../core/Block'
-import { validateInputHandler } from '../../core/utils'
+import validateInputHandler from '../../utils/validateInputHandler'
+import { connect } from '../../utils/connect'
+import authSevice from '../../services/auth'
 
-export class Login extends Block {
-  submitHandler(event: Event) {
+class Login extends Block {
+  async submitHandler(event: Event) {
     event.preventDefault()
     const login = this.refs.login.querySelector('input')!.value
     const password = this.refs.password.querySelector('input')!.value
-
     const loginData = {
       login,
       password,
     }
 
     Object.entries(loginData).forEach(([key, value]) => {
-      console.log(`${key}: ${value}`)
       this.setChildProps(`${key}Error`, {
         error: validateInputHandler(key, value),
       })
     })
+
+    await authSevice.login(loginData)
   }
 
   inputFocusHandler(event: Event) {
@@ -77,6 +79,7 @@ export class Login extends Block {
   render() {
     return `<div class="flex fuul-height">
               <div class="centered">
+              {{{Loader show=isLoading}}}
               <form class='form form_login'>
                 <h1 class="form__header">Вход</h1>
                 <div class='form__list'>
@@ -93,6 +96,7 @@ export class Login extends Block {
                       {{{InputError ref=this.refError}}}
                     </div>
                   {{/each}}
+                  {{{InputError error=error}}}
                   <div class='form__list-item form__list-item_button'>
                     {{{Button
                       ref=button.ref
@@ -103,7 +107,7 @@ export class Login extends Block {
                     }}}
                   </div>
                   <div class='form__list-item'>
-                    <a href="/signup" class="form__link">Нет аккаунта?</a>
+                    {{{Link textLink='Нет аккаунта?' classLink='form__link' link='/signup' to='/signup'}}}
                   </div>
                 </div>
               </form>
@@ -111,3 +115,10 @@ export class Login extends Block {
             </div>`
   }
 }
+
+const withLogin = connect((state) => ({
+  error: state.error,
+  user: state.user,
+  isLoading: state.isLoading,
+}))
+export default withLogin(Login)
