@@ -4,10 +4,6 @@ import './chatsItem.scss'
 export class ChatsItem extends Block {
   static nameOfComponent = 'ChatsItem'
 
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return `
     <div class="chats-item {{#if active}}chats-item_active{{/if}}">

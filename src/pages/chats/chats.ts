@@ -243,9 +243,9 @@ class Chats extends Block {
     }
   }
 
-  async onTop(length: number) {
+  onTop(length: number) {
     if (length % 20 === 0) {
-      await socketService.getMessages(length)
+      socketService.getMessages(length)
     }
   }
 

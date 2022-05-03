@@ -1,19 +1,26 @@
 {
   "ts-node": {
-    "files": true
+      "files": true
   },
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "typeRoots": ["node_modules/@types", "typings/app.d.ts"],
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "skipLibCheck": true
+      "target": "es2017",
+      "module": "commonjs",
+      "typeRoots": [
+          "node_modules/@types",
+          "typings/app.d.ts",
+          "src/types"
+      ],
+      "sourceMap": true,
+      "outDir": "./dist",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "skipLibCheck": true,
+      "resolveJsonModule": true,
+      "noImplicitThis": false,
   }
 }

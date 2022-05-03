@@ -3,6 +3,7 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "import/no-extraneous-dependencies": 0,
     "operator-linebreak": 0,
     "comma-dangle": 0,
     "consistent-return":"warn",
