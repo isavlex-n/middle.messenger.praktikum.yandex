@@ -3,7 +3,7 @@
       "files": true
   },
   "compilerOptions": {
-      "target": "es2017",
+      "target": "es2018",
       "module": "commonjs",
       "typeRoots": [
           "node_modules/@types",
@@ -14,13 +14,11 @@
       "outDir": "./dist",
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,
-      "strict": true,
       "noImplicitAny": true,
       "strictNullChecks": true,
-      "noUnusedLocals": false,
-      "noUnusedParameters": false,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
       "skipLibCheck": true,
       "resolveJsonModule": true,
-      "noImplicitThis": false,
   }
 }

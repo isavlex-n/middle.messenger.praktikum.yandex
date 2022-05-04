@@ -25,6 +25,7 @@ module.exports = {
     new Dotenv(),
     new HtmlWebpackPlugin({
       template: './static/index.html',
+      favicon: './static/icons/messenger.png',
     }),
   ],
   resolve: {
