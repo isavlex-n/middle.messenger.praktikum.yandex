@@ -1,58 +1,43 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
-const path = require('path')
+const paths = require('./paths')
 
 module.exports = {
-  mode: 'development',
-  entry: './src/index.ts',
-  devtool: 'inline-source-map',
+  entry: `${paths.src}/index.ts`,
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: paths.build,
     filename: '[name].bundle.js',
     clean: true,
-  },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist'),
-    },
-    compress: true,
-    historyApiFallback: true,
-  },
-  optimization: {
-    runtimeChunk: 'single',
   },
   plugins: [
     new Dotenv(),
     new HtmlWebpackPlugin({
-      template: './static/index.html',
-      favicon: './static/icons/messenger.png',
+      template: `${paths.static}/index.html`,
+      favicon: `${paths.static}/icons/messenger.png`,
     }),
   ],
   resolve: {
     extensions: ['.ts', '.js', '.json'],
     alias: {
       handlebars: 'handlebars/dist/handlebars.min.js',
+      '@': paths.src,
     },
   },
   module: {
     rules: [
+      // TypeScript
       {
-        test: /\.tsx?$/,
+        test: /\.ts$/,
         use: [
           {
             loader: 'ts-loader',
-            options: {
-              configFile: path.resolve(__dirname, 'tsconfig.json'),
-            },
           },
         ],
         exclude: /(node_modules)/,
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
+      // Images
       { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
+      // Fonts
       { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: 'asset/inline' },
     ],
   },
