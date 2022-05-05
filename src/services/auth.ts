@@ -16,7 +16,6 @@ class AuthService {
         store.set({ isLoading: false })
         router.go('/messenger')
       }
-
       await auth.login(data)
 
       const user = await auth.getUser()

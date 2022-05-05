@@ -1,5 +1,5 @@
 import './index.scss'
-import { Block, registerComponent } from './core'
+import { registerComponent } from './core'
 import authService from './services/auth'
 import Login from './pages/login/login'
 import Signup from './pages/signup/signup'
@@ -7,14 +7,10 @@ import Errors from './pages/errors'
 import Profile from './pages/profile/profile'
 import Chats from './pages/chats/chats'
 import { router } from './router'
+import components from './components'
 
-// eslint-disable-next-line global-require
-const components = require('./components/**/index.ts') as {
-  [key: string]: { default: typeof Block }
-}
-
-Object.values(components).forEach((component) => {
-  registerComponent(component.default)
+components.forEach((component) => {
+  registerComponent(component)
 })
 
 document.addEventListener('DOMContentLoaded', () => {

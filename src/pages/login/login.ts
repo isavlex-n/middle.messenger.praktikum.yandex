@@ -18,7 +18,6 @@ class Login extends Block {
         error: validateInputHandler(key, value),
       })
     })
-
     await authSevice.login(loginData)
   }
 

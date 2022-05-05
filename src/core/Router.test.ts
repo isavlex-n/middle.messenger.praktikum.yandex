@@ -10,20 +10,17 @@ describe('Router', () => {
   class PageOne extends Block {}
   class PageTwo extends Block {}
   class PageThree extends Block {}
-  let router: Router
   let counter: number = 0
-  beforeEach(() => {
-    router = new Router('.app')
-    router
-      .setUnprotectedPaths(['/two'])
-      .onRoute(() => {
-        counter += 1
-      })
-      .use('/', PageOne, {})
-      .use('/one', PageTwo, {})
-      .use('/two', PageThree, {})
-      .start()
-  })
+  const router: Router = new Router('.app')
+  router
+    .setUnprotectedPaths(['/two'])
+    .onRoute(() => {
+      counter += 1
+    })
+    .use('/', PageOne, {})
+    .use('/one', PageTwo, {})
+    .use('/two', PageThree, {})
+    .start()
 
   it('Router history length should change', () => {
     router.go('/')

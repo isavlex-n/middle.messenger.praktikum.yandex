@@ -1,13 +1,13 @@
 // language=hbs
 export const template = `
-<section class="chats__chat">
+<section class="chat">
   {{#if currentChat}}
-  <header class="chats__chat-header">
-    <div class="chats__person">
-      <div class="chats__person-wrap">
-        <img src="{{chatImg}}" class="chats__person-img" />
+  <header class="chat__header">
+    <div class="chat__person">
+      <div class="chat__person-wrap">
+        <img src="{{chatImg}}" class="chat__person-img" />
       </div>
-      <h3 class="chats__person-name">
+      <h3 class="chat__person-name">
         {{#each personNames}}
         <span>{{this.first_name}}&nbsp;</span>
         {{/each}}
@@ -17,32 +17,32 @@ export const template = `
   </header>
 
     {{{Messages messages=messages onTop=onTop}}}
-    <form class="chats__form" id="chats__form">
-      <footer class="chats__footer">
-        <div class="chats__attach">
-          <div class="chats__attach-list chats__attach-list_hidden ">
-            <div class="chats__attach-item">
-              <p class="chats__attach-text chats__attach-photo">Фото или Видео</p>
+    <form class="chat__form" id="chat__form">
+      <footer class="chat__footer">
+        <div class="chat__attach">
+          <div class="chat__attach-list chat__attach-list_hidden ">
+            <div class="chat__attach-item">
+              <p class="chat__attach-text chat__attach-photo">Фото или Видео</p>
             </div>
-            <div class="chats__attach-item">
-              <p class="chats__attach-text chats__attach-file">Файл</p>
+            <div class="chat__attach-item">
+              <p class="chat__attach-text chat__attach-file">Файл</p>
             </div>
-            <div class="chats__attach-item">
-              <p class="chats__attach-text chats__attach-location">Локация</p>
+            <div class="chat__attach-item">
+              <p class="chat__attach-text chat__attach-location">Локация</p>
             </div>
           </div>
         </div>
-        <div class="chats__writing">
+        <div class="chat__writing">
           {{{Input
             ref="messageInput"
             type="text"
             name="message"
             placeholder="Введите сообщение"
-            classMod="chats__input chats__input_message"
-            mode="chats__input-message"
+            classMod="chat__input chat__input_message"
+            mode="chat__input-message"
             }}}
         </div>
-        <div class="chats__send-button">
+        <div class="chat__send-button">
           {{{Button classMod=buttonClassMod type=buttonType events=buttonEvents}}}
         </div>
       </footer>

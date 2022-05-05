@@ -150,14 +150,14 @@ class Chats extends Block {
   async messageButtonHandler(event: Event) {
     event.preventDefault()
     const input = document.querySelector<HTMLInputElement>(
-      '.chats__input_message'
+      '.chat__input_message'
     )
     if (input) {
       const message = input.value
       if (!message) {
-        input.classList.add('chats__input_error')
+        input.classList.add('chat__input_error')
         setTimeout(() => {
-          input.classList.remove('chats__input_error')
+          input.classList.remove('chat__input_error')
         }, 1000)
         return
       }
@@ -243,9 +243,9 @@ class Chats extends Block {
     }
   }
 
-  async onTop(length: number) {
+  onTop(length: number) {
     if (length % 20 === 0) {
-      await socketService.getMessages(length)
+      socketService.getMessages(length)
     }
   }
 
