@@ -6,12 +6,18 @@
   "license": "MIT",
   "source": "static/index.html",
   "scripts": {
-    "lint": "eslint '**/*{.ts,.js}'",
-    "slint": "stylelint '**/*{.css,.scss}' --fix",
+    "lint:js": "eslint '**/*{.ts,.js}'",
+    "lint:css": "stylelint '**/*{.css,.scss}'",
+    "lint:all": "npm-run-all lint:js lint:css",
     "test": "mocha",
     "dev": "webpack serve",
     "build": "webpack",
     "start": "npm run build && node server.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint:all"
+    }
   },
   "targets": {
     "default": {
@@ -48,9 +54,11 @@
     "eslint-plugin-import": "2.26.0",
     "global-jsdom": "8.4.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.4",
     "jsdom": "19.0.0",
     "mini-css-extract-plugin": "^2.6.0",
     "mocha": "9.2.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "2.6.1",
     "process": "0.11.10",
     "sass": "^1.51.0",

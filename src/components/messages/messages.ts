@@ -27,7 +27,7 @@ export class Messages extends Block {
 
   scrollHandler(event: Event) {
     const target = event.target as HTMLElement
-    const isEndList = target.scrollTop <= -(target.scrollHeight - target.offsetHeight)
+    const isEndList = target.scrollTop <= -(target.scrollHeight - target.offsetHeight - 1)
     if (isEndList) {
       this.props.onTop(this.props.messages.length)
     }
@@ -36,14 +36,14 @@ export class Messages extends Block {
   protected render(): string {
     // language=hbs
     return `
-    <section class="chats__messages">
-      {{!-- <div class="chats__date-wrap">
-        <span class="chats__date">19 июня</span>
+    <section class="messages">
+      {{!-- <div class="messages__date-wrap">
+        <span class="messages__date">19 июня</span>
       </div> --}}
       {{#each messages}}
-      <div class="{{#if this.self}}chats__yourself{{else}}chats__companion{{/if}} chats__message">
-        <p class="chats__name">{{this.name}}</p>
-        <p class="chats__message-text">
+      <div class="{{#if this.self}}messages__yourself{{else}}messages__companion{{/if}} messages__message">
+        <p class="messages__name">{{this.name}}</p>
+        <p class="messages__text">
           {{this.content}}
         </p>
       </div>
